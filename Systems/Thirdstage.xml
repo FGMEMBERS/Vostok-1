@@ -1,0 +1,925 @@
+<?xml version="1.0"?>
+
+<!--
+	Author: Slavutinsky Victor
+-->
+
+<system>
+
+	<!--Third stage-->
+
+	<fileheader>
+		<author> Slavutinsky Victor </author>
+		<filecreationdate> 2011 </filecreationdate>
+		<version>$Revision: 1.00 $</version>
+		<description> Third stage </description>
+	</fileheader>
+
+	<channel name="Thirdstage">
+
+
+		<!--Third stage-->
+
+		<switch name="Third Stage Main Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/gascontrol/lever-pos">
+				systems/gascontrol/lever-pos gt 0.2
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<test logic="AND" value="0.2">
+				systems/gascontrol/lever-pos le 0.2
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[14]</output>
+		</switch>
+
+		<switch name="Forward Third Stage Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/third_computer/pitch-forward">
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[15]</output>
+		</switch>
+
+		<switch name="Back Third Stage Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/third_computer/pitch-back">
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[16]</output>
+		</switch>
+
+		<switch name="Left Third Stage Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/third_computer/yaw-left">
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[17]</output>
+		</switch>
+
+		<switch name="Right Third Stage Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/third_computer/yaw-right">
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[18]</output>
+		</switch>
+
+		<switch name="Forward Left Third Stage Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/third_computer/roll-forward-left">
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[19]</output>
+		</switch>
+
+		<switch name="Back Right Third Stage Engine Throttle">
+			<default value="0"/>
+				<test logic="AND" value="systems/third_computer/roll-back-right">
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[20]</output>
+		</switch>
+
+		<switch name="Forward Right Third Stage Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/third_computer/roll-forward-right">
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[21]</output>
+		</switch>
+
+		<switch name="Back Left Third Stage Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/third_computer/roll-back-left">
+				stages/unit[3]/active eq 1.0
+				stages/unit[3]/ignited eq 1.0
+				stages/unit[3]/broken eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[22]</output>
+		</switch>
+
+		<!-- Exhausts calculations -->
+
+<!-- 
+
+	That code is weird but since FG do not know about colour-property+colour-factor now
+	it's needed to count colour  property for every exhaust stripe. It could be shorter with Nasal
+	but it's does not matter. If FG code will be advanced then all that part will be removed
+	for shorter realisation.
+
+ -->
+
+		<!-- Main engine -->
+
+		<fcs_function name="propulsion/engine[14]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[14]/fuel-flow-rate-pps</property>
+				<value>7.48</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<switch name="propulsion/engine[14]/red">
+			<default value="0"/>
+			<test logic="AND" value="0.949">
+				propulsion/engine[14]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<switch name="propulsion/engine[14]/blue">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+				propulsion/engine[14]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<fcs_function name="propulsion/engine[14]/green-d2">
+		<function>
+			<quotient>
+				<property>propulsion/engine[14]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[14]/green-d4">
+		<function>
+			<quotient>
+				<property>propulsion/engine[14]/green</property>
+				<value>4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[14]/green-d8">
+		<function>
+			<quotient>
+				<property>propulsion/engine[14]/green</property>
+				<value>8</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[14]/green-d16">
+		<function>
+			<quotient>
+				<property>propulsion/engine[14]/green</property>
+				<value>16</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[14]/green-d32">
+		<function>
+			<quotient>
+				<property>propulsion/engine[14]/green</property>
+				<value>32</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[14]/green-d64">
+		<function>
+			<quotient>
+				<property>propulsion/engine[14]/green</property>
+				<value>64</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[14]/green-d128">
+		<function>
+			<quotient>
+				<property>propulsion/engine[14]/green</property>
+				<value>128</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<!-- Main forward pitch engine -->
+
+		<fcs_function name="propulsion/engine[15]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[15]/fuel-flow-rate-pps</property>
+				<value>0.551</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<switch name="propulsion/engine[15]/red">
+			<default value="0"/>
+			<test logic="AND" value="0.949">
+				propulsion/engine[15]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<switch name="propulsion/engine[15]/blue">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+				propulsion/engine[15]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<fcs_function name="propulsion/engine[15]/green-d2">
+		<function>
+			<quotient>
+				<property>propulsion/engine[15]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[15]/green-d4">
+		<function>
+			<quotient>
+				<property>propulsion/engine[15]/green</property>
+				<value>4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[15]/green-d8">
+		<function>
+			<quotient>
+				<property>propulsion/engine[15]/green</property>
+				<value>8</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[15]/green-d16">
+		<function>
+			<quotient>
+				<property>propulsion/engine[15]/green</property>
+				<value>16</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[15]/green-d32">
+		<function>
+			<quotient>
+				<property>propulsion/engine[15]/green</property>
+				<value>32</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[15]/green-d64">
+		<function>
+			<quotient>
+				<property>propulsion/engine[15]/green</property>
+				<value>64</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[15]/green-d128">
+		<function>
+			<quotient>
+				<property>propulsion/engine[15]/green</property>
+				<value>128</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<!-- Main back pitch engine -->
+
+		<fcs_function name="propulsion/engine[16]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[16]/fuel-flow-rate-pps</property>
+				<value>0.551</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<switch name="propulsion/engine[16]/red">
+			<default value="0"/>
+			<test logic="AND" value="0.949">
+				propulsion/engine[16]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<switch name="propulsion/engine[16]/blue">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+				propulsion/engine[16]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<fcs_function name="propulsion/engine[16]/green-d2">
+		<function>
+			<quotient>
+				<property>propulsion/engine[16]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[16]/green-d4">
+		<function>
+			<quotient>
+				<property>propulsion/engine[16]/green</property>
+				<value>4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[16]/green-d8">
+		<function>
+			<quotient>
+				<property>propulsion/engine[16]/green</property>
+				<value>8</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[16]/green-d16">
+		<function>
+			<quotient>
+				<property>propulsion/engine[16]/green</property>
+				<value>16</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[16]/green-d32">
+		<function>
+			<quotient>
+				<property>propulsion/engine[16]/green</property>
+				<value>32</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[16]/green-d64">
+		<function>
+			<quotient>
+				<property>propulsion/engine[16]/green</property>
+				<value>64</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[16]/green-d128">
+		<function>
+			<quotient>
+				<property>propulsion/engine[16]/green</property>
+				<value>128</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<!-- Main left pitch engine -->
+
+		<fcs_function name="propulsion/engine[17]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[17]/fuel-flow-rate-pps</property>
+				<value>0.551</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<switch name="propulsion/engine[17]/red">
+			<default value="0"/>
+			<test logic="AND" value="0.949">
+				propulsion/engine[17]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<switch name="propulsion/engine[17]/blue">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+				propulsion/engine[17]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<fcs_function name="propulsion/engine[17]/green-d2">
+		<function>
+			<quotient>
+				<property>propulsion/engine[17]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[17]/green-d4">
+		<function>
+			<quotient>
+				<property>propulsion/engine[17]/green</property>
+				<value>4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[17]/green-d8">
+		<function>
+			<quotient>
+				<property>propulsion/engine[17]/green</property>
+				<value>8</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[17]/green-d16">
+		<function>
+			<quotient>
+				<property>propulsion/engine[17]/green</property>
+				<value>16</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[17]/green-d32">
+		<function>
+			<quotient>
+				<property>propulsion/engine[17]/green</property>
+				<value>32</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[17]/green-d64">
+		<function>
+			<quotient>
+				<property>propulsion/engine[17]/green</property>
+				<value>64</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[17]/green-d128">
+		<function>
+			<quotient>
+				<property>propulsion/engine[17]/green</property>
+				<value>128</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<!-- Main right pitch engine -->
+
+		<fcs_function name="propulsion/engine[18]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[18]/fuel-flow-rate-pps</property>
+				<value>0.551</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<switch name="propulsion/engine[18]/red">
+			<default value="0"/>
+			<test logic="AND" value="0.949">
+				propulsion/engine[18]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<switch name="propulsion/engine[18]/blue">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+				propulsion/engine[18]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<fcs_function name="propulsion/engine[18]/green-d2">
+		<function>
+			<quotient>
+				<property>propulsion/engine[18]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[18]/green-d4">
+		<function>
+			<quotient>
+				<property>propulsion/engine[18]/green</property>
+				<value>4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[18]/green-d8">
+		<function>
+			<quotient>
+				<property>propulsion/engine[18]/green</property>
+				<value>8</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[18]/green-d16">
+		<function>
+			<quotient>
+				<property>propulsion/engine[18]/green</property>
+				<value>16</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[18]/green-d32">
+		<function>
+			<quotient>
+				<property>propulsion/engine[18]/green</property>
+				<value>32</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[18]/green-d64">
+		<function>
+			<quotient>
+				<property>propulsion/engine[18]/green</property>
+				<value>64</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[18]/green-d128">
+		<function>
+			<quotient>
+				<property>propulsion/engine[18]/green</property>
+				<value>128</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<!-- Main forward left roll engine -->
+
+		<fcs_function name="propulsion/engine[19]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[19]/fuel-flow-rate-pps</property>
+				<value>0.044</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<switch name="propulsion/engine[19]/red">
+			<default value="0"/>
+			<test logic="AND" value="0.949">
+				propulsion/engine[19]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<switch name="propulsion/engine[19]/blue">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+				propulsion/engine[19]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<fcs_function name="propulsion/engine[19]/green-d2">
+		<function>
+			<quotient>
+				<property>propulsion/engine[19]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[19]/green-d4">
+		<function>
+			<quotient>
+				<property>propulsion/engine[19]/green</property>
+				<value>4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[19]/green-d8">
+		<function>
+			<quotient>
+				<property>propulsion/engine[19]/green</property>
+				<value>8</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[19]/green-d16">
+		<function>
+			<quotient>
+				<property>propulsion/engine[19]/green</property>
+				<value>16</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[19]/green-d32">
+		<function>
+			<quotient>
+				<property>propulsion/engine[19]/green</property>
+				<value>32</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[19]/green-d64">
+		<function>
+			<quotient>
+				<property>propulsion/engine[19]/green</property>
+				<value>64</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[19]/green-d128">
+		<function>
+			<quotient>
+				<property>propulsion/engine[19]/green</property>
+				<value>128</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<!-- Main back right roll engine -->
+
+		<fcs_function name="propulsion/engine[20]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[20]/fuel-flow-rate-pps</property>
+				<value>0.044</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<switch name="propulsion/engine[20]/red">
+			<default value="0"/>
+			<test logic="AND" value="0.949">
+				propulsion/engine[20]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<switch name="propulsion/engine[20]/blue">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+				propulsion/engine[20]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<fcs_function name="propulsion/engine[20]/green-d2">
+		<function>
+			<quotient>
+				<property>propulsion/engine[20]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[20]/green-d4">
+		<function>
+			<quotient>
+				<property>propulsion/engine[20]/green</property>
+				<value>4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[20]/green-d8">
+		<function>
+			<quotient>
+				<property>propulsion/engine[20]/green</property>
+				<value>8</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[20]/green-d16">
+		<function>
+			<quotient>
+				<property>propulsion/engine[20]/green</property>
+				<value>16</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[20]/green-d32">
+		<function>
+			<quotient>
+				<property>propulsion/engine[20]/green</property>
+				<value>32</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[20]/green-d64">
+		<function>
+			<quotient>
+				<property>propulsion/engine[20]/green</property>
+				<value>64</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[20]/green-d128">
+		<function>
+			<quotient>
+				<property>propulsion/engine[20]/green</property>
+				<value>128</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<!-- Main forward right roll engine -->
+
+		<fcs_function name="propulsion/engine[21]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[21]/fuel-flow-rate-pps</property>
+				<value>0.044</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<switch name="propulsion/engine[21]/red">
+			<default value="0"/>
+			<test logic="AND" value="0.949">
+				propulsion/engine[21]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<switch name="propulsion/engine[21]/blue">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+				propulsion/engine[21]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<fcs_function name="propulsion/engine[21]/green-d2">
+		<function>
+			<quotient>
+				<property>propulsion/engine[21]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[21]/green-d4">
+		<function>
+			<quotient>
+				<property>propulsion/engine[21]/green</property>
+				<value>4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[21]/green-d8">
+		<function>
+			<quotient>
+				<property>propulsion/engine[21]/green</property>
+				<value>8</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[21]/green-d16">
+		<function>
+			<quotient>
+				<property>propulsion/engine[21]/green</property>
+				<value>16</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[21]/green-d32">
+		<function>
+			<quotient>
+				<property>propulsion/engine[21]/green</property>
+				<value>32</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[21]/green-d64">
+		<function>
+			<quotient>
+				<property>propulsion/engine[21]/green</property>
+				<value>64</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[21]/green-d128">
+		<function>
+			<quotient>
+				<property>propulsion/engine[21]/green</property>
+				<value>128</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<!-- Main back left roll engine -->
+
+		<fcs_function name="propulsion/engine[22]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[22]/fuel-flow-rate-pps</property>
+				<value>0.044</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<switch name="propulsion/engine[22]/red">
+			<default value="0"/>
+			<test logic="AND" value="0.949">
+				propulsion/engine[21]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<switch name="propulsion/engine[22]/blue">
+			<default value="0"/>
+			<test logic="AND" value="0.1">
+				propulsion/engine[21]/fuel-flow-rate-pps gt 0.0
+			</test>
+		</switch>
+
+		<fcs_function name="propulsion/engine[22]/green-d2">
+		<function>
+			<quotient>
+				<property>propulsion/engine[22]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[22]/green-d4">
+		<function>
+			<quotient>
+				<property>propulsion/engine[22]/green</property>
+				<value>4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[22]/green-d8">
+		<function>
+			<quotient>
+				<property>propulsion/engine[22]/green</property>
+				<value>8</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[22]/green-d16">
+		<function>
+			<quotient>
+				<property>propulsion/engine[22]/green</property>
+				<value>16</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[22]/green-d32">
+		<function>
+			<quotient>
+				<property>propulsion/engine[22]/green</property>
+				<value>32</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[22]/green-d64">
+		<function>
+			<quotient>
+				<property>propulsion/engine[22]/green</property>
+				<value>64</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[22]/green-d128">
+		<function>
+			<quotient>
+				<property>propulsion/engine[22]/green</property>
+				<value>128</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+	</channel>
+
+</system>

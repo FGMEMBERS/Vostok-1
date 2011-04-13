@@ -1,0 +1,713 @@
+<?xml version="1.0"?>
+
+<!--
+	Author: Slavutinsky Victor
+-->
+
+<system>
+
+	<!--First stage-->
+
+	<fileheader>
+		<author> Slavutinsky Victor </author>
+		<filecreationdate> 2011 </filecreationdate>
+		<version>$Revision: 1.00 $</version>
+		<description> First stage </description>
+	</fileheader>
+
+	<channel name="Firststage">
+
+		<!--Calculating throttle-->
+
+		<switch name="Forward First Stage Main Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/gascontrol/lever-pos">
+				systems/gascontrol/lever-pos gt 0.2
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[0] eq 0
+			</test>
+			<test logic="AND" value="0.2">
+				systems/gascontrol/lever-pos le 0.2
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[0] eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[0]</output>
+		</switch>
+
+		<switch name="Back First Stage Main Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/gascontrol/lever-pos">
+				systems/gascontrol/lever-pos gt 0.2
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[2] eq 0
+			</test>
+			<test logic="AND" value="0.2">
+				systems/gascontrol/lever-pos le 0.2
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[2] eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[2]</output>
+		</switch>
+
+		<switch name="Left First Stage Main Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/gascontrol/lever-pos">
+				systems/gascontrol/lever-pos gt 0.2
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[3] eq 0
+			</test>
+				<test logic="AND" value="0.2">
+				systems/gascontrol/lever-pos le 0.2
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[3] eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[4]</output>
+		</switch>
+
+		<switch name="Right First Stage Main Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="systems/gascontrol/lever-pos">
+				systems/gascontrol/lever-pos gt 0.2
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[1] eq 0
+			</test>
+			<test logic="AND" value="0.2">
+				systems/gascontrol/lever-pos le 0.2
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[1] eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[6]</output>
+		</switch>
+
+		<switch name="Forward First Stage Maneur Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[0] eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[1]</output>
+		</switch>
+			<switch name="Back First Stage Maneur Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[2] eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[3]</output>
+		</switch>
+
+		<switch name="Left First Stage Maneur Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[3] eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[5]</output>
+		</switch>
+
+		<switch name="Right First Stage Maneur Engine Throttle">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1.0
+				stages/unit[0]/ignited eq 1.0
+				stages/unit[0]/broken-block[1] eq 0
+			</test>
+			<output>fcs/throttle-pos-norm[7]</output>
+		</switch>
+
+		<!--Recalculate control angle by kinematic timer
+			To imitate enines rotate pumps delay  -->
+
+		<kinematic name="First Stage Left Engine Delayed">
+			<input>stages/unit[0]/computer/left-engine-rad</input>
+			<traverse>
+			<setting>
+				<position>-0.78539</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>0.78539</position>
+				<time>1</time>
+			</setting>
+			</traverse>
+			<output>stages/unit[0]/left-engine-delayed-rad</output>
+		</kinematic>
+
+		<fcs_function name="First Stage Left Engine Rotated">
+		<function>
+			<sum>
+				<property>stages/unit[0]/left-engine-delayed-rad</property>
+				<value>1.57079632679489661923</value>
+			</sum>
+		</function>
+			<output>stages/unit[0]/left-engine-rotated-rad</output>
+		</fcs_function>
+
+		<kinematic name="First Stage Right Engine Delayed">
+			<input>stages/unit[0]/computer/right-engine-rad</input>
+			<traverse>
+			<setting>
+				<position>-0.78539</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>0.78539</position>
+				<time>1</time>
+			</setting>
+			</traverse>
+			<output>stages/unit[0]/right-engine-delayed-rad</output>
+		</kinematic>
+
+		<fcs_function name="First Stage Right Engine Rotated">
+		<function>
+			<sum>
+				<property>stages/unit[0]/right-engine-delayed-rad</property>
+				<value>1.57079632679489661923</value>
+			</sum>
+		</function>
+			<output>stages/unit[0]/right-engine-rotated-rad</output>
+		</fcs_function>
+
+		<kinematic name="First Stage Back Engine Delayed">
+			<input>stages/unit[0]/computer/back-engine-rad</input>
+			<traverse>
+			<setting>
+				<position>-0.78539</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>0.78539</position>
+				<time>1</time>
+			</setting>
+			</traverse>
+			<output>stages/unit[0]/back-engine-delayed-rad</output>
+		</kinematic>
+
+		<fcs_function name="First Stage Back Engine Rotated">
+		<function>
+			<sum>
+				<property>stages/unit[0]/back-engine-delayed-rad</property>
+				<value>1.57079632679489661923</value>
+			</sum>
+		</function>
+			<output>stages/unit[0]/back-engine-rotated-rad</output>
+		</fcs_function>
+
+		<kinematic name="First Stage Forward Engine Delayed">
+			<input>stages/unit[0]/computer/forward-engine-rad</input>
+			<traverse>
+			<setting>
+				<position>-0.78539</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>0.78539</position>
+				<time>1</time>
+			</setting>
+			</traverse>
+			<output>stages/unit[0]/forward-engine-delayed-rad</output>
+		</kinematic>
+
+		<fcs_function name="First Stage Forward Engine Rotated">
+		<function>
+			<sum>
+				<property>stages/unit[0]/forward-engine-delayed-rad</property>
+				<value>1.57079632679489661923</value>
+			</sum>
+		</function>
+			<output>stages/unit[0]/forward-engine-rotated-rad</output>
+		</fcs_function>
+
+		<!--Translating angles to engines -->
+
+		<pure_gain name="First Stage Forward Engine Translation">
+			<input>stages/unit[0]/forward-engine-rotated-rad</input>
+			<gain>1.0</gain>
+			<output>propulsion/engine[1]/pitch-angle-rad </output>
+		</pure_gain>
+
+		<pure_gain name="First Stage Back Engine Translation">
+		<input>stages/unit[0]/back-engine-rotated-rad</input>
+			<gain>1.0</gain>
+			<output>propulsion/engine[3]/pitch-angle-rad </output>
+		</pure_gain>
+
+		<pure_gain name="First Stage Left Engine Translation">
+			<input>stages/unit[0]/left-engine-rotated-rad</input>
+			<gain>1.0</gain>
+			<output>propulsion/engine[5]/pitch-angle-rad </output>
+		</pure_gain>
+
+		<pure_gain name="First Stage Right Engine Translation">
+			<input>stages/unit[0]/right-engine-rotated-rad</input>
+			<gain>1.0</gain>
+			<output>propulsion/engine[7]/pitch-angle-rad </output>
+		</pure_gain>
+
+		<!-- Exhausts calculations -->
+
+<!-- 
+
+	That code is weird but since FG do not know about colour-property+colour-factor now
+	it's needed to count colour  property for every exhaust stripe. It could be shorter with Nasal
+	but it's does not matter. If FG code will be advanced then all that part will be removed
+	for shorter realisation.
+
+ -->
+
+		<!-- Main engines -->
+
+		<fcs_function name="propulsion/engine[0]/red">
+		<function>
+			<sum>
+				<value>0.949</value>
+				<product>
+					<difference>
+						<value>1.0</value>
+						<value>0.949</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[0]/fuel-flow-rate-pps</property>
+						<value>183.4</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[0]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[0]/fuel-flow-rate-pps</property>
+				<value>183.4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[0]/blue">
+		<function>
+			<sum>
+				<value>0.1</value>
+				<product>
+					<difference>
+						<value>0.25</value>
+						<value>0.1</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[0]/fuel-flow-rate-pps</property>
+						<value>183.4</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[0]/transparency">
+		<function>
+			<quotient>
+				<property>propulsion/engine[0]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[2]/red">
+		<function>
+			<sum>
+				<value>0.949</value>
+				<product>
+					<difference>
+						<value>1.0</value>
+						<value>0.949</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[2]/fuel-flow-rate-pps</property>
+						<value>183.4</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[2]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[2]/fuel-flow-rate-pps</property>
+				<value>183.4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[2]/blue">
+		<function>
+			<sum>
+				<value>0.1</value>
+				<product>
+					<difference>
+						<value>0.25</value>
+						<value>0.1</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[2]/fuel-flow-rate-pps</property>
+						<value>183.4</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[2]/transparency">
+		<function>
+			<quotient>
+				<property>propulsion/engine[2]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+
+		<fcs_function name="propulsion/engine[4]/red">
+		<function>
+			<sum>
+				<value>0.949</value>
+				<product>
+					<difference>
+						<value>1.0</value>
+						<value>0.949</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[4]/fuel-flow-rate-pps</property>
+						<value>183.4</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[4]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[4]/fuel-flow-rate-pps</property>
+				<value>183.4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[4]/blue">
+		<function>
+			<sum>
+				<value>0.1</value>
+				<product>
+					<difference>
+						<value>0.25</value>
+						<value>0.1</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[4]/fuel-flow-rate-pps</property>
+						<value>183.4</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[4]/transparency">
+		<function>
+			<quotient>
+				<property>propulsion/engine[4]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+
+		<fcs_function name="propulsion/engine[6]/red">
+		<function>
+			<sum>
+				<value>0.949</value>
+				<product>
+					<difference>
+						<value>1.0</value>
+						<value>0.949</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[6]/fuel-flow-rate-pps</property>
+						<value>183.4</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[6]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[6]/fuel-flow-rate-pps</property>
+				<value>183.4</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[6]/blue">
+		<function>
+			<sum>
+				<value>0.1</value>
+				<product>
+					<difference>
+						<value>0.25</value>
+						<value>0.1</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[6]/fuel-flow-rate-pps</property>
+						<value>183.4</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[6]/transparency">
+		<function>
+			<quotient>
+				<property>propulsion/engine[6]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<!-- Maneur engines -->
+
+
+		<fcs_function name="propulsion/engine[1]/red">
+		<function>
+			<sum>
+				<value>0.949</value>
+				<product>
+					<difference>
+						<value>1.0</value>
+						<value>0.949</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[1]/fuel-flow-rate-pps</property>
+						<value>18.28</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[1]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[1]/fuel-flow-rate-pps</property>
+				<value>18.28</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[1]/blue">
+		<function>
+			<sum>
+				<value>0.1</value>
+				<product>
+					<difference>
+						<value>0.25</value>
+						<value>0.1</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[1]/fuel-flow-rate-pps</property>
+						<value>18.28</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[1]/transparency">
+		<function>
+			<quotient>
+				<property>propulsion/engine[1]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+
+		<fcs_function name="propulsion/engine[3]/red">
+		<function>
+			<sum>
+				<value>0.949</value>
+				<product>
+					<difference>
+						<value>1.0</value>
+						<value>0.949</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[3]/fuel-flow-rate-pps</property>
+						<value>18.28</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[3]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[3]/fuel-flow-rate-pps</property>
+				<value>18.28</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[3]/blue">
+		<function>
+			<sum>
+				<value>0.1</value>
+				<product>
+					<difference>
+						<value>0.25</value>
+						<value>0.1</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[3]/fuel-flow-rate-pps</property>
+						<value>18.28</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[3]/transparency">
+		<function>
+			<quotient>
+				<property>propulsion/engine[3]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+
+		<fcs_function name="propulsion/engine[5]/red">
+		<function>
+			<sum>
+				<value>0.949</value>
+				<product>
+					<difference>
+						<value>1.0</value>
+						<value>0.949</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[5]/fuel-flow-rate-pps</property>
+						<value>18.28</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[5]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[5]/fuel-flow-rate-pps</property>
+				<value>18.28</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[5]/blue">
+		<function>
+			<sum>
+				<value>0.1</value>
+				<product>
+					<difference>
+						<value>0.25</value>
+						<value>0.1</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[5]/fuel-flow-rate-pps</property>
+						<value>18.28</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[5]/transparency">
+		<function>
+			<quotient>
+				<property>propulsion/engine[5]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+
+		<fcs_function name="propulsion/engine[7]/red">
+		<function>
+			<sum>
+				<value>0.949</value>
+				<product>
+					<difference>
+						<value>1.0</value>
+						<value>0.949</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[7]/fuel-flow-rate-pps</property>
+						<value>18.28</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[7]/green">
+		<function>
+			<quotient>
+				<property>propulsion/engine[7]/fuel-flow-rate-pps</property>
+				<value>18.28</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[7]/blue">
+		<function>
+			<sum>
+				<value>0.1</value>
+				<product>
+					<difference>
+						<value>0.25</value>
+						<value>0.1</value>
+					</difference>
+					<quotient>
+						<property>propulsion/engine[7]/fuel-flow-rate-pps</property>
+						<value>18.28</value>
+					</quotient>
+				</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="propulsion/engine[7]/transparency">
+		<function>
+			<quotient>
+				<property>propulsion/engine[7]/green</property>
+				<value>2</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+	</channel>
+
+</system>

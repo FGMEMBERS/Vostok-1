@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<!--
+	Author: Slavutinsky Victor
+-->
+
+<PropertyList>
+
+<!-- Sounds -->
+
+	<fx>
+
+	<jsb-click>
+		<name>jsb-click</name>
+		<path>Sounds/click.wav</path>
+		<mode>once</mode>
+		<condition>
+			<and>
+				<equals>
+					<property>fdm/jsbsim/systems/sounds/click/on</property>
+					<value>1</value>
+				</equals>
+				<equals>
+					<property>sim/current-view/internal</property>
+					<value>true</value>
+				</equals>
+			</and>
+		</condition>
+		<volume>
+			<factor>0.7</factor>
+		</volume>
+	</jsb-click>
+
+	<vsor-shutter>
+		<name>vsor-shutter</name>
+		<mode>in-transit</mode>
+		<path>Aircraft/Vostok-1/Sounds/Vsor-Shutter-Move.wav</path>
+		<property>fdm/jsbsim/systems/vzor/cover-pos</property>
+		<volume>
+			<factor>0.3</factor>
+			<property>sim/current-view/internal</property>
+		</volume>
+	</vsor-shutter>
+
+	<right-illuminator-shutter>
+		<name>right-illuminator-shutter</name>
+		<mode>in-transit</mode>
+		<path>Aircraft/Vostok-1/Sounds/Vsor-Shutter-Move.wav</path>
+		<property>fdm/jsbsim/systems/rightilluminator/cover-pos</property>
+		<volume>
+			<factor>0.3</factor>
+			<property>sim/current-view/internal</property>
+		</volume>
+	</right-illuminator-shutter>
+
+	<back-illuminator-shutter>
+		<name>back-illuminator-shutter</name>
+		<mode>in-transit</mode>
+		<path>Aircraft/Vostok-1/Sounds/Vsor-Shutter-Move.wav</path>
+		<property>fdm/jsbsim/systems/backilluminator/cover-pos</property>
+		<volume>
+			<factor>0.3</factor>
+			<property>sim/current-view/internal</property>
+		</volume>
+	</back-illuminator-shutter>
+
+	</fx>
+
+</PropertyList>

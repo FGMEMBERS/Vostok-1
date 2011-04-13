@@ -1,0 +1,721 @@
+<?xml version="1.0"?>
+
+<!--
+	Author: Slavutinsky Victor
+-->
+
+<system>
+
+	<fileheader>
+		<author> Slavutinsky Victor </author>
+		<filecreationdate> 2011 </filecreationdate>
+		<version>$Revision: 1.00 $</version>
+		<description> Mainpanel </description>
+	</fileheader>
+
+<!--	That must be aded to set file
+
+	<fdm>
+		<jsbsim>
+			<systems>
+				<mainpanel>
+					<vertical-speed-absolute-ms type="float">0.0</vertical-speed-absolute-ms>
+					<clock-main-vernier-input type="bool">0</clock-main-vernier-input>
+					<clock-main-vernier-command type="bool">0</clock-main-vernier-command>
+					<clock-main-vernier-pos type="float">0.0</clock-main-vernier-pos>
+					<clock-main-vernier-switch type="bool">0.0</clock-main-vernier-switch>
+					<clock-main-vernier-angle type="float">0.0</clock-main-vernier-angle>
+				</mainpanel>
+			</systems>
+		</jsbsim>
+	</fdm>
+
+-->
+
+	<channel name="Mainpanel">
+
+		<!-- Indication lights -->
+
+		<!-- Green -->
+
+			<!-- A -->
+
+		<switch name="calculations/mainpanel/indicator[12]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/engine[0]/thrust-lbs gt 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[12]/on</output>
+		</switch>
+
+			<!-- B -->
+
+		<switch name="calculations/mainpanel/indicator[17]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/engine[2]/thrust-lbs gt 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[17]/on</output>
+		</switch>
+
+			<!-- C -->
+
+		<switch name="calculations/mainpanel/indicator[13]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/engine[4]/thrust-lbs gt 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[13]/on</output>
+		</switch>
+
+			<!-- D -->
+
+		<switch name="calculations/mainpanel/indicator[18]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/engine[6]/thrust-lbs gt 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[18]/on</output>
+		</switch>
+
+			<!-- E -->
+
+		<switch name="calculations/mainpanel/indicator[14]/on">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				propulsion/engine[8]/thrust-lbs gt 0
+				propulsion/engine[9]/thrust-lbs gt 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[14]/on</output>
+		</switch>
+
+			<!-- F -->
+
+		<switch name="calculations/mainpanel/indicator[19]/on">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				propulsion/engine[14]/thrust-lbs gt 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[19]/on</output>
+		</switch>
+
+			<!-- TDU orientation-->
+
+		<switch name="calculations/mainpanel/indicator[20]/on">
+			<default value="0"/>
+			<test logic="OR" value="1">
+				propulsion/engine[32]/thrust-lbs gt 0
+				propulsion/engine[33]/thrust-lbs gt 0
+				propulsion/engine[34]/thrust-lbs gt 0
+				propulsion/engine[35]/thrust-lbs gt 0
+				propulsion/engine[36]/thrust-lbs gt 0
+				propulsion/engine[37]/thrust-lbs gt 0
+				propulsion/engine[38]/thrust-lbs gt 0
+				propulsion/engine[39]/thrust-lbs gt 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[20]/on</output>
+		</switch>
+
+			<!-- TDU main-->
+
+		<switch name="calculations/mainpanel/indicator[22]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				propulsion/engine[23]/thrust-lbs gt 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[22]/on</output>
+		</switch>
+
+			<!-- Brake chute-->
+
+		<switch name="calculations/mainpanel/indicator[21]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[5]/active eq 1
+				systems/spacecraft/brake-chute-extracted eq 1
+				systems/spacecraft/brake-chute-dropped eq 0
+				systems/spacecraft/brake-chute-teared eq 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[21]/on</output>
+		</switch>
+
+			<!-- Main chute-->
+
+		<switch name="calculations/mainpanel/indicator[23]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[5]/active eq 1
+				systems/spacecraft/main-chute-extracted eq 1
+				systems/spacecraft/main-chute-dropped eq 0
+				systems/spacecraft/main-chute-teared eq 0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[23]/on</output>
+		</switch>
+
+		<!-- Yellow -->
+
+			<!-- First stage drop-->
+
+		<switch name="calculations/mainpanel/indicator[4]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1
+				propulsion/tank[0]/contents-lbs lt 6114.7
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1
+				propulsion/tank[1]/contents-lbs lt 2472.4
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1
+				propulsion/tank[2]/contents-lbs lt 6114.7
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1
+				propulsion/tank[3]/contents-lbs lt 2472.4
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1
+				propulsion/tank[4]/contents-lbs lt 6114.7
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1
+				propulsion/tank[5]/contents-lbs lt 2472.4
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1
+				propulsion/tank[6]/contents-lbs lt 6114.7
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1
+				propulsion/tank[7]/contents-lbs lt 2472.4
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[4]/on</output>
+		</switch>
+
+			<!-- Fairings drop-->
+
+		<switch name="calculations/mainpanel/indicator[9]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[1]/active eq 1
+				position/h-sl-ft gt 164041.0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[9]/on</output>
+		</switch>
+
+			<!-- Second stage drop-->
+
+		<switch name="calculations/mainpanel/indicator[10]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[2]/active eq 1
+				propulsion/tank[8]/contents-lbs lt 7163.3
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[2]/active eq 1
+				propulsion/tank[9]/contents-lbs lt 7163.3
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[2]/active eq 1
+				propulsion/tank[10]/contents-lbs lt 2935.9
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[2]/active eq 1
+				propulsion/tank[11]/contents-lbs lt 2935.9
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[10]/on</output>
+		</switch>
+
+			<!-- Third stage drop-->
+
+		<switch name="calculations/mainpanel/indicator[15]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[3]/active eq 1
+				propulsion/tank[12]/contents-lbs lt 482.8
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[3]/active eq 1
+				propulsion/tank[13]/contents-lbs lt 482.8
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[3]/active eq 1
+				propulsion/tank[14]/contents-lbs lt 220.4
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[3]/active eq 1
+				propulsion/tank[15]/contents-lbs lt 220.4
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[15]/on</output>
+		</switch>
+
+			<!-- TDU stage drop-->
+
+		<switch name="calculations/mainpanel/indicator[11]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[4]/active eq 1
+				propulsion/tank[16]/contents-lbs lt 24.25
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[4]/active eq 1
+				propulsion/tank[17]/contents-lbs lt 24.25
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[4]/active eq 1
+				propulsion/tank[18]/contents-lbs lt 6.613
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[4]/active eq 1
+				propulsion/tank[19]/contents-lbs lt 6.613
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[11]/on</output>
+		</switch>
+
+			<!-- Prepare to landing-->
+
+		<switch name="calculations/mainpanel/indicator[16]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[5]/active eq 1
+				systems/spacecraft/ground-contact eq 0.0
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[16]/on</output>
+		</switch>
+
+		<!-- Red -->
+
+			<!-- A -->
+
+		<switch name="calculations/mainpanel/indicator[0]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/broken eq 1
+				stages/unit[0]/active eq 1
+				stages/unit[0]/broken-block[0] eq 1
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[0]/on</output>
+		</switch>
+
+			<!-- B -->
+
+		<switch name="calculations/mainpanel/indicator[5]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/broken eq 1
+				stages/unit[0]/active eq 1
+				stages/unit[0]/broken-block[1] eq 1
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[5]/on</output>
+		</switch>
+
+			<!-- C -->
+
+		<switch name="calculations/mainpanel/indicator[1]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/broken eq 1
+				stages/unit[0]/active eq 1
+				stages/unit[0]/broken-block[2] eq 1
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[1]/on</output>
+		</switch>
+
+			<!-- D -->
+
+		<switch name="calculations/mainpanel/indicator[6]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/broken eq 1
+				stages/unit[0]/active eq 1
+				stages/unit[0]/broken-block[3] eq 1
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[6]/on</output>
+		</switch>
+
+			<!-- E -->
+
+		<switch name="calculations/mainpanel/indicator[2]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[2]/broken eq 1
+				stages/unit[2]/active eq 1
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[2]/on</output>
+		</switch>
+
+			<!-- F -->
+
+		<switch name="calculations/mainpanel/indicator[7]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[3]/broken eq 1
+				stages/unit[3]/active eq 1
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[3]/broken eq 1
+				stages/unit[2]/active eq 1
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[7]/on</output>
+		</switch>
+
+			<!-- TDU -->
+
+		<switch name="calculations/mainpanel/indicator[3]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[4]/broken eq 1
+				stages/unit[4]/active eq 1
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[4]/broken eq 1
+				stages/unit[3]/active eq 1
+			</test>
+			<test logic="AND" value="1">
+				stages/unit[4]/broken eq 1
+				stages/unit[2]/active eq 1
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[3]/on</output>
+		</switch>
+
+			<!-- Spacecraft -->
+
+		<switch name="calculations/mainpanel/indicator[8]/on">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				stages/unit[5]/broken eq 1
+			</test>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/lightcheck-switch eq 1
+			</test>
+			<output>systems/mainpanel/indicator[8]/on</output>
+		</switch>
+
+		<!-- TDU stage fuel indicator -->
+
+		<!--320/(242.50*2) -->
+
+		<fcs_function name="calculations/mainpanel/tdu-main-pressure-sum-atm">
+		<function>
+			<product>
+				<sum>
+					<property>propulsion/tank[16]/contents-lbs</property>
+					<property>propulsion/tank[17]/contents-lbs</property>
+				</sum>
+				<value>0.65979</value>
+			</product>
+		</function>
+			<output>systems/mainpanel/tdu-main-pressure-sum-atm</output>
+		</fcs_function>
+
+		<switch name="calculations/mainpanel/tdu-main-pressure-atm">
+			<default value="systems/mainpanel/tdu-main-pressure-sum-atm"/>
+			<test logic="OR" value="320">
+				stages/unit[0]/active eq 1
+				stages/unit[2]/active eq 1
+				stages/unit[3]/active eq 1
+			</test>
+			<output>systems/mainpanel/tdu-main-pressure-atm</output>
+		</switch>
+
+		<!--155/(18.4*2) -->
+
+		<fcs_function name="calculations/mainpanel/tdu-auto-one-pressure-sum-atm">
+		<function>
+			<product>
+				<sum>
+					<property>propulsion/tank[20]/contents-lbs</property>
+					<property>propulsion/tank[21]/contents-lbs</property>
+				</sum>
+				<value>4.211</value>
+			</product>
+		</function>
+			<output>systems/mainpanel/tdu-auto-one-pressure-sum-atm</output>
+		</fcs_function>
+
+		<switch name="calculations/mainpanel/tdu-auto-one-pressure-atm">
+			<default value="systems/mainpanel/tdu-auto-one-pressure-sum-atm"/>
+			<test logic="OR" value="155">
+				stages/unit[0]/active eq 1
+				stages/unit[2]/active eq 1
+				stages/unit[3]/active eq 1
+			</test>
+			<output>systems/mainpanel/tdu-auto-one-pressure-atm</output>
+		</switch>
+
+		<fcs_function name="calculations/mainpanel/tdu-auto-two-pressure-sum-atm">
+		<function>
+			<product>
+				<sum>
+					<property>propulsion/tank[22]/contents-lbs</property>
+					<property>propulsion/tank[23]/contents-lbs</property>
+				</sum>
+				<value>4.211</value>
+			</product>
+		</function>
+			<output>systems/mainpanel/tdu-auto-two-pressure-sum-atm</output>
+		</fcs_function>
+
+		<switch name="calculations/mainpanel/tdu-auto-two-pressure-atm">
+			<default value="systems/mainpanel/tdu-auto-two-pressure-sum-atm"/>
+			<test logic="OR" value="155">
+				stages/unit[0]/active eq 1
+				stages/unit[2]/active eq 1
+				stages/unit[3]/active eq 1
+			</test>
+			<output>systems/mainpanel/tdu-auto-two-pressure-atm</output>
+		</switch>
+
+		<fcs_function name="calculations/mainpanel/tdu-handled-pressure-sum-atm">
+		<function>
+			<product>
+				<sum>
+					<property>propulsion/tank[24]/contents-lbs</property>
+					<property>propulsion/tank[25]/contents-lbs</property>
+				</sum>
+				<value>4.211</value>
+			</product>
+		</function>
+			<output>systems/mainpanel/tdu-handled-pressure-sum-atm</output>
+		</fcs_function>
+
+		<switch name="calculations/mainpanel/tdu-handled-pressure-atm">
+			<default value="systems/mainpanel/tdu-handled-pressure-sum-atm"/>
+			<test logic="OR" value="155">
+				stages/unit[0]/active eq 1
+				stages/unit[2]/active eq 1
+				stages/unit[3]/active eq 1
+			</test>
+			<output>systems/mainpanel/tdu-handled-pressure-atm</output>
+		</switch>
+
+<!-- Clock main vernier -->
+
+		<switch name="calculations/mainpanel/clock-main-vernier-allowed">
+			<default value="systems/mainpanel/clock-main-vernier-command"/>
+			<test logic="AND" value="systems/mainpanel/clock-main-vernier-input">
+				systems/mainpanel/serviceable eq 1
+			</test>
+			<output>systems/mainpanel/clock-main-vernier-command</output>
+		</switch>
+
+		<kinematic name="calculations/mainpanel/clock-main-vernier-pos">
+			<input>systems/mainpanel/clock-main-vernier-command</input>
+			<traverse>
+			<setting>
+				<position>0</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>1</position>
+				<time>0.1</time>
+			</setting>
+			</traverse>
+			<output>systems/mainpanel/clock-main-vernier-pos</output>
+		</kinematic>
+
+		<switch name="calculations/mainpanel/clock-main-vernier-not-allowed">
+			<default value="systems/mainpanel/clock-main-vernier-input"/>
+			<test logic="AND" value="systems/mainpanel/clock-main-vernier-command">
+				systems/mainpanel/serviceable eq 0
+			</test>
+			<output>systems/mainpanel/clock-main-vernier-input</output>
+		</switch>
+
+		<switch name="calculations/mainpanel/clock-main-vernier-switch">
+			<default value="systems/mainpanel/clock-main-vernier-switch"/>
+			<test logic="AND" value="1">
+				systems/mainpanel/clock-main-vernier-pos ge 0.5
+			</test>
+			<test logic="AND" value="0">
+				systems/mainpanel/clock-main-vernier-pos lt 0.5
+			</test>
+			<output>systems/mainpanel/clock-main-vernier-switch</output>
+		</switch>
+
+<!-- Flight time vernier -->
+
+		<switch name="calculations/mainpanel/clock-inflight-vernier-allowed">
+			<default value="systems/mainpanel/clock-inflight-vernier-command"/>
+			<test logic="AND" value="systems/mainpanel/clock-inflight-vernier-input">
+				systems/mainpanel/serviceable eq 1
+			</test>
+			<output>systems/mainpanel/clock-inflight-vernier-command</output>
+		</switch>
+
+		<kinematic name="calculations/mainpanel/clock-inflight-vernier-pos">
+			<input>systems/mainpanel/clock-inflight-vernier-command</input>
+			<traverse>
+			<setting>
+				<position>0</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>1</position>
+				<time>0.1</time>
+			</setting>
+			</traverse>
+			<output>systems/mainpanel/clock-inflight-vernier-pos</output>
+		</kinematic>
+
+		<switch name="calculations/mainpanel/clock-inflight-vernier-not-allowed">
+			<default value="systems/mainpanel/clock-inflight-vernier-input"/>
+			<test logic="AND" value="systems/mainpanel/clock-inflight-vernier-command">
+				systems/mainpanel/serviceable eq 0
+			</test>
+			<output>systems/mainpanel/clock-inflight-vernier-input</output>
+		</switch>
+
+		<switch name="calculations/mainpanel/clock-inflight-vernier-switch">
+			<default value="systems/mainpanel/clock-inflight-vernier-switch"/>
+			<test logic="AND" value="1">
+				systems/mainpanel/clock-inflight-vernier-pos ge 0.5
+			</test>
+			<test logic="AND" value="0">
+				systems/mainpanel/clock-inflight-vernier-pos lt 0.5
+			</test>
+			<output>systems/mainpanel/clock-inflight-vernier-switch</output>
+		</switch>
+
+<!-- Day time vernier -->
+
+		<switch name="calculations/mainpanel/clock-daytime-vernier-allowed">
+			<default value="systems/mainpanel/clock-daytime-vernier-command"/>
+			<test logic="AND" value="systems/mainpanel/clock-daytime-vernier-input">
+				systems/mainpanel/serviceable eq 1
+			</test>
+			<output>systems/mainpanel/clock-daytime-vernier-command</output>
+		</switch>
+
+		<kinematic name="calculations/mainpanel/clock-daytime-vernier-pos">
+			<input>systems/mainpanel/clock-daytime-vernier-command</input>
+			<traverse>
+			<setting>
+				<position>0</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>1</position>
+				<time>0.1</time>
+			</setting>
+			</traverse>
+			<output>systems/mainpanel/clock-daytime-vernier-pos</output>
+		</kinematic>
+
+		<switch name="calculations/mainpanel/clock-daytime-vernier-not-allowed">
+			<default value="systems/mainpanel/clock-daytime-vernier-input"/>
+			<test logic="AND" value="systems/mainpanel/clock-daytime-vernier-command">
+				systems/mainpanel/serviceable eq 0
+			</test>
+			<output>systems/mainpanel/clock-daytime-vernier-input</output>
+		</switch>
+
+		<switch name="calculations/mainpanel/clock-daytime-vernier-switch">
+			<default value="systems/mainpanel/clock-daytime-vernier-switch"/>
+			<test logic="AND" value="1">
+				systems/mainpanel/clock-daytime-vernier-pos ge 0.5
+			</test>
+			<test logic="AND" value="0">
+				systems/mainpanel/clock-daytime-vernier-pos lt 0.5
+			</test>
+			<output>systems/mainpanel/clock-daytime-vernier-switch</output>
+		</switch>
+
+<!-- Click -->
+
+		<switch name="calculations/mainpanel/click">
+			<default value="systems/sounds/click/on"/>
+			<test logic="AND" value="1">
+				systems/mainpanel/clock-main-vernier-pos ge 0.25
+				systems/mainpanel/clock-main-vernier-pos le 0.75
+				systems/sounds/click/on == 0
+			</test>
+			<test logic="AND" value="1">
+				systems/mainpanel/clock-inflight-vernier-pos ge 0.25
+				systems/mainpanel/clock-inflight-vernier-pos le 0.75
+				systems/sounds/click/on == 0
+			</test>
+			<test logic="AND" value="1">
+				systems/mainpanel/clock-daytime-vernier-pos ge 0.25
+				systems/mainpanel/clock-daytime-vernier-pos le 0.75
+				systems/sounds/click/on == 0
+			</test>
+			<output>systems/sounds/click/on</output>
+		</switch>
+
+	</channel>
+
+</system>
