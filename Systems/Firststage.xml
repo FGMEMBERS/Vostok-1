@@ -17,9 +17,199 @@
 
 	<channel name="Firststage">
 
+		<!-- Send control handle commands to orientation computer -->
+
+		<pure_gain name="calculations/stages/unit[0]/control/q-gained">
+			<input>systems/controlhandle/elevator-pos</input>
+			<gain>-1.0</gain>
+			<output>stages/unit[0]/control/q-gained</output>
+		</pure_gain>
+
+		<pure_gain name="calculations/stages/unit[0]/control/p-gained">
+			<input>systems/controlhandle/rudder-pos</input>
+			<gain>-1.0</gain>
+			<output>stages/unit[0]/control/p-gained</output>
+		</pure_gain>
+
+		<pure_gain name="calculations/stages/unit[0]/control/r-gained">
+			<input>systems/controlhandle/aileron-pos</input>
+			<gain>1.0</gain>
+			<output>stages/unit[0]/control/r-gained</output>
+		</pure_gain>
+
+		<switch name="calculations/stages/unit[0]/control/q-command">
+			<default value="systems/orientationcomputer/q-command"/>
+			<test logic="AND" value="stages/unit[0]/control/q-gained">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/q-command</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/p-command">
+			<default value="systems/orientationcomputer/p-command"/>
+			<test logic="AND" value="stages/unit[0]/control/p-gained">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/p-command</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/r-command">
+			<default value="systems/orientationcomputer/r-command"/>
+			<test logic="AND" value="stages/unit[0]/control/r-gained">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/r-command</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/q-hold">
+			<default value="systems/orientationcomputer/q-hold"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1.0
+				systems/controlhandle/button-switch eq 1.0
+			</test>
+			<test logic="AND" value="0">
+				stages/unit[0]/active eq 1.0
+				systems/controlhandle/button-switch eq 0.0
+			</test>
+			<output>systems/orientationcomputer/q-hold</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/p-hold">
+			<default value="systems/orientationcomputer/p-hold"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1.0
+				systems/controlhandle/button-switch eq 1.0
+			</test>
+			<test logic="AND" value="0">
+				stages/unit[0]/active eq 1.0
+				systems/controlhandle/button-switch eq 0.0
+			</test>
+			<output>systems/orientationcomputer/p-hold</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/r-hold">
+			<default value="systems/orientationcomputer/r-hold"/>
+			<test logic="AND" value="1">
+				stages/unit[0]/active eq 1.0
+				systems/controlhandle/button-switch eq 1.0
+			</test>
+			<test logic="AND" value="0">
+				stages/unit[0]/active eq 1.0
+				systems/controlhandle/button-switch eq 0.0
+			</test>
+			<output>systems/orientationcomputer/r-hold</output>
+		</switch>
+
+		<!--Directly connect control pid to input to control acceleration output -->
+
+		<switch name="calculations/stages/unit[0]/control/q-control-add">
+			<default value="systems/orientationcomputer/q-control-add"/>
+			<test logic="AND" value="systems/orientationcomputer/q-control-acceleration">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/q-control-add</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/p-control-add">
+			<default value="systems/orientationcomputer/p-control-add"/>
+			<test logic="AND" value="systems/orientationcomputer/p-control-acceleration">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/p-control-add</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/r-control-add">
+			<default value="systems/orientationcomputer/r-control-add"/>
+			<test logic="AND" value="systems/orientationcomputer/r-control-acceleration">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/r-control-add</output>
+		</switch>
+
+		<!--Calculating mass moment changes-->
+
+		<fcs_function name="calculations/stages/unit[0]/mass-part">
+			<function>
+				<quotient>
+					<sum>
+						<property>propulsion/tank[0]/contents-lbs</property>
+						<property>propulsion/tank[1]/contents-lbs</property>
+						<property>propulsion/tank[2]/contents-lbs</property>
+						<property>propulsion/tank[3]/contents-lbs</property>
+						<property>propulsion/tank[4]/contents-lbs</property>
+						<property>propulsion/tank[5]/contents-lbs</property>
+						<property>propulsion/tank[6]/contents-lbs</property>
+						<property>propulsion/tank[7]/contents-lbs</property>
+					</sum>
+					<sum>
+						<value>61147.0</value>
+						<value>61147.0</value>
+						<value>61147.0</value>
+						<value>61147.0</value>
+						<value>24724.0</value>
+						<value>24724.0</value>
+						<value>24724.0</value>
+						<value>24724.0</value>
+					</sum>
+				</quotient>
+			</function>
+			<output>stages/unit[0]/mass-part</output>
+		</fcs_function>
+
+		<!--Output orientation computer factors and limits -->
+
+		<fcs_function name="calculations/stages/unit[0]/control/mass-control">
+			<function>
+				<product>
+					<value>20</value>
+					<table>
+						<independentVar lookup="row">stages/unit[0]/mass-part</independentVar>
+						<tableData>
+							0.0		0.2
+							0.2		1.0
+							1.0		1.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>stages/unit[0]/control/mass-control</output>
+		</fcs_function>
+
+		<switch name="calculations/stages/unit[0]/control/factor-control">
+			<default value="systems/orientationcomputer/factor-control"/>
+			<test logic="AND" value="stages/unit[0]/control/mass-control">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/factor-control</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/factor-input">
+			<default value="systems/orientationcomputer/factor-input"/>
+			<test logic="AND" value="0.0872">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/factor-input</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/output-min">
+			<default value="systems/orientationcomputer/output-min"/>
+			<test logic="AND" value="-0.785">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/output-min</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[0]/control/output-max">
+			<default value="systems/orientationcomputer/output-max"/>
+			<test logic="AND" value="0.785">
+				stages/unit[0]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/output-max</output>
+		</switch>
+
 		<!--Calculating throttle-->
 
-		<switch name="Forward First Stage Main Engine Throttle">
+		<switch name="calculations/stages/unit[0]/control/forward-main-throttle">
 			<default value="0"/>
 			<test logic="AND" value="systems/gascontrol/lever-pos">
 				systems/gascontrol/lever-pos gt 0.2
@@ -36,7 +226,7 @@
 			<output>fcs/throttle-pos-norm[0]</output>
 		</switch>
 
-		<switch name="Back First Stage Main Engine Throttle">
+		<switch name="calculations/stages/unit[0]/control/back-main-throttle">
 			<default value="0"/>
 			<test logic="AND" value="systems/gascontrol/lever-pos">
 				systems/gascontrol/lever-pos gt 0.2
@@ -53,7 +243,7 @@
 			<output>fcs/throttle-pos-norm[2]</output>
 		</switch>
 
-		<switch name="Left First Stage Main Engine Throttle">
+		<switch name="calculations/stages/unit[0]/control/left-main-throttle">
 			<default value="0"/>
 			<test logic="AND" value="systems/gascontrol/lever-pos">
 				systems/gascontrol/lever-pos gt 0.2
@@ -70,7 +260,7 @@
 			<output>fcs/throttle-pos-norm[4]</output>
 		</switch>
 
-		<switch name="Right First Stage Main Engine Throttle">
+		<switch name="calculations/stages/unit[0]/control/right-main-throttle">
 			<default value="0"/>
 			<test logic="AND" value="systems/gascontrol/lever-pos">
 				systems/gascontrol/lever-pos gt 0.2
@@ -87,7 +277,7 @@
 			<output>fcs/throttle-pos-norm[6]</output>
 		</switch>
 
-		<switch name="Forward First Stage Maneur Engine Throttle">
+		<switch name="calculations/stages/unit[0]/control/forward-maneur-throttle">
 			<default value="0"/>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1.0
@@ -96,7 +286,7 @@
 			</test>
 			<output>fcs/throttle-pos-norm[1]</output>
 		</switch>
-			<switch name="Back First Stage Maneur Engine Throttle">
+			<switch name="calculations/stages/unit[0]/control/back-maneur-throttle">
 			<default value="0"/>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1.0
@@ -106,7 +296,7 @@
 			<output>fcs/throttle-pos-norm[3]</output>
 		</switch>
 
-		<switch name="Left First Stage Maneur Engine Throttle">
+		<switch name="calculations/stages/unit[0]/control/left-maneur-throttle">
 			<default value="0"/>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1.0
@@ -116,7 +306,7 @@
 			<output>fcs/throttle-pos-norm[5]</output>
 		</switch>
 
-		<switch name="Right First Stage Maneur Engine Throttle">
+		<switch name="calculations/stages/unit[0]/control/right-maneur-throttle">
 			<default value="0"/>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1.0
@@ -126,11 +316,105 @@
 			<output>fcs/throttle-pos-norm[7]</output>
 		</switch>
 
-		<!--Recalculate control angle by kinematic timer
+		<!-- Calculate control angles -->
+
+		<fcs_function name="calculations/stages/unit[0]/control/forward-engine-rad">
+			<function>
+			<sum>
+				<product>
+					<property>systems/orientationcomputer/p-output</property>
+					<value>1</value>
+				</product>
+				<product>
+					<property>systems/orientationcomputer/r-output</property>
+					<value>-1</value>
+				</product>
+			</sum>
+			</function>
+			<clipto>
+				<min>stages/unit[0]/control/control-min</min>
+				<max>stages/unit[0]/control/control-max</max>
+			</clipto>
+			<output>stages/unit[0]/control/forward-engine-rad</output>
+		</fcs_function>
+
+		<fcs_function name="calculations/stages/unit[0]/control/back-engine-rad">
+			<function>
+			<sum>
+				<product>
+					<property>systems/orientationcomputer/p-output</property>
+					<value>-1</value>
+				</product>
+				<product>
+					<property>systems/orientationcomputer/r-output</property>
+					<value>-1</value>
+				</product>
+			</sum>
+			</function>
+			<clipto>
+				<min>stages/unit[0]/control/control-min</min>
+				<max>stages/unit[0]/control/control-max</max>
+			</clipto>
+			<output>stages/unit[0]/control/back-engine-rad</output>
+		</fcs_function>
+
+		<fcs_function name="calculations/stages/unit[0]/control/left-engine-rad">
+			<function>
+			<sum>
+				<product>
+					<property>systems/orientationcomputer/q-output</property>
+					<value>-1</value>
+				</product>
+				<product>
+					<property>systems/orientationcomputer/r-output</property>
+					<value>-1</value>
+				</product>
+			</sum>
+			</function>
+			<clipto>
+				<min>stages/unit[0]/control/control-min</min>
+				<max>stages/unit[0]/control/control-max</max>
+			</clipto>
+			<output>stages/unit[0]/control/left-engine-rad</output>
+		</fcs_function>
+
+		<fcs_function name="calculations/stages/unit[0]/control/right-engine-rad">
+			<function>
+			<sum>
+				<product>
+					<property>systems/orientationcomputer/q-output</property>
+					<value>1</value>
+				</product>
+				<product>
+					<property>systems/orientationcomputer/r-output</property>
+					<value>-1</value>
+				</product>
+			</sum>
+			</function>
+			<clipto>
+				<min>stages/unit[0]/control/control-min</min>
+				<max>stages/unit[0]/control/control-max</max>
+			</clipto>
+			<output>stages/unit[0]/control/right-engine-rad</output>
+		</fcs_function>
+
+		<pure_gain name="calculations/unit[0]/control/pitch-cmd-norm">
+			<input>systems/orientationcomputer/q-output</input>
+			<gain>1.2732</gain>
+			<output>stages/unit[0]/control/pitch-cmd-norm</output>
+		</pure_gain>
+
+		<pure_gain name="calculations/unit[0]/control/yaw-cmd-norm">
+			<input>systems/orientationcomputer/p-output</input>
+			<gain>1.2732</gain>
+			<output>stages/unit[0]/control/yaw-cmd-norm</output>
+		</pure_gain>
+
+		<!--Recalculate control angles by kinematic timer
 			To imitate enines rotate pumps delay  -->
 
 		<kinematic name="First Stage Left Engine Delayed">
-			<input>stages/unit[0]/computer/left-engine-rad</input>
+			<input>stages/unit[0]/control/left-engine-rad</input>
 			<traverse>
 			<setting>
 				<position>-0.78539</position>
@@ -138,7 +422,7 @@
 			</setting>
 			<setting>
 				<position>0.78539</position>
-				<time>1</time>
+				<time>2.0</time>
 			</setting>
 			</traverse>
 			<output>stages/unit[0]/left-engine-delayed-rad</output>
@@ -155,7 +439,7 @@
 		</fcs_function>
 
 		<kinematic name="First Stage Right Engine Delayed">
-			<input>stages/unit[0]/computer/right-engine-rad</input>
+			<input>stages/unit[0]/control/right-engine-rad</input>
 			<traverse>
 			<setting>
 				<position>-0.78539</position>
@@ -163,7 +447,7 @@
 			</setting>
 			<setting>
 				<position>0.78539</position>
-				<time>1</time>
+				<time>3.0</time>
 			</setting>
 			</traverse>
 			<output>stages/unit[0]/right-engine-delayed-rad</output>
@@ -180,7 +464,7 @@
 		</fcs_function>
 
 		<kinematic name="First Stage Back Engine Delayed">
-			<input>stages/unit[0]/computer/back-engine-rad</input>
+			<input>stages/unit[0]/control/back-engine-rad</input>
 			<traverse>
 			<setting>
 				<position>-0.78539</position>
@@ -188,7 +472,7 @@
 			</setting>
 			<setting>
 				<position>0.78539</position>
-				<time>1</time>
+				<time>2.0</time>
 			</setting>
 			</traverse>
 			<output>stages/unit[0]/back-engine-delayed-rad</output>
@@ -205,7 +489,7 @@
 		</fcs_function>
 
 		<kinematic name="First Stage Forward Engine Delayed">
-			<input>stages/unit[0]/computer/forward-engine-rad</input>
+			<input>stages/unit[0]/control/forward-engine-rad</input>
 			<traverse>
 			<setting>
 				<position>-0.78539</position>
@@ -213,7 +497,7 @@
 			</setting>
 			<setting>
 				<position>0.78539</position>
-				<time>1</time>
+				<time>2.0</time>
 			</setting>
 			</traverse>
 			<output>stages/unit[0]/forward-engine-delayed-rad</output>

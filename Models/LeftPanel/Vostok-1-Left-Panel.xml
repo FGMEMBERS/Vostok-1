@@ -19,6 +19,16 @@
 
 	<enable-hot type="bool">false</enable-hot>
 
+	<animation>
+		<type>select</type>
+		<condition>
+			<equals>
+				<property>sim/current-view/internal</property>
+				<value>true</value>
+			</equals>
+		</condition>
+	</animation>
+
 	<!-- Down indicator light -->
 
 	<animation>
@@ -88,6 +98,12 @@
 		<object-name>LP_VSNeedleThree</object-name>
 		<object-name>LP_VSNeedleTwo</object-name>
 		<object-name>LP_VSPanel</object-name>
+		<object-name>LP_PVernier</object-name>
+		<object-name>LP_PUp</object-name>
+		<object-name>LP_PDown</object-name>
+		<object-name>LP_RVernier</object-name>
+		<object-name>LP_RUp</object-name>
+		<object-name>LP_RDown</object-name>
 		<emission>
 			<red-prop>fdm/jsbsim/systems/light/cabine/red</red-prop>
 			<green-prop>fdm/jsbsim/systems/light/cabine/green</green-prop>
@@ -100,10 +116,8 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>LP_Horizon</object-name>
-		<property>fdm/jsbsim/calculations/calculations/roll-modified-rad</property>
+		<property>fdm/jsbsim/attitude/roll-rad</property>
 		<factor>57.2957795130823208768</factor>
-		<center>
-		</center>
 		<axis>
 			<x1-m>-1.0</x1-m>
 			<y1-m>-0.00016</y1-m>
@@ -119,8 +133,6 @@
 		<object-name>LP_Horizon</object-name>
 		<property>fdm/jsbsim/attitude/pitch-rad</property>
 		<factor>57.2957795130823208768</factor>
-		<center>
-		</center>
 		<axis>
 			<x1-m>0.059663</x1-m>
 			<y1-m>-1.0</y1-m>
@@ -129,6 +141,144 @@
 			<y2-m>1.0</y2-m>
 			<z2-m>0.053153</z2-m>
 		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>LP_PVernier</object-name>
+		<property>fdm/jsbsim/systems/arthorizon/pitch-offset-deg</property>
+		<factor>1.0</factor>
+		<axis>
+			<x1-m>0.082</x1-m>
+			<y1-m>-0.066</y1-m>
+			<z1-m>0.080</z1-m>
+			<x2-m>0.107</x2-m>
+			<y2-m>-0.066</y2-m>
+			<z2-m>0.080</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>LP_PUp</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>fdm/jsbsim/systems/arthorizon/pitch-offset-deg</property>
+				<step>1</step>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+  		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>fdm/jsbsim/systems/arthorizon/pitch-offset-deg</property>
+				<step>1</step>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>LP_PDown</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>fdm/jsbsim/systems/arthorizon/pitch-offset-deg</property>
+				<step>-1</step>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+  		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>fdm/jsbsim/systems/arthorizon/pitch-offset-deg</property>
+				<step>-1</step>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>LP_RVernier</object-name>
+		<property>fdm/jsbsim/systems/arthorizon/roll-offset-deg</property>
+		<factor>1.0</factor>
+		<axis>
+			<x1-m>0.082</x1-m>
+			<y1-m>0.067</y1-m>
+			<z1-m>0.080</z1-m>
+			<x2-m>0.107</x2-m>
+			<y2-m>0.067</y2-m>
+			<z2-m>0.080</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>LP_RUp</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>fdm/jsbsim/systems/arthorizon/roll-offset-deg</property>
+				<step>1</step>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+  		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>fdm/jsbsim/systems/arthorizon/roll-offset-deg</property>
+				<step>1</step>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>LP_RDown</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>fdm/jsbsim/systems/arthorizon/roll-offset-deg</property>
+				<step>-1</step>
+				<wrap>false</wrap>
+			</binding>
+		</action>
+  		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.1</interval-sec>
+			<binding>
+				<command>property-adjust</command>
+				<property>fdm/jsbsim/systems/arthorizon/roll-offset-deg</property>
+				<step>-1</step>
+				<wrap>false</wrap>
+			</binding>
+		</action>
 	</animation>
 
 	<!-- G force indicator -->
@@ -143,10 +293,10 @@
 		<axis>
 			<x1-m>0.055</x1-m>
 			<y1-m>-1.0</y1-m>
-			<z1-m>0.026</z1-m>
+			<z1-m>0.012</z1-m>
 			<x2-m>0.055</x2-m>
 			<y2-m>1.0</y2-m>
-			<z2-m>0.026</z2-m>
+			<z2-m>0.012</z2-m>
 		</axis>
 	</animation>
 
@@ -155,7 +305,7 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>LP_HAScale</object-name>
-		<property>fdm/jsbsim/systems/orientationpanel/heading-modified-rad</property>
+		<property>fdm/jsbsim/attitude/heading-true-rad</property>
 		<factor>57.2957795130823208768</factor>
 		<center>
 		</center>

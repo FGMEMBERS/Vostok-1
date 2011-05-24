@@ -15,11 +15,11 @@
 
 	<channel name="Temperature">
 
-		<!-- By NACA report 990 -->
-
 		<!-- Flow -->
 
-		<fcs_function name="aero/temperature/flow-mach-c">
+		<!-- By NACA report 990
+
+		<fcs_function name="aero/temperature/stagnation-mach-c">
 		<function>
 			<description>
 				Stagnation temperature due to Mach number and altitude
@@ -54,6 +54,54 @@
 			</table>
 		</function>
 		</fcs_function>
+ -->
+
+		<fcs_function name="aero/temperature/P-sum-psf">
+		<function>
+			<description>
+				Summar aerodynamical pressure
+			</description>
+				<sum>
+					<property>atmosphere/P-psf</property>
+					<property>aero/qbar-modified-psf</property>
+				</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="aero/temperature/stagnation-mach-c">
+		<function>
+			<description>
+				Stagnation temperature due to Mach number and altitude
+			</description>
+			<product>
+				<difference>
+					<product>
+						<sum>
+							<value>273</value>	<!-- Celsius to Kelvin -->
+							<value>15</value>	<!-- Standart mean temperature -->
+						</sum>
+						<sum>
+							<value>1</value>
+							<product>
+								<quotient>
+									<difference>
+										<value>1.4</value>	<!-- Cp/Cv coefficient for twoatomic gases -->
+										<value>1</value>
+									</difference>
+									<value>2</value>
+								</quotient>
+								<pow>
+									<property>velocities/mach</property>
+									<value>2</value>
+								</pow>
+							</product>
+						</sum>
+					</product>
+					<value>273</value>
+				</difference>
+			</product>
+		</function>
+		</fcs_function>
 
 		<fcs_function name="aero/temperature/flow-mach-red">
 		<function>
@@ -61,7 +109,7 @@
 				Red portion of flow color due temperature
 			</description>
 			<table>
-				<independentVar lookup="row">aero/temperature/flow-mach-c</independentVar>
+				<independentVar lookup="row">aero/temperature/stagnation-mach-c</independentVar>
 			<tableData>
 0	0
 1500	1
@@ -88,7 +136,7 @@
 				Green portion of color due temperature
 			</description>
 			<table>
-				<independentVar lookup="row">aero/temperature/flow-mach-c</independentVar>
+				<independentVar lookup="row">aero/temperature/stagnation-mach-c</independentVar>
 			<tableData>
 0	0
 1500	0.505
@@ -115,7 +163,7 @@
 				Blue portion of color due temperature
 			</description>
 			<table>
-				<independentVar lookup="row">aero/temperature/flow-mach-c</independentVar>
+				<independentVar lookup="row">aero/temperature/stagnation-mach-c</independentVar>
 			<tableData>
 0	0
 1500	0
@@ -154,7 +202,7 @@
 		<fcs_function name="aero/temperature/flow-mach-d2-c">
 		<function>
 			<quotient>
-				<property>aero/temperature/flow-mach-c</property>
+				<property>aero/temperature/stagnation-mach-c</property>
 				<value>2</value>
 			</quotient>
 		</function>
@@ -259,7 +307,7 @@
 		<fcs_function name="aero/temperature/flow-mach-d4-c">
 		<function>
 			<quotient>
-				<property>aero/temperature/flow-mach-c</property>
+				<property>aero/temperature/stagnation-mach-c</property>
 				<value>4</value>
 			</quotient>
 		</function>
@@ -364,7 +412,7 @@
 		<fcs_function name="aero/temperature/flow-mach-d8-c">
 		<function>
 			<quotient>
-				<property>aero/temperature/flow-mach-c</property>
+				<property>aero/temperature/stagnation-mach-c</property>
 				<value>8</value>
 			</quotient>
 		</function>
@@ -469,7 +517,7 @@
 		<fcs_function name="aero/temperature/flow-mach-d16-c">
 		<function>
 			<quotient>
-				<property>aero/temperature/flow-mach-c</property>
+				<property>aero/temperature/stagnation-mach-c</property>
 				<value>8</value>
 			</quotient>
 		</function>
@@ -573,29 +621,77 @@
 
 		<!-- Surface -->
 
+		<fcs_function name="aero/temperature/recovery-mach-c">
+		<function>
+			<description>
+				Surface temperature due to Mach number and altitude
+			</description>
+-			<product>
+				<difference>
+					<product>
+						<sum>
+							<value>273</value>	<!-- Celsius to Kelvin -->
+							<value>15</value>	<!-- Standart mean temperature -->
+						</sum>
+						<sum>
+							<value>1</value>
+							<product>
+								<pow>
+									<value>0.715</value>	<!-- Prandtl coefficient -->
+									<quotient>
+										<value>1</value>
+										<value>3</value>
+									</quotient>
+								</pow>
+								<quotient>
+									<difference>
+										<value>1.4</value>	<!-- Cp/Cv coefficient for twoatomic gases -->
+										<value>1</value>
+									</difference>
+									<value>2</value>
+								</quotient>
+								<pow>
+									<property>velocities/mach</property>
+									<value>2</value>
+								</pow>
+							</product>
+						</sum>
+					</product>
+					<value>273</value>
+				</difference>
+			</product>
+		</function>
+		</fcs_function>
+
 		<fcs_function name="aero/temperature/surface-mach-c">
 		<function>
 			<description>
 				Surface temperature due to Mach number and altitude
 			</description>
 			<product>
-				<property>aero/temperature/flow-mach-c</property>
-				<pow>
+				<difference>
+					<property>aero/temperature/recovery-mach-c</property>
 					<product>
-						<value>0.715</value>
 						<quotient>
-							<value>2116</value>
-							<sum>
-								<value>2116</value>
-								<property>aero/qbar-modified-psf</property>
-							</sum>
+							<value>0.5</value>
+							<value>50</value>	<!-- Mean air heat transfer coefficient-->
 						</quotient>
+						<quotient>
+							<property>atmosphere/P-psf</property>
+							<product>
+								<value>0.3048</value>	<!--  Feets/sec to meters/sec-->
+								<value>0.3048</value>	<!--  Feets/sec to meters/sec-->
+							</product>
+						</quotient>
+						<pow>
+							<product>
+								<property>velocities/vt-fps</property>
+								<value>0.3048</value>	<!--  Feets/sec to meters/sec-->
+							</product>
+							<value>3</value>
+						</pow>
 					</product>
-					<quotient>
-						<value>1</value>
-						<value>3</value>
-					</quotient>
-				</pow>
+				</difference>
 			</product>
 		</function>
 		</fcs_function>

@@ -131,12 +131,44 @@
 		<object-name>V_SSliderTwo</object-name>
 		<object-name>V_SThree</object-name>
 		<object-name>V_STwo</object-name>
-		<object-name>V_Shaders</object-name>
 		<emission>
 			<red-prop>fdm/jsbsim/systems/vzor/light-red</red-prop>
 			<green-prop>fdm/jsbsim/systems/vzor/light-green</green-prop>
 			<blue-prop>fdm/jsbsim/systems/vzor/light-blue</blue-prop>
 		</emission>
+	</animation>
+
+	<!-- Mirror shifts -->
+
+	<animation>
+		<type>textranslate</type>
+		<object-name>V_Mirror</object-name>
+		<property>fdm/jsbsim/systems/vzor/mirror-shift</property>
+		<factor>1</factor>
+		<center>
+			<x-m> 0 </x-m>
+			<y-m> 0 </y-m>
+			<z-m> 0 </z-m>
+		</center>
+		<axis>
+			<x>1</x>
+		</axis>
+	 </animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>V_Mirror</object-name>
+		<property>fdm/jsbsim/systems/vzor/mirror-angle-deg</property>
+		<center>
+			<x-m>0.0</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
 	</animation>
 
 	<!-- Cover shifts -->

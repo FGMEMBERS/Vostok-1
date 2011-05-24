@@ -346,12 +346,7 @@ crashes = func
 			and (brake_chute_extracted==1)
 			and (brake_chute_dropped==0)
 			and (brake_chute_teared==0)
-			and (
-				(qbar>brake_qbar_max)
-				or (abs(p_rad_sec)>brake_rot_max)
-				or (abs(q_rad_sec)>brake_rot_max)
-				or (abs(r_rad_sec)>brake_rot_max)
-			)
+			and (qbar>brake_qbar_max)
 		)
 		{
 			setprop("fdm/jsbsim/systems/spacecraft/brake-chute-teared", 1);

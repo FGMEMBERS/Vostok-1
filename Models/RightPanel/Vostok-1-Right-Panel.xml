@@ -20,6 +20,16 @@
 	<enable-hot type="bool">false</enable-hot>
 
 	<animation>
+		<type>select</type>
+		<condition>
+			<equals>
+				<property>sim/current-view/internal</property>
+				<value>true</value>
+			</equals>
+		</condition>
+	</animation>
+
+	<animation>
 		<type>material</type>
 		<emission>
 			<red-prop>fdm/jsbsim/systems/light/cabine/red</red-prop>
@@ -396,6 +406,112 @@
 		<axis>
 			<x>1</x>
 			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- Perigee indicator-->
+
+	<animation>
+		<type>rotate</type>
+		<object-name>RP_PCDiskThree</object-name>
+		<property>fdm/jsbsim/systems/enginespanel/periapsis-hundreds-km</property>
+		<factor>36</factor>
+		<center>
+			<x-m>0.06361</x-m>
+			<y-m>-0.033166</y-m>
+			<z-m>0.023791</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>RP_PCDiskTwo</object-name>
+		<property>fdm/jsbsim/systems/enginespanel/periapsis-tens-km</property>
+		<factor>36</factor>
+		<center>
+			<x-m>0.06361</x-m>
+			<y-m>-0.033166</y-m>
+			<z-m>0.023791</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>RP_PCDiskOne</object-name>
+		<property>fdm/jsbsim/systems/enginespanel/periapsis-ones-km</property>
+		<factor>36</factor>
+		<center>
+			<x-m>0.06361</x-m>
+			<y-m>-0.033166</y-m>
+			<z-m>0.023791</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- Apogee indicator-->
+
+	<animation>
+		<type>rotate</type>
+		<object-name>RP_ACDiskThree</object-name>
+		<property>fdm/jsbsim/systems/enginespanel/apoapsis-hundreds-km</property>
+		<factor>36</factor>
+		<center>
+			<x-m>0.06361</x-m>
+			<y-m>-0.033166</y-m>
+			<z-m>0.023791</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>RP_ACDiskTwo</object-name>
+		<property>fdm/jsbsim/systems/enginespanel/apoapsis-tens-km</property>
+		<factor>36</factor>
+		<center>
+			<x-m>0.06361</x-m>
+			<y-m>-0.033166</y-m>
+			<z-m>0.023791</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>RP_ACDiskOne</object-name>
+		<property>fdm/jsbsim/systems/enginespanel/apoapsis-ones-km</property>
+		<factor>36</factor>
+		<center>
+			<x-m>0.06361</x-m>
+			<y-m>-0.033166</y-m>
+			<z-m>0.023791</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
 			<z>0</z>
 		</axis>
 	</animation>

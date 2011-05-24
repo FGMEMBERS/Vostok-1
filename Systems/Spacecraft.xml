@@ -70,7 +70,7 @@
 			</setting>
 			<setting>
 				<position>1.0</position>
-				<time>20</time>
+				<time>30</time>
 			</setting>
 			</traverse>
 			<output>systems/spacecraft/main-chute-pos-norm</output>
@@ -113,6 +113,8 @@
 			</traverse>
 			<output>stages/unit[5]/activated</output>
 		</kinematic>
+
+<!--
 
 		<fcs_function name="calculations/spacecraft/first-brake-chute">
 		<function>
@@ -174,6 +176,8 @@
 			<output>inertia/pointmass-location-X-inches[32]</output>
 		</fcs_function>
 
+-->
+
 		<switch name="calculations/spacecraft/soft-landing-engine">
 			<default value="0"/>
 			<test logic="AND" value="1">
@@ -233,11 +237,6 @@
 			<test logic="AND" value="1">
 				systems/spacecraft/main-drop-command gt 0.9
 			</test>
-<!--
-			<test logic="AND" value="1">
-				systems/spacecraft/ground-contact eq 1.0
-			</test>
--->
 			<output>systems/spacecraft/brake-chute-dropped</output>
 		</switch>
 
@@ -246,11 +245,6 @@
 			<test logic="AND" value="1">
 				systems/spacecraft/main-drop-command gt 0.9
 			</test>
-<!--
-			<test logic="AND" value="1">
-				systems/spacecraft/ground-contact eq 1.0
-			</test>
--->
 			<output>systems/spacecraft/main-chute-dropped</output>
 		</switch>
 

@@ -190,35 +190,35 @@
 			<default value="0"/>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1
-				propulsion/tank[0]/contents-lbs lt 6114.7
+				propulsion/tank[0]/contents-lbs lt 3057.35
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1
-				propulsion/tank[1]/contents-lbs lt 2472.4
+				propulsion/tank[1]/contents-lbs lt 1236.2
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1
-				propulsion/tank[2]/contents-lbs lt 6114.7
+				propulsion/tank[2]/contents-lbs lt 3057.35
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1
-				propulsion/tank[3]/contents-lbs lt 2472.4
+				propulsion/tank[3]/contents-lbs lt 1236.2
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1
-				propulsion/tank[4]/contents-lbs lt 6114.7
+				propulsion/tank[4]/contents-lbs lt 3057.35
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1
-				propulsion/tank[5]/contents-lbs lt 2472.4
+				propulsion/tank[5]/contents-lbs lt 1236.2
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1
-				propulsion/tank[6]/contents-lbs lt 6114.7
+				propulsion/tank[6]/contents-lbs lt 3057.35
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[0]/active eq 1
-				propulsion/tank[7]/contents-lbs lt 2472.4
+				propulsion/tank[7]/contents-lbs lt 1236.2
 			</test>
 			<test logic="AND" value="1">
 				systems/leftswitchpanel/lightcheck-switch eq 1
@@ -249,19 +249,19 @@
 			<default value="0"/>
 			<test logic="AND" value="1">
 				stages/unit[2]/active eq 1
-				propulsion/tank[8]/contents-lbs lt 7163.3
+				propulsion/tank[8]/contents-lbs lt 3581.65
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[2]/active eq 1
-				propulsion/tank[9]/contents-lbs lt 7163.3
+				propulsion/tank[9]/contents-lbs lt 3581.65
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[2]/active eq 1
-				propulsion/tank[10]/contents-lbs lt 2935.9
+				propulsion/tank[10]/contents-lbs lt 1467.95
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[2]/active eq 1
-				propulsion/tank[11]/contents-lbs lt 2935.9
+				propulsion/tank[11]/contents-lbs lt 1467.95
 			</test>
 			<test logic="AND" value="1">
 				systems/leftswitchpanel/lightcheck-switch eq 1
@@ -275,19 +275,19 @@
 			<default value="0"/>
 			<test logic="AND" value="1">
 				stages/unit[3]/active eq 1
-				propulsion/tank[12]/contents-lbs lt 482.8
+				propulsion/tank[12]/contents-lbs lt 241.4
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[3]/active eq 1
-				propulsion/tank[13]/contents-lbs lt 482.8
+				propulsion/tank[13]/contents-lbs lt 241.4
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[3]/active eq 1
-				propulsion/tank[14]/contents-lbs lt 220.4
+				propulsion/tank[14]/contents-lbs lt 110.2
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[3]/active eq 1
-				propulsion/tank[15]/contents-lbs lt 220.4
+				propulsion/tank[15]/contents-lbs lt 110.2
 			</test>
 			<test logic="AND" value="1">
 				systems/leftswitchpanel/lightcheck-switch eq 1
@@ -301,19 +301,19 @@
 			<default value="0"/>
 			<test logic="AND" value="1">
 				stages/unit[4]/active eq 1
-				propulsion/tank[16]/contents-lbs lt 24.25
+				propulsion/tank[16]/contents-lbs lt 12.125
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[4]/active eq 1
-				propulsion/tank[17]/contents-lbs lt 24.25
+				propulsion/tank[17]/contents-lbs lt 12.125
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[4]/active eq 1
-				propulsion/tank[18]/contents-lbs lt 6.613
+				propulsion/tank[18]/contents-lbs lt 3.3065
 			</test>
 			<test logic="AND" value="1">
 				stages/unit[4]/active eq 1
-				propulsion/tank[19]/contents-lbs lt 6.613
+				propulsion/tank[19]/contents-lbs lt 3.3065
 			</test>
 			<test logic="AND" value="1">
 				systems/leftswitchpanel/lightcheck-switch eq 1
@@ -692,6 +692,301 @@
 				systems/mainpanel/clock-daytime-vernier-pos lt 0.5
 			</test>
 			<output>systems/mainpanel/clock-daytime-vernier-switch</output>
+		</switch>
+
+<!-- Orbit counter -->
+
+		<fcs_function name="systems/orbitcounter/antipode-longitude-calculated">
+		<function>
+			<sum>
+				<property>systems/orbitcounter/launchpad-longitude</property>
+				<value>180</value>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/orbitcounter/antipode-longitude-circle">
+		<function>
+			<difference>
+				<property>systems/orbitcounter/antipode-longitude-calculated</property>
+				<value>360</value>
+			</difference>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/orbitcounter/antipode-longitude">
+			<default value="systems/orbitcounter/antipode-longitude-calculated"/>
+			<test logic="AND" value="systems/orbitcounter/antipode-longitude-calculated">
+				systems/orbitcounter/antipode-longitude-calculated le 360
+			</test>
+			<test logic="AND" value="systems/orbitcounter/antipode-longitude-circle">
+				systems/orbitcounter/antipode-longitude-calculated gt 360
+			</test>
+		</switch>
+
+		<fcs_function name="systems/orbitcounter/pad-distance">
+		<function>
+			<abs>
+				<difference>
+					<property>systems/orbitcounter/launchpad-longitude</property>
+					<property>position/long-gc-deg</property>
+				</difference>
+			</abs>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/orbitcounter/half-orbit-distance">
+		<function>
+			<abs>
+				<difference>
+					<property>systems/orbitcounter/antipode-longitude</property>
+					<property>position/long-gc-deg</property>
+				</difference>
+			</abs>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/orbitcounter/near-pad">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/orbitcounter/pad-distance le 1.0
+			</test>
+		</switch>
+
+		<switch name="systems/orbitcounter/near-half">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/orbitcounter/half-orbit-distance le 1.0
+			</test>
+		</switch>
+
+		<switch name="systems/orbitcounter/orbit-half-command">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/orbitcounter/near-half eq 1.0
+				systems/orbitcounter/half-made eq 0.0
+			</test>
+		</switch>
+
+		<kinematic name="systems/orbitcounter/orbit-half-pos">
+			<input>systems/orbitcounter/orbit-half-command</input>
+			<traverse>
+			<setting>
+				<position>0</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>1</position>
+				<time>1.0</time>
+			</setting>
+			</traverse>
+		</kinematic>
+
+		<switch name="systems/orbitcounter/half-made">
+			<default value="systems/orbitcounter/half-made"/>
+			<test logic="AND" value="1">
+				systems/orbitcounter/half-made eq 0.0
+				systems/orbitcounter/orbit-half-pos gt 0.5
+			</test>
+			<test logic="AND" value="0">
+				systems/orbitcounter/orbit-full-pos gt 0.6
+			</test>
+		</switch>
+
+		<switch name="systems/orbitcounter/orbit-full-command">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/orbitcounter/near-pad eq 1.0
+				systems/orbitcounter/half-made eq 1.0
+			</test>
+		</switch>
+
+		<kinematic name="systems/orbitcounter/orbit-full-pos">
+			<input>systems/orbitcounter/orbit-full-command</input>
+			<traverse>
+			<setting>
+				<position>0</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>1</position>
+				<time>1.0</time>
+			</setting>
+			</traverse>
+		</kinematic>
+
+		<fcs_function name="systems/orbitcounter/orbit-next-calculated">
+		<function>
+			<sum>
+				<property>systems/orbitcounter/orbit</property>
+				<value>1</value>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/orbitcounter/orbit-next">
+		<function>
+			<table>
+				<independentVar lookup="row">systems/orbitcounter/orbit-next-calculated</independentVar>
+				<tableData>
+					0.0		0.0
+					999.0		999.0
+					1000.0		0.0
+				</tableData>
+			</table>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/orbitcounter/orbit-incremented">
+			<default value="systems/orbitcounter/orbit-incremented"/>
+			<test logic="AND" value="systems/orbitcounter/orbit-next">
+				systems/orbitcounter/near-pad eq 1.0
+				systems/orbitcounter/half-made eq 1.0
+				systems/orbitcounter/orbit-full-pos gt 0.0
+				systems/orbitcounter/orbit-full-pos lt 0.3
+			</test>
+		</switch>
+
+		<switch name="systems/orbitcounter/orbit">
+			<default value="systems/orbitcounter/orbit"/>
+			<test logic="AND" value="systems/orbitcounter/orbit-incremented">
+				systems/orbitcounter/near-pad eq 1.0
+				systems/orbitcounter/half-made eq 1.0
+				systems/orbitcounter/orbit-full-pos gt 0.3
+				systems/orbitcounter/orbit-full-pos lt 0.6
+			</test>
+			<test logic="AND" value="systems/orbitcounter/orbit-setted">
+				systems/orbitcounter/orbit-set eq 1.0
+			</test>
+		</switch>
+
+		<fcs_function name="systems/orbitcounter/orbit-tens">
+		<function>
+			<integer>	
+				<product>
+					<fraction>
+						<quotient>
+							<property>systems/orbitcounter/orbit</property>
+							<value>100</value>
+						</quotient>
+					</fraction>
+					<value>10</value>
+				</product>
+			</integer>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/orbitcounter/orbit-ones">
+		<function>
+			<integer>	
+				<product>
+					<fraction>
+						<quotient>
+							<property>systems/orbitcounter/orbit</property>
+							<value>10</value>
+						</quotient>
+					</fraction>
+					<value>10</value>
+				</product>
+			</integer>
+		</function>
+		</fcs_function>
+
+<!-- Globus -->
+
+		<fcs_function name="systems/globus/eci-modified-fps">
+		<function>
+			<difference>
+				<pow>
+					<sum>
+						<pow>
+							<property>velocities/v-east-fps</property>
+							<value>2.0</value>
+						</pow>
+						<pow>
+							<property>velocities/v-north-fps</property>
+							<value>2.0</value>
+						</pow>
+					</sum>
+					<value>0.5</value>
+				</pow>
+				<value>1200</value>
+			</difference>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/globus/landing-angle-calculated">
+		<function>
+			<table>
+				<independentVar lookup="column">systems/globus/eci-modified-fps</independentVar>
+				<independentVar lookup="row">position/h-agl-ft</independentVar>
+				<tableData>
+	0	4556	9113	13670	18226	22783	23922	24064	24099	24135	24170	24206	24491
+0	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10
+82020	0	0.324	0.449	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10
+123030	0	0.689	1.148	1.522	1.850	2.149	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10
+164041	0	1.008	1.898	2.800	3.806	5.051	5.427	5.476	5.488	5.501	5.513	5.526	5.628	
+246062	0	1.428	2.915	4.709	7.358	13.74	18.60	19.61	19.89	20.18	20.49	20.817	24.14	
+328083	0	1.726	3.593	5.934	9.644	21.48	42.43	54.40	59.69	67.63	81.21	-1e10	-1e10	
+369094	0	1.854	3.877	6.433	10.53	24.22	52.95	75.61	88.91	117.1	-1e10	-1e10	-1e10	
+410104	0	1.973	4.140	6.892	11.34	26.66	63.12	102.0	136.1	-1e10	-1e10	-1e10	-1e10	
+444209	0	2.068	4.346	7.250	11.97	28.58	72.55	140.1	-1e10	-1e10	-1e10	-1e10	-1e10	
+492125	0	2.194	4.619	7.726	12.81	31.16	88.39	-1e10	-1e10	-1e10	-1e10	-1e10	-1e10	
+				</tableData>
+			</table>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/globus/landing-angle-deg">
+			<default value="systems/globus/landing-angle-calculated"/>
+			<test logic="AND" value="0">
+				systems/globus/landing-angle-calculated lt 0
+			</test>
+		</switch>
+
+		<switch name="systems/globus/landing-or-position">
+			<default value="0"/>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/globus-switch eq 0
+				systems/globus/landing-angle-deg gt 0.001
+			</test>
+		</switch>
+
+		<fcs_function name="systems/globus/north-east-deg">
+		<function>
+			<sum>
+			<product>
+				<atan2>
+					<property>velocities/v-east-fps</property>
+					<property>velocities/v-north-fps</property>
+				</atan2>
+				<value>57.2957795130823208768</value>
+			</product>
+			</sum>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/globus/heading-true-deg">
+		<function>
+			<product>
+				<property>attitude/heading-true-rad</property>
+				<value>57.2957795130823208768</value>
+			</product>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/globus/roll-deg">
+			<default value="systems/globus/heading-true-deg"/>
+			<test logic="AND" value="systems/globus/north-east-deg">
+				systems/globus/landing-or-position eq 1
+			</test>
+		</switch>
+
+		<switch name="systems/globus/pitch-deg">
+			<default value="0"/>
+			<test logic="AND" value="systems/globus/landing-angle-deg">
+				systems/globus/landing-or-position eq 1
+			</test>
 		</switch>
 
 <!-- Click -->

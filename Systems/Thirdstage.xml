@@ -17,10 +17,295 @@
 
 	<channel name="Thirdstage">
 
-
 		<!--Third stage-->
 
-		<switch name="Third Stage Main Engine Throttle">
+		<!-- Send control handle commands to orientation computer -->
+
+		<pure_gain name="calculations/stages/unit[3]/control/q-gained">
+			<input>systems/controlhandle/elevator-pos</input>
+			<gain>-1.0</gain>
+			<output>stages/unit[3]/control/q-gained</output>
+		</pure_gain>
+
+		<pure_gain name="calculations/stages/unit[3]/control/p-gained">
+			<input>systems/controlhandle/rudder-pos</input>
+			<gain>-1.0</gain>
+			<output>stages/unit[3]/control/p-gained</output>
+		</pure_gain>
+
+		<pure_gain name="calculations/stages/unit[3]/control/r-gained">
+			<input>systems/controlhandle/aileron-pos</input>
+			<gain>1.0</gain>
+			<output>stages/unit[3]/control/r-gained</output>
+		</pure_gain>
+
+		<switch name="calculations/stages/unit[3]/control/q-command">
+			<default value="systems/orientationcomputer/q-command"/>
+			<test logic="AND" value="stages/unit[3]/control/q-gained">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/q-command</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/p-command">
+			<default value="systems/orientationcomputer/p-command"/>
+			<test logic="AND" value="stages/unit[3]/control/p-gained">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/p-command</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/r-command">
+			<default value="systems/orientationcomputer/r-command"/>
+			<test logic="AND" value="stages/unit[3]/control/r-gained">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/r-command</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/q-hold">
+			<default value="systems/orientationcomputer/q-hold"/>
+			<test logic="AND" value="1">
+				stages/unit[3]/active eq 1.0
+				systems/controlhandle/button-switch eq 1.0
+			</test>
+			<test logic="AND" value="0">
+				stages/unit[3]/active eq 1.0
+				systems/controlhandle/button-switch eq 0.0
+			</test>
+			<output>systems/orientationcomputer/q-hold</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/p-hold">
+			<default value="systems/orientationcomputer/p-hold"/>
+			<test logic="AND" value="1">
+				stages/unit[3]/active eq 1.0
+				systems/controlhandle/button-switch eq 1.0
+			</test>
+			<test logic="AND" value="0">
+				stages/unit[3]/active eq 1.0
+				systems/controlhandle/button-switch eq 0.0
+			</test>
+			<output>systems/orientationcomputer/p-hold</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/r-hold">
+			<default value="systems/orientationcomputer/r-hold"/>
+			<test logic="AND" value="1">
+				stages/unit[3]/active eq 1.0
+				systems/controlhandle/button-switch eq 1.0
+			</test>
+			<test logic="AND" value="0">
+				stages/unit[3]/active eq 1.0
+				systems/controlhandle/button-switch eq 0.0
+			</test>
+			<output>systems/orientationcomputer/r-hold</output>
+		</switch>
+
+		<!--Directly connect control pid to input to control acceleration output -->
+
+		<switch name="calculations/stages/unit[3]/control/q-control-add">
+			<default value="systems/orientationcomputer/q-control-add"/>
+			<test logic="AND" value="systems/orientationcomputer/q-control-acceleration">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/q-control-add</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/p-control-add">
+			<default value="systems/orientationcomputer/p-control-add"/>
+			<test logic="AND" value="systems/orientationcomputer/p-control-acceleration">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/p-control-add</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/r-control-add">
+			<default value="systems/orientationcomputer/r-control-add"/>
+			<test logic="AND" value="systems/orientationcomputer/r-control-acceleration">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/r-control-add</output>
+		</switch>
+
+		<!--Calculating mass moment changes-->
+
+		<fcs_function name="calculations/stages/unit[3]/mass-part">
+			<function>
+				<quotient>
+					<sum>
+						<property>propulsion/tank[12]/contents-lbs</property>
+						<property>propulsion/tank[13]/contents-lbs</property>
+						<property>propulsion/tank[14]/contents-lbs</property>
+						<property>propulsion/tank[15]/contents-lbs</property>
+					</sum>
+					<sum>
+						<value>4828.0</value>
+						<value>4828.0</value>
+						<value>2204.0</value>
+						<value>2204.0</value>
+					</sum>
+				</quotient>
+			</function>
+			<output>stages/unit[3]/mass-part</output>
+		</fcs_function>
+
+		<!--Output orientation computer factors and limits -->
+
+		<fcs_function name="calculations/stages/unit[3]/control/mass-control">
+			<function>
+				<product>
+					<value>20</value>
+					<table>
+						<independentVar lookup="row">stages/unit[3]/mass-part</independentVar>
+						<tableData>
+							0.0		0.2
+							0.2		1.0
+							1.0		1.0
+						</tableData>
+					</table>
+				</product>
+			</function>
+			<output>stages/unit[3]/control/mass-control</output>
+		</fcs_function>
+
+		<switch name="calculations/stages/unit[3]/control/factor-control">
+			<default value="systems/orientationcomputer/factor-control"/>
+			<test logic="AND" value="stages/unit[3]/control/mass-control">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/factor-control</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/factor-input">
+			<default value="systems/orientationcomputer/factor-input"/>
+			<test logic="AND" value="0.1745">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/factor-input</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/output-min">
+			<default value="systems/orientationcomputer/output-min"/>
+			<test logic="AND" value="-1.0">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/output-min</output>
+		</switch>
+
+		<switch name="calculations/stages/unit[3]/control/output-max">
+			<default value="systems/orientationcomputer/output-max"/>
+			<test logic="AND" value="1.0">
+				stages/unit[3]/active eq 1.0
+			</test>
+			<output>systems/orientationcomputer/output-max</output>
+		</switch>
+
+		<!--Calculate throttles -->
+
+		<fcs_function name="calculations/stages/unit[3]/control/pitch-forward">
+			<function>
+				<quotient>
+					<sum>
+						<value>1</value>
+						<property>systems/orientationcomputer/q-output</property>
+					</sum>
+					<value>2</value>
+				</quotient>
+			</function>
+			<output>stages/unit[3]/control/pitch-forward</output>
+		</fcs_function>
+
+		<fcs_function name="calculations/stages/unit[3]/control/pitch-back">
+			<function>
+				<difference>
+					<value>1</value>
+					<quotient>
+						<sum>
+							<value>1</value>
+							<property>systems/orientationcomputer/q-output</property>
+						</sum>
+						<value>2</value>
+					</quotient>
+				</difference>
+			</function>
+			<output>stages/unit[3]/control/pitch-back</output>
+		</fcs_function>
+
+		<fcs_function name="calculations/stages/unit[3]/control/yaw-left">
+			<function>
+				<quotient>
+					<sum>
+						<value>1</value>
+						<property>systems/orientationcomputer/p-output</property>
+					</sum>
+					<value>2</value>
+				</quotient>
+			</function>
+			<output>stages/unit[3]/control/yaw-left</output>
+		</fcs_function>
+
+		<fcs_function name="calculations/stages/unit[3]/control/yaw-right">
+			<function>
+				<difference>
+					<value>1</value>
+					<quotient>
+						<sum>
+							<value>1</value>
+							<property>systems/orientationcomputer/p-output</property>
+						</sum>
+						<value>2</value>
+					</quotient>
+				</difference>
+			</function>
+			<output>stages/unit[3]/control/yaw-right</output>
+		</fcs_function>
+
+		<fcs_function name="calculations/stages/unit[3]/control/roll-forward-left">
+			<function>
+				<quotient>
+
+					<sum>
+						<value>1</value>
+						<property>systems/orientationcomputer/r-output</property>
+					</sum>
+					<value>2</value>
+				</quotient>
+			</function>
+			<output>stages/unit[3]/control/roll-forward-left</output>
+		</fcs_function>
+
+		<fcs_function name="calculations/stages/unit[3]/control/roll-forward-right">
+			<function>
+				<difference>
+					<value>1</value>
+					<quotient>
+						<sum>
+							<value>1</value>
+							<property>systems/orientationcomputer/r-output</property>
+						</sum>
+						<value>2</value>
+					</quotient>
+				</difference>
+			</function>
+			<output>stages/unit[3]/control/roll-forward-right</output>
+		</fcs_function>
+
+		<pure_gain name="calculations/stages/unit[3]/control/roll-back-left">
+			<input>stages/unit[3]/control/roll-forward-right</input>
+			<gain>1.0</gain>
+			<output>stages/unit[3]/control/roll-back-left</output>
+		</pure_gain>
+
+		<pure_gain name="calculations/stages/unit[3]/control/roll-back-right">
+			<input>stages/unit[3]/control/roll-forward-left</input>
+			<gain>1.0</gain>
+			<output>stages/unit[3]/control/roll-back-right</output>
+		</pure_gain>
+
+		<!--Transfer throttles to engines-->
+
+		<switch name="calculations/stages/unit[3]/main-engine-throttle">
 			<default value="0"/>
 			<test logic="AND" value="systems/gascontrol/lever-pos">
 				systems/gascontrol/lever-pos gt 0.2
@@ -37,9 +322,9 @@
 			<output>fcs/throttle-pos-norm[14]</output>
 		</switch>
 
-		<switch name="Forward Third Stage Engine Throttle">
+		<switch name="calculations/stages/unit[3]/forward-engine-throttle">
 			<default value="0"/>
-			<test logic="AND" value="systems/third_computer/pitch-forward">
+			<test logic="AND" value="stages/unit[3]/control/pitch-forward">
 				stages/unit[3]/active eq 1.0
 				stages/unit[3]/ignited eq 1.0
 				stages/unit[3]/broken eq 0
@@ -47,9 +332,9 @@
 			<output>fcs/throttle-pos-norm[15]</output>
 		</switch>
 
-		<switch name="Back Third Stage Engine Throttle">
+		<switch name="calculations/stages/unit[3]/back-engine-throttle">
 			<default value="0"/>
-			<test logic="AND" value="systems/third_computer/pitch-back">
+			<test logic="AND" value="stages/unit[3]/control/pitch-back">
 				stages/unit[3]/active eq 1.0
 				stages/unit[3]/ignited eq 1.0
 				stages/unit[3]/broken eq 0
@@ -57,9 +342,9 @@
 			<output>fcs/throttle-pos-norm[16]</output>
 		</switch>
 
-		<switch name="Left Third Stage Engine Throttle">
+		<switch name="calculations/stages/unit[3]/left-engine-throttle">
 			<default value="0"/>
-			<test logic="AND" value="systems/third_computer/yaw-left">
+			<test logic="AND" value="stages/unit[3]/control/yaw-left">
 				stages/unit[3]/active eq 1.0
 				stages/unit[3]/ignited eq 1.0
 				stages/unit[3]/broken eq 0
@@ -67,9 +352,9 @@
 			<output>fcs/throttle-pos-norm[17]</output>
 		</switch>
 
-		<switch name="Right Third Stage Engine Throttle">
+		<switch name="calculations/stages/unit[3]/right-engine-throttle">
 			<default value="0"/>
-			<test logic="AND" value="systems/third_computer/yaw-right">
+			<test logic="AND" value="stages/unit[3]/control/yaw-right">
 				stages/unit[3]/active eq 1.0
 				stages/unit[3]/ignited eq 1.0
 				stages/unit[3]/broken eq 0
@@ -77,9 +362,9 @@
 			<output>fcs/throttle-pos-norm[18]</output>
 		</switch>
 
-		<switch name="Forward Left Third Stage Engine Throttle">
+		<switch name="calculations/stages/unit[3]/forward-left-engine-throttle">
 			<default value="0"/>
-			<test logic="AND" value="systems/third_computer/roll-forward-left">
+			<test logic="AND" value="stages/unit[3]/control/roll-forward-left">
 				stages/unit[3]/active eq 1.0
 				stages/unit[3]/ignited eq 1.0
 				stages/unit[3]/broken eq 0
@@ -87,9 +372,9 @@
 			<output>fcs/throttle-pos-norm[19]</output>
 		</switch>
 
-		<switch name="Back Right Third Stage Engine Throttle">
+		<switch name="calculations/stages/unit[3]/back-right-engine-throttle">
 			<default value="0"/>
-				<test logic="AND" value="systems/third_computer/roll-back-right">
+				<test logic="AND" value="stages/unit[3]/control/roll-back-right">
 				stages/unit[3]/active eq 1.0
 				stages/unit[3]/ignited eq 1.0
 				stages/unit[3]/broken eq 0
@@ -97,9 +382,9 @@
 			<output>fcs/throttle-pos-norm[20]</output>
 		</switch>
 
-		<switch name="Forward Right Third Stage Engine Throttle">
+		<switch name="calculations/stages/unit[3]/forward-right-engine-throttle">
 			<default value="0"/>
-			<test logic="AND" value="systems/third_computer/roll-forward-right">
+			<test logic="AND" value="stages/unit[3]/control/roll-forward-right">
 				stages/unit[3]/active eq 1.0
 				stages/unit[3]/ignited eq 1.0
 				stages/unit[3]/broken eq 0
@@ -107,9 +392,9 @@
 			<output>fcs/throttle-pos-norm[21]</output>
 		</switch>
 
-		<switch name="Back Left Third Stage Engine Throttle">
+		<switch name="calculations/stages/unit[3]/back-left-engine-throttle">
 			<default value="0"/>
-			<test logic="AND" value="systems/third_computer/roll-back-left">
+			<test logic="AND" value="stages/unit[3]/control/roll-back-left">
 				stages/unit[3]/active eq 1.0
 				stages/unit[3]/ignited eq 1.0
 				stages/unit[3]/broken eq 0

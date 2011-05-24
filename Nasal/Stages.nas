@@ -27,19 +27,48 @@ stages = func
 		}
 
 		var repeat_time=getprop("fdm/jsbsim/stages/repeat-time");
-		var view_offset_x=[0,0,0];
+		var view_offset_x=[0,0,0,0,0,0,0];
 		view_offset_x[0]=getprop("sim/view[0]/config/x-offset-m");
 		view_offset_x[1]=getprop("sim/view[1]/config/x-offset-m");
-		view_offset_x[2]=getprop("sim/view[1]/config/x-offset-m");
-		var view_offset_y=[0,0,0];
+		view_offset_x[2]=getprop("sim/view[2]/config/x-offset-m");
+		view_offset_x[3]=getprop("sim/view[101]/config/x-offset-m");
+		view_offset_x[4]=getprop("sim/view[102]/config/x-offset-m");
+		view_offset_x[5]=getprop("sim/view[103]/config/x-offset-m");
+		view_offset_x[6]=getprop("sim/view[104]/config/x-offset-m");
+		var view_offset_y=[0,0,0,0,0,0,0];
 		view_offset_y[0]=getprop("sim/view[0]/config/y-offset-m");
 		view_offset_y[1]=getprop("sim/view[1]/config/y-offset-m");
-		view_offset_y[2]=getprop("sim/view[1]/config/y-offset-m");
-		var view_offset_z=[0,0,0];
+		view_offset_y[2]=getprop("sim/view[2]/config/y-offset-m");
+		view_offset_y[3]=getprop("sim/view[101]/config/y-offset-m");
+		view_offset_y[4]=getprop("sim/view[102]/config/y-offset-m");
+		view_offset_y[5]=getprop("sim/view[103]/config/y-offset-m");
+		view_offset_y[6]=getprop("sim/view[104]/config/y-offset-m");
+		var view_offset_z=[0,0,0,0,0,0,0];
 		view_offset_z[0]=getprop("sim/view[0]/config/z-offset-m");
 		view_offset_z[1]=getprop("sim/view[1]/config/z-offset-m");
 		view_offset_z[2]=getprop("sim/view[2]/config/z-offset-m");
-		var current_view_number=getprop("sim/current-view/view-number");
+		view_offset_z[3]=getprop("sim/view[101]/config/z-offset-m");
+		view_offset_z[4]=getprop("sim/view[102]/config/z-offset-m");
+		view_offset_z[5]=getprop("sim/view[103]/config/z-offset-m");
+		view_offset_z[6]=getprop("sim/view[104]/config/z-offset-m");
+		var view_pitch_offset_deg=[0,0,0,0,0,0,0];
+		view_pitch_offset_deg[0]=getprop("sim/view[0]/config/pitch-offset-deg");
+		view_pitch_offset_deg[1]=getprop("sim/view[1]/config/pitch-offset-deg");
+		view_pitch_offset_deg[2]=getprop("sim/view[2]/config/pitch-offset-deg");
+		view_pitch_offset_deg[3]=getprop("sim/view[101]/config/pitch-offset-deg");
+		view_pitch_offset_deg[4]=getprop("sim/view[102]/config/pitch-offset-deg");
+		view_pitch_offset_deg[5]=getprop("sim/view[103]/config/pitch-offset-deg");
+		view_pitch_offset_deg[6]=getprop("sim/view[104]/config/pitch-offset-deg");
+		var view_heading_offset_deg=[0,0,0,0,0,0,0];
+		view_heading_offset_deg[0]=getprop("sim/view[0]/config/heading-offset-deg");
+		view_heading_offset_deg[1]=getprop("sim/view[1]/config/heading-offset-deg");
+		view_heading_offset_deg[2]=getprop("sim/view[2]/config/heading-offset-deg");
+		view_heading_offset_deg[3]=getprop("sim/view[101]/config/heading-offset-deg");
+		view_heading_offset_deg[4]=getprop("sim/view[102]/config/heading-offset-deg");
+		view_heading_offset_deg[5]=getprop("sim/view[103]/config/heading-offset-deg");
+		view_heading_offset_deg[6]=getprop("sim/view[104]/config/heading-offset-deg");
+
+		var current_view_name=getprop("sim/current-view/name");
 
 		var one_two_ignition_switch=getprop("fdm/jsbsim/systems/rightswitchpanel/one-two-ignition-switch");
 		var one_drop_switch=getprop("fdm/jsbsim/systems/rightswitchpanel/one-drop-switch");
@@ -88,16 +117,48 @@ stages = func
 
 		if (
 			(repeat_time==nil)
+
 			or (view_offset_x[0]==nil)
 			or (view_offset_x[1]==nil)
 			or (view_offset_x[2]==nil)
+			or (view_offset_x[3]==nil)
+			or (view_offset_x[4]==nil)
+			or (view_offset_x[5]==nil)
+			or (view_offset_x[6]==nil)
+
 			or (view_offset_y[0]==nil)
 			or (view_offset_y[1]==nil)
 			or (view_offset_y[2]==nil)
+			or (view_offset_y[3]==nil)
+			or (view_offset_y[4]==nil)
+			or (view_offset_y[5]==nil)
+			or (view_offset_y[6]==nil)
+
 			or (view_offset_z[0]==nil)
 			or (view_offset_z[1]==nil)
 			or (view_offset_z[2]==nil)
-			or (current_view_number==nil)
+			or (view_offset_z[3]==nil)
+			or (view_offset_z[4]==nil)
+			or (view_offset_z[5]==nil)
+			or (view_offset_z[6]==nil)
+
+			or (view_pitch_offset_deg[0]==nil)
+			or (view_pitch_offset_deg[1]==nil)
+			or (view_pitch_offset_deg[2]==nil)
+			or (view_pitch_offset_deg[3]==nil)
+			or (view_pitch_offset_deg[4]==nil)
+			or (view_pitch_offset_deg[5]==nil)
+			or (view_pitch_offset_deg[6]==nil)
+
+			or (view_heading_offset_deg[0]==nil)
+			or (view_heading_offset_deg[1]==nil)
+			or (view_heading_offset_deg[2]==nil)
+			or (view_heading_offset_deg[3]==nil)
+			or (view_heading_offset_deg[4]==nil)
+			or (view_heading_offset_deg[5]==nil)
+			or (view_heading_offset_deg[6]==nil)
+
+			or (current_view_name==nil)
 
 			or (one_two_ignition_switch==nil)
 			or (one_drop_switch==nil)
@@ -388,6 +449,7 @@ stages = func
 			if (
 				(stage_active[2]==1)
 				and (stage_active[1]==0)
+				and (stage_active[0]==0)
 				and (change==0)
 			)
 			{
@@ -498,25 +560,61 @@ stages = func
 
 		#Views
 
-		if (current_view_number==0)
+		if (current_view_name=="Cosmonaut View")
 		{
 			setprop("sim/current-view/x-offset-m", view_offset_x[0]);
 			setprop("sim/current-view/y-offset-m", view_offset_y[0]);
 			setprop("sim/current-view/z-offset-m", view_offset_z[0]);
 		}
 
-		if (current_view_number==1)
+		if (current_view_name=="Tail View")
 		{
 			setprop("sim/current-view/x-offset-m", view_offset_x[1]);
 			setprop("sim/current-view/y-offset-m", view_offset_y[1]);
 			setprop("sim/current-view/z-offset-m", view_offset_z[1]);
 		}
 
-		if (current_view_number==2)
+		if (current_view_name=="Side View")
 		{
 			setprop("sim/current-view/x-offset-m", view_offset_x[2]);
 			setprop("sim/current-view/y-offset-m", view_offset_y[2]);
 			setprop("sim/current-view/z-offset-m", view_offset_z[2]);
+		}
+
+		if (current_view_name=="Left Panel View")
+		{
+			setprop("sim/current-view/x-offset-m", view_offset_x[3]);
+			setprop("sim/current-view/y-offset-m", view_offset_y[3]);
+			setprop("sim/current-view/z-offset-m", view_offset_z[3]);
+			setprop("sim/current-view/pitch-offset-deg", view_pitch_offset_deg[3]);
+			setprop("sim/current-view/heading-offset-deg", view_heading_offset_deg[3]);
+		}
+
+		if (current_view_name=="Right Panel View")
+		{
+			setprop("sim/current-view/x-offset-m", view_offset_x[4]);
+			setprop("sim/current-view/y-offset-m", view_offset_y[4]);
+			setprop("sim/current-view/z-offset-m", view_offset_z[4]);
+			setprop("sim/current-view/pitch-offset-deg", view_pitch_offset_deg[4]);
+			setprop("sim/current-view/heading-offset-deg", view_heading_offset_deg[4]);
+		}
+
+		if (current_view_name=="Vzor View")
+		{
+			setprop("sim/current-view/x-offset-m", view_offset_x[5]);
+			setprop("sim/current-view/y-offset-m", view_offset_y[5]);
+			setprop("sim/current-view/z-offset-m", view_offset_z[5]);
+			setprop("sim/current-view/pitch-offset-deg", view_pitch_offset_deg[5]);
+			setprop("sim/current-view/heading-offset-deg", view_heading_offset_deg[5]);
+		}
+
+		if (current_view_name=="Main Panel View")
+		{
+			setprop("sim/current-view/x-offset-m", view_offset_x[6]);
+			setprop("sim/current-view/y-offset-m", view_offset_y[6]);
+			setprop("sim/current-view/z-offset-m", view_offset_z[6]);
+			setprop("sim/current-view/pitch-offset-deg", view_pitch_offset_deg[6]);
+			setprop("sim/current-view/heading-offset-deg", view_heading_offset_deg[6]);
 		}
 
 		setprop("fdm/jsbsim/stages/command", 0);
@@ -1510,6 +1608,12 @@ third_stage_drop_phase_two=func
 		third_stage_drop_weights();
 		tdu_stage_add_weights();
 		tdu_stage_activate();
+
+		#Set command angles
+		setprop("fdm/jsbsim/systems/tdu_computer/pitch-rad", 0);
+		setprop("fdm/jsbsim/systems/tdu_computer/roll-rad", 0);
+		setprop("fdm/jsbsim/systems/tdu_computer/yaw-rad", 0);
+
 		third_stage_deactivate();
 		setprop("fdm/jsbsim/stages/unit[3]/drop", 1);
 		settimer(third_stage_drop_phase_three, 2.0);
@@ -1846,15 +1950,23 @@ view_shift=func
 			{
 				setprop("sim/view[0]/config/y-offset-m", 19.74);
 				setprop("sim/view[1]/config/y-offset-m", -25.0);
-				setprop("sim/view[2]/config/z-offset-m", 50.1);
+				setprop("sim/view[2]/config/x-offset-m", 50.0);
+				setprop("sim/view[101]/config/y-offset-m", 19.74);
+				setprop("sim/view[102]/config/y-offset-m", 19.74);
+				setprop("sim/view[103]/config/y-offset-m", 19.74);
+				setprop("sim/view[104]/config/y-offset-m", 19.74);
 			}
 			else
 			{
 				if (third_on==1)
 				{
 					setprop("sim/view[0]/config/y-offset-m", 2.238);
-					setprop("sim/view[1]/config/y-offset-m", -10.1);
-					setprop("sim/view[2]/config/z-offset-m", 20.1);
+					setprop("sim/view[1]/config/y-offset-m", -10.0);
+					setprop("sim/view[2]/config/x-offset-m", 20.0);
+					setprop("sim/view[101]/config/y-offset-m", 2.238);
+					setprop("sim/view[102]/config/y-offset-m", 2.238);
+					setprop("sim/view[103]/config/y-offset-m", 2.238);
+					setprop("sim/view[104]/config/y-offset-m", 2.238);
 				}
 				else
 				{
@@ -1862,13 +1974,21 @@ view_shift=func
 					{
 						setprop("sim/view[0]/config/y-offset-m", 1.581);
 						setprop("sim/view[1]/config/y-offset-m", -5.0);
-						setprop("sim/view[2]/config/z-offset-m", 10.1);
+						setprop("sim/view[2]/config/x-offset-m", 10.0);
+						setprop("sim/view[101]/config/y-offset-m", 1.581);
+						setprop("sim/view[102]/config/y-offset-m", 1.581);
+						setprop("sim/view[103]/config/y-offset-m", 1.581);
+						setprop("sim/view[104]/config/y-offset-m", 1.581);
 					}
 					else
 					{
 						setprop("sim/view[0]/config/y-offset-m", 0.436);
 						setprop("sim/view[1]/config/y-offset-m", 5.0);
-						setprop("sim/view[2]/config/z-offset-m", -10.1);
+						setprop("sim/view[2]/config/x-offset-m", 10.0);
+						setprop("sim/view[101]/config/y-offset-m", 0.436);
+						setprop("sim/view[102]/config/y-offset-m", 0.436);
+						setprop("sim/view[103]/config/y-offset-m", 0.436);
+						setprop("sim/view[104]/config/y-offset-m", 0.436);
 					}
 				}
 			}
@@ -1893,8 +2013,8 @@ init_stages=func
 		#second_stage_separate();
 		#fairings_separate();
 		#third_stage_separate();
-		#tdu_stage_separate();
-		#spacecraft_init();
+		#tdu_stage_init();
+		#spacecraft_separate();
 
 		settimer(extra_activation, 2.0);
 

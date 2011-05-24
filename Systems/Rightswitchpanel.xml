@@ -108,14 +108,16 @@
 			<default value="systems/rightswitchpanel/one-two-ignition-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/one-two-ignition-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/one-two-ignition-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/one-two-ignition-not-allowed">
 			<default value="systems/rightswitchpanel/one-two-ignition-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/one-two-ignition-command">
+			<test logic="OR" value="systems/rightswitchpanel/one-two-ignition-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/one-two-ignition-input</output>
 		</switch>
@@ -124,6 +126,7 @@
 			<default value="systems/rightswitchpanel/one-two-ignition-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/one-two-ignition-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/one-two-ignition-safer-command</output>
 		</switch>
@@ -186,14 +189,16 @@
 			<default value="systems/rightswitchpanel/one-drop-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/one-drop-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/one-drop-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/one-drop-not-allowed">
 			<default value="systems/rightswitchpanel/one-drop-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/one-drop-command">
+			<test logic="OR" value="systems/rightswitchpanel/one-drop-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/one-drop-input</output>
 		</switch>
@@ -202,6 +207,7 @@
 			<default value="systems/rightswitchpanel/one-drop-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/one-drop-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/one-drop-safer-command</output>
 		</switch>
@@ -264,14 +270,16 @@
 			<default value="systems/rightswitchpanel/fairings-drop-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/fairings-drop-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/fairings-drop-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/fairings-drop-not-allowed">
 			<default value="systems/rightswitchpanel/fairings-drop-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/fairings-drop-command">
+			<test logic="OR" value="systems/rightswitchpanel/fairings-drop-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/fairings-drop-input</output>
 		</switch>
@@ -280,6 +288,7 @@
 			<default value="systems/rightswitchpanel/fairings-drop-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/fairings-drop-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/fairings-drop-safer-command</output>
 		</switch>
@@ -342,14 +351,16 @@
 			<default value="systems/rightswitchpanel/two-drop-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/two-drop-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/two-drop-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/two-drop-not-allowed">
 			<default value="systems/rightswitchpanel/two-drop-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/two-drop-command">
+			<test logic="OR" value="systems/rightswitchpanel/two-drop-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/two-drop-input</output>
 		</switch>
@@ -358,6 +369,7 @@
 			<default value="systems/rightswitchpanel/two-drop-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/two-drop-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/two-drop-safer-command</output>
 		</switch>
@@ -420,14 +432,16 @@
 			<default value="systems/rightswitchpanel/three-ignition-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/three-ignition-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/three-ignition-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/three-ignition-not-allowed">
 			<default value="systems/rightswitchpanel/three-ignition-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/three-ignition-command">
+			<test logic="OR" value="systems/rightswitchpanel/three-ignition-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/three-ignition-input</output>
 		</switch>
@@ -436,6 +450,7 @@
 			<default value="systems/rightswitchpanel/three-ignition-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/three-ignition-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/three-ignition-safer-command</output>
 		</switch>
@@ -498,14 +513,16 @@
 			<default value="systems/rightswitchpanel/three-drop-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/three-drop-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/three-drop-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/three-drop-not-allowed">
 			<default value="systems/rightswitchpanel/three-drop-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/three-drop-command">
+			<test logic="OR" value="systems/rightswitchpanel/three-drop-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/three-drop-input</output>
 		</switch>
@@ -514,6 +531,7 @@
 			<default value="systems/rightswitchpanel/three-drop-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/three-drop-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/three-drop-safer-command</output>
 		</switch>
@@ -576,14 +594,16 @@
 			<default value="systems/rightswitchpanel/tdu-ignition-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/tdu-ignition-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/tdu-ignition-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/tdu-ignition-not-allowed">
 			<default value="systems/rightswitchpanel/tdu-ignition-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/tdu-ignition-command">
+			<test logic="OR" value="systems/rightswitchpanel/tdu-ignition-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/tdu-ignition-input</output>
 		</switch>
@@ -592,6 +612,7 @@
 			<default value="systems/rightswitchpanel/tdu-ignition-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/tdu-ignition-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/tdu-ignition-safer-command</output>
 		</switch>
@@ -654,14 +675,16 @@
 			<default value="systems/rightswitchpanel/tdu-drop-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/tdu-drop-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/tdu-drop-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/tdu-drop-not-allowed">
 			<default value="systems/rightswitchpanel/tdu-drop-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/tdu-drop-command">
+			<test logic="OR" value="systems/rightswitchpanel/tdu-drop-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/tdu-drop-input</output>
 		</switch>
@@ -670,6 +693,7 @@
 			<default value="systems/rightswitchpanel/tdu-drop-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/tdu-drop-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/tdu-drop-safer-command</output>
 		</switch>
@@ -732,14 +756,16 @@
 			<default value="systems/rightswitchpanel/brake-parachute-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/brake-parachute-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/brake-parachute-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/brake-parachute-not-allowed">
 			<default value="systems/rightswitchpanel/brake-parachute-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/brake-parachute-command">
+			<test logic="OR" value="systems/rightswitchpanel/brake-parachute-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/brake-parachute-input</output>
 		</switch>
@@ -748,6 +774,7 @@
 			<default value="systems/rightswitchpanel/brake-parachute-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/brake-parachute-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/brake-parachute-safer-command</output>
 		</switch>
@@ -810,14 +837,16 @@
 			<default value="systems/rightswitchpanel/main-parachute-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/main-parachute-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/main-parachute-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/main-parachute-not-allowed">
 			<default value="systems/rightswitchpanel/main-parachute-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/main-parachute-command">
+			<test logic="OR" value="systems/rightswitchpanel/main-parachute-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/main-parachute-input</output>
 		</switch>
@@ -826,6 +855,7 @@
 			<default value="systems/rightswitchpanel/main-parachute-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/main-parachute-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/main-parachute-safer-command</output>
 		</switch>
@@ -888,14 +918,16 @@
 			<default value="systems/rightswitchpanel/landing-engine-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/landing-engine-input">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/landing-engine-command</output>
 		</switch>
 
 		<switch name="calculations/rightswitchpanel/landing-engine-not-allowed">
 			<default value="systems/rightswitchpanel/landing-engine-input"/>
-			<test logic="AND" value="systems/rightswitchpanel/landing-engine-command">
+			<test logic="OR" value="systems/rightswitchpanel/landing-engine-command">
 				systems/rightswitchpanel/serviceable eq 0
+				systems/rightswitchpanel/cover-switch eq 0
 			</test>
 			<output>systems/rightswitchpanel/landing-engine-input</output>
 		</switch>
@@ -904,6 +936,7 @@
 			<default value="systems/rightswitchpanel/landing-engine-safer-command"/>
 			<test logic="AND" value="systems/rightswitchpanel/landing-engine-command">
 				systems/rightswitchpanel/serviceable eq 1
+				systems/rightswitchpanel/cover-switch eq 1
 			</test>
 			<output>systems/rightswitchpanel/landing-engine-safer-command</output>
 		</switch>

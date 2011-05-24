@@ -36,6 +36,118 @@
 
 	<channel name="Vzor">
 
+	<!-- mirror -->
+
+		<!-- field of view is 150deg -->
+
+		<fcs_function name="systems/vzor/mirror-shift-y">
+		<function>
+			<product>
+				<table>
+					<independentVar lookup="row">attitude/pitch-rad</independentVar>
+					<tableData>
+						-1.57079632679489661923		0.0
+						-0.26179938779914943654		-0.5
+					</tableData>
+				</table>
+				<table>
+					<independentVar lookup="row">attitude/roll-rad</independentVar>
+					<tableData>
+						-3.14159265358979323846		-1.0
+						-1.58				-1.0
+						-1.57079632679489661923		1.0
+						0.0				1.0
+						1.57079632679489661923		1.0
+						1.58				-1.0
+						3.14159265358979323846		-1.0
+					</tableData>
+				</table>
+			</product>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/vzor/mirror-shift-x">
+		<function>
+			<table>
+				<independentVar lookup="row">attitude/roll-rad</independentVar>
+				<tableData>
+					-3.14159265358979323846		0.5
+					-1.83259571459404605577		0.0
+					-1.30899693899574718269		-0.5
+					0.0				0.0
+					1.30899693899574718269		0.5
+					1.83259571459404605577		0.0
+					3.14159265358979323846		-0.5			
+				</tableData>
+			</table>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/vzor/mirror-shift-day">
+		<function>
+			<product>
+				<pow>
+					<sum>
+						<pow>
+							<property>systems/vzor/mirror-shift-x</property>
+							<value>2.0</value>
+						</pow>
+						<pow>
+							<property>systems/vzor/mirror-shift-y</property>
+							<value>2.0</value>
+						</pow>
+					</sum>
+					<value>0.5</value>
+				</pow>
+				<value>0.5</value>
+			</product>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/vzor/mirror-angle-deg">
+		<function>
+			<product>
+				<atan2>
+					<property>systems/vzor/mirror-shift-y</property>
+					<property>systems/vzor/mirror-shift-x</property>
+				</atan2>
+				<value>57.2957795130823208768</value>
+			</product>
+		</function>
+		</fcs_function>
+
+
+		<fcs_function name="systems/vzor/mirror-shift-night">
+		<function>
+			<sum>
+				<property>systems/vzor/mirror-shift-day</property>
+				<value>0.5</value>
+			</sum>
+		</function>
+		</fcs_function>
+
+
+		<switch name="systems/vzor/mirror-shift">
+			<default value="systems/vzor/mirror-shift-day"/>
+			<test logic="OR" value="0.25">
+				systems/vzor/serviceable eq 0
+				stages/unit[1]/active eq 1
+				position/h-agl-ft lt 164041
+			</test>
+			<test logic="AND" value="systems/vzor/mirror-shift-day">
+				systems/vzor/serviceable eq 1
+				stages/unit[1]/active eq 0
+				position/h-agl-ft gt 164041
+				/sim/time/sun-angle-rad lt 1.57079632679489661923
+			</test>
+			<test logic="AND" value="systems/vzor/mirror-shift-night">
+				systems/vzor/serviceable eq 1
+				stages/unit[1]/active eq 0
+				position/h-agl-ft gt 164041
+				/sim/time/sun-angle-rad ge 1.57079632679489661923
+			</test>
+		</switch>
+
 	<!-- cover -->
 
 		<switch name="calculations/vzor/cover-allowed">
@@ -104,7 +216,7 @@
 		<function>
 			<product>
 				<property>systems/vzor/cover-pos</property>
-				<value>0.02</value>
+				<value>0.0</value>
 			</product>
 		</function>
 			<output>systems/vzor/petal-shift-one</output>
@@ -259,11 +371,11 @@
 					</tableData>
 				</table>
 				<table>
-					<independentVar lookup="row">velocities/r-aero-rad_sec</independentVar>
+					<independentVar lookup="row">velocities/r-rad_sec</independentVar>
 					<independentVar lookup="column">systems/leftswitchpanel/lightcheck-switch</independentVar>
 					<tableData>
 								0.0		1.0
-						-0.001		1.0		1.0
+						-0.1		1.0		1.0
 						0.0		0.0		1.0
 						1.0		0.0		1.0
 					</tableData>
@@ -284,13 +396,13 @@
 					</tableData>
 				</table>
 				<table>
-					<independentVar lookup="row">velocities/r-aero-rad_sec</independentVar>
+					<independentVar lookup="row">velocities/r-rad_sec</independentVar>
 					<independentVar lookup="column">systems/leftswitchpanel/lightcheck-switch</independentVar>
 					<tableData>
 								0.0	1.0
 						-1.0		0.0	1.0
 						0.0		0.0	1.0
-						0.001		1.0	1.0
+						0.1		1.0	1.0
 					</tableData>
 				</table>
 			</product>
@@ -309,11 +421,11 @@
 					</tableData>
 				</table>
 				<table>
-					<independentVar lookup="row">velocities/q-aero-rad_sec</independentVar>
+					<independentVar lookup="row">velocities/q-rad_sec</independentVar>
 					<independentVar lookup="column">systems/leftswitchpanel/lightcheck-switch</independentVar>
 					<tableData>
 								0.0		1.0
-						-0.001		1.0		1.0
+						-0.1		1.0		1.0
 						0.0		0.0		1.0
 						1.0		0.0		1.0
 					</tableData>
@@ -334,13 +446,13 @@
 					</tableData>
 				</table>
 				<table>
-					<independentVar lookup="row">velocities/q-aero-rad_sec</independentVar>
+					<independentVar lookup="row">velocities/q-rad_sec</independentVar>
 					<independentVar lookup="column">systems/leftswitchpanel/lightcheck-switch</independentVar>
 					<tableData>
 								0.0	1.0
 						-1.0		0.0	1.0
 						0.0		0.0	1.0
-						0.001		1.0	1.0
+						0.1		1.0	1.0
 					</tableData>
 				</table>
 			</product>
@@ -359,11 +471,11 @@
 					</tableData>
 				</table>
 				<table>
-					<independentVar lookup="row">velocities/p-aero-rad_sec</independentVar>
+					<independentVar lookup="row">velocities/p-rad_sec</independentVar>
 					<independentVar lookup="column">systems/leftswitchpanel/lightcheck-switch</independentVar>
 					<tableData>
 								0.0		1.0
-						-0.001		1.0		1.0
+						-0.1		1.0		1.0
 						0.0		0.0		1.0
 						1.0		0.0		1.0
 					</tableData>
@@ -384,13 +496,13 @@
 					</tableData>
 				</table>
 				<table>
-					<independentVar lookup="row">velocities/p-aero-rad_sec</independentVar>
+					<independentVar lookup="row">velocities/p-rad_sec</independentVar>
 					<independentVar lookup="column">systems/leftswitchpanel/lightcheck-switch</independentVar>
 					<tableData>
 								0.0	1.0
 						-1.0		0.0	1.0
 						0.0		0.0	1.0
-						0.001		1.0	1.0
+						0.1		1.0	1.0
 					</tableData>
 				</table>
 			</product>

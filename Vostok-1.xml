@@ -36,8 +36,8 @@
 	Moments and forces counted in Datcom+ by simple models 
 		with little wings and tails what produces not so much
 		moments and forces relatively to fuselage.
-	Only craft have its own structure points,
-		structure points of upper stages is actually gears.
+	Only craft have its own STRUCTURE points,
+		STRUCTURE points of upper stages is actually gears.
 -->
 
 	<metrics>
@@ -2048,73 +2048,97 @@
 
 	<ground_reactions>
 
+	<!-- Wait of carrier with full load is 623935lbs
+		only 4 points contact ground, so it's 623935/4=155983lbs for each point
+			spring_coeff=*~1.1=171582.125 to make good contact by experiment
+			damping_coeff=*~0.55=85791.0625 to make good contact by experiment
+		damping_coeff_rebound=1 to make good contact by experiment
+  -->
+
 		<!-- 0 -->
-		<contact type="BOGEY" name="FORWARD">
+		<contact type="STRUCTURE" name="FORWARD">
 			<location unit="M">
 				<x> -6.0 </x>
 				<y> 0.0 </y>
-				<z> -14.252 </z>
+<!--				<z> -14.252 </z>	-->
+				<z> -15.5 </z>
 			</location>
-			<static_friction>  0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<rolling_friction> 0.1 </rolling_friction>
-			<spring_coeff unit="LBS/FT">      132855.00 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC"> 126571.00 </damping_coeff>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.80 </dynamic_friction>
+			<rolling_friction> 0.80 </rolling_friction>
+<!--			<spring_coeff unit="LBS/FT">      140385.375 </spring_coeff>	-->
+			<spring_coeff unit="LBS/FT">      75000.0 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC"> 46795.125 </damping_coeff>
+			<damping_coeff_rebound unit="LBS/FT/SEC"> 46795.125 </damping_coeff_rebound>
+			<spring_coeff unit="LBS/FT">      75000 </spring_coeff>  
+			<damping_coeff unit="LBS/FT/SEC"> 75000 </damping_coeff>
+			<damping_coeff_rebound unit="LBS/FT/SEC"> 75000 </damping_coeff_rebound>
 			<max_steer unit="DEG"> 0.00 </max_steer>
-			<brake_group>LEFT</brake_group>
+			<brake_group>CENTER</brake_group>
 			<retractable>1</retractable>
 		</contact>
 
 		<!-- 1 -->
-		<contact type="BOGEY" name="BACK">
+		<contact type="STRUCTURE" name="BACK">
 			<location unit="M">
 				<x> 6.0 </x>
 				<y> 0.0 </y>
-				<z> -14.252 </z>
+				<z> -15.5 </z>
 			</location>
-			<static_friction>  0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<rolling_friction> 0.1 </rolling_friction>
-			<spring_coeff unit="LBS/FT">      132855.00 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC"> 126571.00 </damping_coeff>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.80 </dynamic_friction>
+			<rolling_friction> 0.80 </rolling_friction>
+			<spring_coeff unit="LBS/FT">      75000.0 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC"> 46795.125 </damping_coeff>
+			<damping_coeff_rebound unit="LBS/FT/SEC"> 46795.125 </damping_coeff_rebound>
 			<max_steer unit="DEG"> 0.00 </max_steer>
-			<brake_group>LEFT</brake_group>
+			<brake_group>CENTER</brake_group>
 			<retractable>1</retractable>
 		</contact>
 
 		<!-- 2 -->
-		<contact type="BOGEY" name="LEFT">
+		<contact type="STRUCTURE" name="LEFT">
 			<location unit="M">
 				<x> 0.0 </x>
 				<y> -6.0 </y>
-				<z> -14.252 </z>
+				<z> -15.5 </z>
 			</location>
-			<static_friction>  0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<rolling_friction> 0.1 </rolling_friction>
-			<spring_coeff unit="LBS/FT">      132855.00 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC"> 126571.00 </damping_coeff>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.80 </dynamic_friction>
+			<rolling_friction> 0.80 </rolling_friction>
+			<spring_coeff unit="LBS/FT">      75000.0 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC"> 46795.125 </damping_coeff>
+			<damping_coeff_rebound unit="LBS/FT/SEC"> 46795.125 </damping_coeff_rebound>
 			<max_steer unit="DEG"> 0.00 </max_steer>
-			<brake_group>RIGHT</brake_group>
+			<brake_group>CENTER</brake_group>
 			<retractable>1</retractable>
 		</contact>
 
 		<!-- 3 -->
-		<contact type="BOGEY" name="RIGHT">
+		<contact type="STRUCTURE" name="RIGHT">
 			<location unit="M">
 				<x> 0.0 </x>
 				<y> 6.0 </y>
-				<z> -14.252 </z>
+				<z> -15.5 </z>
 			</location>
-			<static_friction>  0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<rolling_friction> 0.1 </rolling_friction>
-			<spring_coeff unit="LBS/FT">      132855.00 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC"> 126571.00 </damping_coeff>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.80 </dynamic_friction>
+			<rolling_friction> 0.80 </rolling_friction>
+			<spring_coeff unit="LBS/FT">      75000.0 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC"> 46795.125 </damping_coeff>
+			<damping_coeff_rebound unit="LBS/FT/SEC"> 46795.125 </damping_coeff_rebound>
 			<max_steer unit="DEG"> 0.00 </max_steer>
-			<brake_group>RIGHT</brake_group>
+			<brake_group>CENTER</brake_group>
 			<retractable>1</retractable>
 		</contact>
+
+	<!-- Wait of spacecraft is 5500lbs
+		only 3 points contact ground, so it's 5500/3=1833lbs for each point
+			spring_coeff=*~1.1 to make good contact by experiment
+			damping_coeff=*~0.55 to make good contact by experiment
+		damping_coeff_rebound=1 to make good contact by experiment
+  -->
+
 
 		<!-- 4 -->
 		<contact type="STRUCTURE" name="POINT_0">
@@ -2123,151 +2147,173 @@
 				<y>	0 </y>
 				<z>	0 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 5 -->
 		<contact type="STRUCTURE" name="POINT_1">
 			<location unit="M">
 				<x>	-0.638138 </x>
-				<y>	-1.032559 </y>
-				<z>	0.750158 </z>
+				<y>	0.750158 </y>
+				<z>	1.032559 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 6 -->
 		<contact type="STRUCTURE" name="POINT_2">
 			<location unit="M">
 				<x>	-0.638138 </x>
-				<y>	0.394334 </y>
-				<z>	1.213791 </z>
+				<y>	1.213791 </y>
+				<z>	-0.394334 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 7 -->
 		<contact type="STRUCTURE" name="POINT_3">
 			<location unit="M">
 				<x>	-0.638138 </x>
-				<y>	1.276224 </y>
-				<z>	0 </z>
+				<y>	0 </y>
+				<z>	-1.276224 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 8 -->
 		<contact type="STRUCTURE" name="POINT_4">
 			<location unit="M">
 				<x>	-0.638138 </x>
-				<y>	0.394334 </y>
-				<z>	-1.213791 </z>
+				<y>	-1.213791 </y>
+				<z>	-0.394334 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 9 -->
 		<contact type="STRUCTURE" name="POINT_5">
 			<location unit="M">
 				<x>	-0.638138 </x>
-				<y>	-1.032559 </y>
-				<z>	-0.750158 </z>
+				<y>	-0.750158 </y>
+				<z>	1.032559 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 10 -->
 		<contact type="STRUCTURE" name="POINT_6">
 			<location unit="M">
 				<x>	0.638138 </x>
-				<y>	-0.394421 </y>
-				<z>	1.213791 </z>
+				<y>	1.213791 </y>
+				<z>	0.394421 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 11 -->
 		<contact type="STRUCTURE" name="POINT_7">
 			<location unit="M">
 				<x>	0.638138 </x>
-				<y>	1.032472 </y>
-				<z>	0.750158 </z>
+				<y>	0.750158 </y>
+				<z>	-1.032472 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 12 -->
 		<contact type="STRUCTURE" name="POINT_8">
 			<location unit="M">
 				<x>	0.638138 </x>
-				<y>	1.032472 </y>
-				<z>	-0.750158 </z>
+				<y>	-0.750158 </y>
+				<z>	-1.032472 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 13 -->
 		<contact type="STRUCTURE" name="POINT_9">
 			<location unit="M">
 				<x>	0.638138 </x>
-				<y>	-0.394421 </y>
-				<z>	-1.213791 </z>
+				<y>	-1.213791 </y>
+				<z>	0.394421 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 14 -->
 		<contact type="STRUCTURE" name="POINT_10">
 			<location unit="M">
 				<x>	0.638138 </x>
-				<y>	1.276312 </y>
-				<z>	0 </z>
+				<y>	0 </y>
+				<z>	-1.276312 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 		<!-- 15 -->
@@ -2277,11 +2323,13 @@
 				<y>	0 </y>
 				<z>	0 </z>
 			</location>
-			<static_friction> 0.1 </static_friction>
-			<dynamic_friction> 0.1 </dynamic_friction>
-			<spring_coeff unit="LBS/FT">      3388.75 </spring_coeff>
-			<damping_coeff unit="LBS/FT/SEC">  3388.75 </damping_coeff>
-			<damping_coeff_rebound unit="LBS/FT/SEC"> 5422000.00 </damping_coeff_rebound>
+			<static_friction>  0.80 </static_friction>
+			<dynamic_friction> 0.50 </dynamic_friction>
+			<rolling_friction> 0.02 </rolling_friction>
+			<spring_coeff unit="LBS/FT">       1650.00 </spring_coeff>
+			<damping_coeff unit="LBS/FT/SEC">   550.00 </damping_coeff>
+			<brake_group>CENTER</brake_group>
+			<retractable>0</retractable>
 		</contact>
 
 	</ground_reactions>
@@ -2291,7 +2339,7 @@
 		<channel name="Pitch">
 
 			<kinematic name="Pitch Cmd Delayed">
-				<input>stages/unit[0]/computer/pitch-cmd-norm</input>
+				<input>stages/unit[0]/control/pitch-cmd-norm</input>
 				<traverse>
 				<setting>
 					<position>-1.0</position>
@@ -2299,7 +2347,7 @@
 				</setting>
 				<setting>
 					<position>1.0</position>
-					<time>1</time>
+					<time>0.01</time>
 				</setting>
 				</traverse>
 				<output>stages/unit[0]/elevator-delayed-norm</output>
@@ -2339,6 +2387,7 @@
 		</channel>
 
 		<channel name="Roll">
+
 			<summer name="Roll Trim Sum">
 				<input>fcs/aileron-cmd-norm</input>
 				<input>fcs/roll-trim-cmd-norm</input>
@@ -2395,8 +2444,24 @@
 		</channel>
 
 		<channel name="Yaw">
+
+			<kinematic name="Yaw Cmd Delayed">
+				<input>stages/unit[0]/control/yaw-cmd-norm</input>
+				<traverse>
+				<setting>
+					<position>-1.0</position>
+					<time>0</time>
+				</setting>
+				<setting>
+					<position>1.0</position>
+					<time>0.01</time>
+				</setting>
+				</traverse>
+				<output>stages/unit[0]/rudder-delayed-norm</output>
+			</kinematic>
+
 			<summer name="Rudder Command Sum">
-				<input>fcs/rudder-cmd-norm</input>
+				<input>stages/unit[0]/rudder-delayed-norm</input>
 				<input>fcs/yaw-trim-cmd-norm</input>
 				<clipto>
 					<min> -0.35 </min>
@@ -2721,7 +2786,7 @@
 				<test logic="AND" value="0.8364">
 					stages/unit[4]/active eq 1.0
 				</test>
-				<test logic="AND" value=".9087">
+				<test logic="AND" value="0.9087">
 					stages/unit[5]/active eq 1.0
 				</test>
 				<output>metrics/Sh-sqft</output>
@@ -2751,6 +2816,74 @@
 		</channel>
 
 	</flight_control>
+
+	<external_reactions>
+
+		<force name="Brake-Chute" frame="WIND">
+			<function>
+				<product>
+					<property>aero/qbar-modified-psf</property>
+					<property>metrics/Sw-sqft</property>
+					<value>6.173</value>
+					<pow>
+						<property>systems/spacecraft/brake-chute-pos-norm</property>
+						<value>2.0</value>
+					</pow>
+					<difference>
+						<value>1</value>
+						<property>systems/spacecraft/brake-chute-dropped</property>
+					</difference>
+					<difference>
+						<value>1</value>
+						<property>systems/spacecraft/brake-chute-teared</property>
+					</difference>
+				</product>
+			</function>
+			<location unit="FT">
+				<x>0.0</x>
+				<y>-2.641</y>
+				<z>1.469</z>
+			</location>
+			<direction>
+				<x>-1</x>
+				<y>0</y>
+				<z>0</z>
+			</direction>
+		</force>
+
+		<force name="Main-Chute" frame="WIND">
+			<function>
+				<product>
+					<property>aero/qbar-modified-psf</property>
+					<property>metrics/Sw-sqft</property>
+					<value>384.2</value>
+					<pow>
+						<property>systems/spacecraft/main-chute-pos-norm</property>
+						<value>2.0</value>
+					</pow>
+					<difference>
+						<value>1</value>
+						<property>systems/spacecraft/main-chute-dropped</property>
+					</difference>
+					<difference>
+						<value>1</value>
+						<property>systems/spacecraft/main-chute-teared</property>
+					</difference>
+				</product>
+			</function>
+			<location unit="FT">
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>9.379</z>
+			</location>
+			<direction>
+				<x>-1</x>
+				<y>0</y>
+				<z>0</z>
+			</direction>
+		</force>
+
+	</external_reactions>
 
 	<aerodynamics>
 
@@ -3268,45 +3401,6 @@
 			</product>
 			</function>
 
-			<function name="aero/coefficient/CD_BrakeChute">
-				<description>
-					Drag due to brake chute
-				</description>
-				<product>
-					<property>aero/qbar-modified-psf</property>
-					<property>metrics/Sw-sqft</property>
-					<value>6.173</value>
-					<property>systems/spacecraft/brake-chute-pos-norm</property>
-					<difference>
-						<value>1</value>
-						<property>systems/spacecraft/brake-chute-dropped</property>
-					</difference>
-					<difference>
-						<value>1</value>
-						<property>systems/spacecraft/brake-chute-teared</property>
-					</difference>
-				</product>
-			</function>
-
-			<function name="aero/coefficient/CD_MainChute">
-				<description>
-					Drag due to main chute
-				</description>
-				<product>
-					<property>aero/qbar-modified-psf</property>
-					<property>metrics/Sw-sqft</property>
-					<value>384.2</value>
-					<property>systems/spacecraft/main-chute-pos-norm</property>
-					<difference>
-						<value>1</value>
-						<property>systems/spacecraft/main-chute-dropped</property>
-					</difference>
-					<difference>
-						<value>1</value>
-						<property>systems/spacecraft/main-chute-teared</property>
-					</difference>
-				</product>
-			</function>
 		</axis>
 
 		<axis name="PITCH">
@@ -3322,7 +3416,6 @@
 				<property>metrics/Sw-sqft</property>
 				<property>metrics/cbarw-ft</property>
 				<property>stages/first</property>
-				<value>0.0</value>
 			<table>
 				<independentVar lookup="row">aero/alpha-rotated-rad</independentVar>
 				<independentVar lookup="column">velocities/mach</independentVar>
@@ -3352,22 +3445,20 @@
 			</product>
 			</function>
 
-		<function name="aero/coefficient/CmDe_First">
-		<description>
-			Pitch moment coefficient due to elevator deflection
-			Positive surface deflection is trailing edge down
-		</description>
-		<product>
-			<property>aero/qbar-modified-psf</property>
-			<property>metrics/Sw-sqft</property>
-			<property>metrics/cbarw-ft</property>
-			<property>stages/first</property>
-			<value>stages/first</value>
-			<value>0.0</value>
-		<table>
-			<independentVar lookup="row">fcs/elevator-pos-rad</independentVar>
-			<independentVar lookup="column">velocities/mach</independentVar>
-		<tableData>
+			<function name="aero/coefficient/CmDe_First">
+			<description>
+				Pitch moment coefficient due to elevator deflection
+				Positive surface deflection is trailing edge down
+			</description>
+			<product>
+				<property>aero/qbar-modified-psf</property>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>stages/first</property>
+			<table>
+				<independentVar lookup="row">fcs/elevator-pos-rad</independentVar>
+				<independentVar lookup="column">velocities/mach</independentVar>
+			<tableData>
 		0.0	.25		.5	2.0	3.0	4.0
 -.7854		0.0	-1.711		-1.671	-239.8	-140.7	-97.73
 -.5236		0.0	-1.315		-1.285	-159.9	-93.81	-65.15
@@ -3378,10 +3469,10 @@
 .2618		0.0	1.106		1.080	79.94	46.90	32.58
 .5236		0.0	1.315		1.285	159.9	93.81	65.15
 .7854		0.0	1.711		1.671	239.8	140.7	97.73
-		</tableData>
-		</table>
-		</product>
-		</function>
+			</tableData>
+			</table>
+			</product>
+			</function>
 
 			<!--Second stage -->
 
@@ -3394,8 +3485,6 @@
 				<property>metrics/Sw-sqft</property>
 				<property>metrics/cbarw-ft</property>
 				<property>stages/second</property>
-				<value>stages/first</value>
-				<value>0.0</value>
 			<table>
 				<independentVar lookup="row">aero/alpha-rotated-rad</independentVar>
 				<independentVar lookup="column">velocities/mach</independentVar>
@@ -3436,7 +3525,6 @@
 				<property>metrics/Sw-sqft</property>
 				<property>metrics/cbarw-ft</property>
 				<property>stages/third</property>
-				<value>stages/first</value>
 			<table>
 				<independentVar lookup="row">aero/alpha-rotated-rad</independentVar>
 				<independentVar lookup="column">velocities/mach</independentVar>
@@ -3506,75 +3594,140 @@
 			</product>
 			</function>
 
-
-			<!--Spacecraft 
-
-			<function name="aero/coefficient/Cmbasic_Spacecraft">
-			<description>
-				Basic pitch moment coefficient
-			</description>
-			<product>
-				<property>aero/qbar-modified-psf</property>
-				<property>metrics/Sw-sqft</property>
-				<property>metrics/cbarw-ft</property>
-				<property>stages/spacecraft</property>
-				<value>0.1</value>
-				<table>
-					<independentVar lookup="row">aero/alpha-spacecraft-rad</independentVar>
-				<tableData>
-					-1.571		1.0
-					.000		0.0
-					1.571		-1.0
-				</tableData>
-				</table>
-			</product>
-			</function>
-
--->
-
 			<function name="aero/coefficient/Cmq_Spacecraft">
 			<description>
 				Pitch Moment coefficient due to pitch speed
 			</description>
 			<product>
-				<sum>
-					<property>aero/coefficient/CD_Spacecraft</property>
-					<property>aero/coefficient/CD_BrakeChute</property>
-					<property>aero/coefficient/CD_MainChute</property>
-				</sum>
-				<property>velocities/q-aero-rad_sec</property>
-				<property>stages/spacecraft</property>
 				<table>
-					<independentVar lookup="row">systems/spacecraft/main-chute-dropped</independentVar>
+					<independentVar lookup="row">aero/qbar-modified-psf</independentVar>
 					<tableData>
-						0.0		1.0
-						1.0		0.0
+						0	0
+						1	10
+						10	100
+						100	100
 					</tableData>
 				</table>
-				<value>-0.05</value>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<table>
+					<independentVar lookup="row">velocities/q-aero-rad_sec</independentVar>
+					<tableData>
+						-10	-10
+						0	0
+						10	10
+					</tableData>
+				</table>
+				<sum>
+					<product>
+						<value>-0.4</value>
+						<table>
+							<independentVar lookup="row">systems/spacecraft/main-chute-pos-norm</independentVar>
+							<tableData>
+								0	1
+								1	0
+							</tableData>
+						</table>
+					</product>
+					<product>
+						<property>aero/ci2vel</property>
+						<value>-42.0</value>
+						<table>
+							<independentVar lookup="row">systems/spacecraft/main-chute-pos-norm</independentVar>
+							<tableData>
+								0	0
+								1	1
+							</tableData>
+						</table>
+					</product>
+				</sum>
+				<property>stages/spacecraft</property>
 			</product>
 			</function>
 
 <!--
 
-			<function name="aero/coefficient/Cmq_TEST">
+			<function name="aero/coefficient/Cmq_BrakeChute">
 			<description>
-				Vertical force pitch moment compensation TEST
+				Pitch Moment coefficient due to pitch speed
 			</description>
 			<product>
-				<property>external_reactions/centrifugal-force-lbs</property>
-				<property>calculations/calculations/cg-vertical-sholder-x-in</property>
-				<cos>
-					<atan2>
-						<property>calculations/calculations/cg-z-vertical-pitched-in</property>
-						<property>calculations/calculations/cg-x-vertical-pitched-in</property>
-					</atan2>
-				</cos>
-				<quotient>
-					<value> 0.0254 </value>
-					<value> 0.3048 </value>
-				</quotient>
-				<value> 1 </value>
+				<table>
+					<independentVar lookup="row">aero/qbar-modified-psf</independentVar>
+					<tableData>
+						0	0
+						1	10
+						10	100
+						100	100
+					</tableData>
+				</table>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>aero/ci2vel</property>
+				<table>
+					<independentVar lookup="row">velocities/q-aero-rad_sec</independentVar>
+					<tableData>
+						-10	-10
+						0	0
+						10	10
+					</tableData>
+				</table>
+				<property>stages/spacecraft</property>
+				<value>-50.0</value>
+				<pow>
+					<property>systems/spacecraft/brake-chute-pos-norm</property>
+					<value>2.0</value>
+				</pow>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/brake-chute-dropped</property>
+				</difference>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/brake-chute-teared</property>
+				</difference>
+			</product>
+			</function>
+
+			<function name="aero/coefficient/Cmq_MainChute">
+			<description>
+				Pitch Moment coefficient due to pitch speed
+			</description>
+			<product>
+				<table>
+					<independentVar lookup="row">aero/qbar-modified-psf</independentVar>
+					<tableData>
+						0	0
+						1	10
+						10	100
+						100	100
+					</tableData>
+				</table>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>aero/ci2vel</property>
+				<table>
+					<independentVar lookup="row">velocities/q-aero-rad_sec</independentVar>
+					<tableData>
+						-10	-10
+						0	0
+						10	10
+					</tableData>
+				</table>
+				<property>stages/spacecraft</property>
+				<value>-75.0</value>
+				<pow>
+					<property>systems/spacecraft/main-chute-pos-norm</property>
+					<value>2.0</value>
+				</pow>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/main-chute-dropped</property>
+				</difference>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/main-chute-teared</property>
+				</difference>
 			</product>
 			</function>
 
@@ -3584,71 +3737,487 @@
 
 		<axis name="ROLL">
 
-			<!-- Spacecraft 
+			<!--	Note what carrier and spacecraft is accounted as standing.
+				So accounted roll is actually yaw.
+				Coefficient due to pitch added to make it. -->
 
-			<function name="aero/coefficient/Clr_Spacecraft">
+			<!--First stage -->
+
+			<function name="aero/coefficient/Cl_First">
 			<description>
-				Roll Moment coefficient due to roll angle
+				Roll moment due beta and mach coefficient
 			</description>
 			<product>
 				<property>aero/qbar-modified-psf</property>
 				<property>metrics/Sw-sqft</property>
-				<property>metrics/bw-ft</property>
-				<property>stages/spacecraft</property>
-				<value>0.1</value>
+				<property>metrics/cbarw-ft</property>
+				<property>stages/first</property>
+				<sin>
+					<property>aero/alpha-rotated-rad</property>
+				</sin>
 			<table>
-				<independentVar lookup="row">attitude/roll-rad</independentVar>
+				<independentVar lookup="row">aero/beta-rad</independentVar>
+				<independentVar lookup="column">velocities/mach</independentVar>
 			<tableData>
-				-1.571		1.0
-				.000		0.0
-				1.571		-1.0
+		0.0	.25		.5	2.0	3.0	4.0
+-1.571		0.0	-73.63		-78.12	-993.2	-183.0	-190.0
+-1.309		0.0	-66.31		-70.73	-149.1	-150.0	-165.0
+-1.047		0.0	-53.55		-57.50	-418.5	-416.3	-400.0
+-.7854		0.0	-34.75		-37.64	-242.5	-242.6	-250.0
+-.5236		0.0	-14.99		-16.61	-136.7	-136.9	-140.0
+-.2618		0.0	-1.805		-2.117	-46.48	-48.77	-50.51
+-.1745		0.0	.4931E-01	.1018	-27.89	-29.75	-30.75
+-.8727E-01	0.0	.4699		.5839	-13.31	-14.24	-14.73
+-.3491E-01	0.0	.2728		.3359	-5.294	-5.668	-5.868
+.000		0.0	.000		.000	.000	.000	.000
+.3491E-01	0.0	-.2728		-.3359	5.295	5.675	5.881
+.8727E-01	0.0	-.4699		-.5839	13.34	14.34	14.88
+.1745		0.0	-.4931E-01	-.1018	27.98	30.30	31.43
+.2618		0.0	1.805		2.117	46.48	49.99	51.52
+.5236		0.0	16.55		15.59	137.1	137.4	140.0
+.7854		0.0	32.83		32.01	242.8	246.3	250.0
+1.047		0.0	49.87		51.59	395.7	397.5	400.0
+1.309		0.0	64.66		68.64	151.3	150.0	165.0
+1.571		0.0	73.63		78.12	-185.3	183.0	190.0
 			</tableData>
 			</table>
 			</product>
 			</function>
 
--->
+			<function name="aero/coefficient/ClDr_First">
+			<description>
+				Roll moment coefficient due rudder deflection
+			</description>
+			<product>
+				<property>aero/qbar-modified-psf</property>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>stages/first</property>
+			<table>
+				<independentVar lookup="row">fcs/rudder-pos-rad</independentVar>
+				<independentVar lookup="column">velocities/mach</independentVar>
+			<tableData>
+		0.0	.25		.5	2.0	3.0	4.0
+-.7854		0.0	-1.711		-1.671	-239.8	-140.7	-97.73
+-.5236		0.0	-1.315		-1.285	-159.9	-93.81	-65.15
+-.2618		0.0	-1.106		-1.080	-79.94	-46.90	-32.58
+-.8727E-01	0.0	-.4045		-.3951	-26.65	-15.63	-10.86
+.000		0.0	.0		0.0	.000	.000	.000
+.8727E-01	0.0	.4045		.3951	26.65	15.63	10.86
+.2618		0.0	1.106		1.080	79.94	46.90	32.58
+.5236		0.0	1.315		1.285	159.9	93.81	65.15
+.7854		0.0	1.711		1.671	239.8	140.7	97.73
+			</tableData>
+			</table>
+			</product>
+			</function>
+
+			<!--Second stage -->
+
+			<function name="aero/coefficient/Cl_Second">
+			<description>
+				Basic roll moment coefficient
+			</description>
+			<product>
+				<property>aero/qbar-modified-psf</property>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>stages/second</property>
+				<sin>
+					<property>aero/alpha-rotated-rad</property>
+				</sin>
+			<table>
+				<independentVar lookup="row">aero/beta-rad</independentVar>
+				<independentVar lookup="column">velocities/mach</independentVar>
+			<tableData>
+		0.0	.25		.5		2.0	3.0	4.0	5.0
+-1.571		0.0	-320.1		-315.2		-1020.	-83.01	-350.8	-120.0
+-1.309		0.0	-263.0		-264.5		-2182.	-2011.	-2020.	-710.4
+-1.047		0.0	-218.2		-226.2		-3969.	-3200.	-2688.	-649.5
+-.7854		0.0	-157.0		-169.2		-1558.	-1217.	-1097.	-900.0
+-.5236		0.0	-89.95		-97.76		-631.5	-433.2	-358.4	-279.2
+-.2618		0.0	-35.22		-37.18		-122.4	-46.94	-61.04	-32.23
+-.1745		0.0	-21.85		-22.37		-62.17	-38.06	-18.0	-15.73
+-.8727E-01	0.0	-10.69		-10.63		-28.08	-15.85	-11.03	-7.187
+-.3491E-01	0.0	-4.478		-4.490		-11.16	-5.892	-4.252	-2.523
+.000		0.0	.000		.000		.000	.000	.000	.000
+.3491E-01	0.0	4.478		4.490		11.15	5.859	4.197	2.464
+.8727E-01	0.0	10.69		10.63		27.96	14.83	10.75	6.412
+.1745		0.0	21.84		22.36		61.64	36.19	27.50	17.26
+.2618		0.0	35.20		37.16		122.4	78.64	61.04	40.86
+.5236		0.0	95.08		94.05		633.2	434.3	366.8	291.6
+.7854		0.0	150.4		149.9		1559.	1231.	1109.	900.0
+1.047		0.0	206.6		207.6		3791.	3056.	2601.	800.0
+1.309		0.0	262.0		261.8		2221.	2060.	2082.	649.5
+1.571		0.0	320.1		315.2		-38.75	140.1	204.5	120.0
+			</tableData>
+			</table>
+			</product>
+			</function>
+
+			<!--Third stage -->
+
+			<function name="aero/coefficient/Cl_Third">
+			<description>
+				Roll moment due beta and mach coefficient
+			</description>
+			<product>
+				<property>aero/qbar-modified-psf</property>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>stages/third</property>
+				<sin>
+					<property>aero/alpha-rotated-rad</property>
+				</sin>
+			<table>
+				<independentVar lookup="row">aero/beta-rad</independentVar>
+				<independentVar lookup="column">velocities/mach</independentVar>
+			<tableData>
+		0.0	.25	.5	2.0	3.0	4.0	5.0
+-1.571		0.0	-29.03	-29.19	-40.52	-37.0	-33.30	-25.0
+-1.309		0.0	-24.35	-24.52	-15.77	-11.34	-10.0	-7.0
+-1.047		0.0	-19.39	-19.58	-25.58	-53.0	-47.11	-39.94
+-.7854		0.0	-14.08	-14.26	-39.01	-37.84	-35.0	-33.0
+-.5236		0.0	-8.820	-8.922	-25.62	-24.17	-22.0	-20.0
+-.2618		0.0	-3.965	-3.991	-10.73	-10.30	-10.28	-10.0
+-.1745		0.0	-2.599	-2.594	-6.833	-6.585	-6.587	-6.0
+-.8727E-01	0.0	-1.292	-1.285	-3.341	-3.223	-3.235	-3.229
+-.3491E-01	0.0	-.5157	-.5117	-1.329	-1.285	-1.290	-1.280
+.000		0.0	.000	.000	.000	.000	.000	.000
+.3491E-01	0.0	.5157	.5117	1.329	1.285	1.291	1.280
+.8727E-01	0.0	1.292	1.285	3.338	3.226	3.242	3.217
+.1745		0.0	2.599	2.594	6.818	6.615	6.649	6.0
+.2618		0.0	3.965	3.991	10.71	10.38	10.40	10.0
+.5236		0.0	8.922	8.893	25.63	24.21	22.0	20.0
+.7854		0.0	13.99	13.91	39.08	38.01	35.0	33.0
+1.047		0.0	19.13	19.16	56.59	53.0	50.43	41.40
+1.309		0.0	24.22	24.35	16.35	18.79	10.0	7.0
+1.571		0.0	29.03	29.19	40.52	37.0	33.30	25.0
+			</tableData>
+			</table>
+			</product>
+			</function>
+
+			<!--TDU stage -->
+
+			<function name="aero/coefficient/Cl_TDU">
+			<description>
+				Roll moment due beta and mach coefficient
+			</description>
+			<product>
+				<property>aero/qbar-modified-psf</property>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>stages/tdu</property>
+				<sin>
+					<property>aero/alpha-rotated-rad</property>
+				</sin>
+			<table>
+				<independentVar lookup="row">aero/beta-rad</independentVar>
+				<independentVar lookup="column">velocities/mach</independentVar>
+			<tableData>
+		0.0	.25	.5	2.0	3.0	4.0		5.0
+-1.571		0.0	-36.10	-36.00	-38.0	-40.0	-42.0		-44.0
+-1.309		0.0	-30.01	-29.93	-31.0	-35.0	-40.0		-42.0
+-1.047		0.0	-23.99	-23.96	-24.48	-46.88	-65.0		-70.0
+-.7854		0.0	-17.95	-17.98	-23.11	-23.41	-30.0		-32.0
+-.5236		0.0	-11.92	-11.94	-15.27	-15.12	-26.72		-26.0
+-.2618		0.0	-5.932	-5.937	-6.642	-6.751	-6.950		-7.2
+-.1745		0.0	-3.963	-3.962	-4.304	-4.379	-4.537		-4.6
+-.8727E-01	0.0	-1.988	-1.987	-2.145	-2.168	-2.247		-2.274
+-.3491E-01	0.0	-.7971	-.7962	-.8608	-.8680	-.8987		-.9094
+.000		0.0	.000	.000	.000	.000	.000		.000
+.3491E-01	0.0	.7971	.7962	.8609	.8680	.8988		.9096
+.8727E-01	0.0	1.988	1.987	2.147	2.169	2.249		2.277
+.1745		0.0	3.963	3.962	4.307	4.388	4.554		4.6
+.2618		0.0	5.932	5.937	6.636	6.775	7.001		7.2
+.5236		0.0	11.94	11.94	15.27	15.13	24.70		26.0
+.7854		0.0	17.93	17.90	23.23	23.48	30.0		32.0
+1.047		0.0	23.92	23.86	24.48	55.76	65.0		70.0
+1.309		0.0	29.98	29.89	31.0	35.0	40.0		42.0
+1.571		0.0	36.10	36.00	38.0	40.0	42.0		44.0
+			</tableData>
+			</table>
+			</product>
+			</function>
 
 			<function name="aero/coefficient/Clrs_Spacecraft">
 			<description>
 				Roll Moment coefficient due to roll speed
 			</description>
 			<product>
-				<sum>
-					<property>aero/coefficient/CD_Spacecraft</property>
-					<property>aero/coefficient/CD_BrakeChute</property>
-					<property>aero/coefficient/CD_MainChute</property>
-				</sum>
-				<property>velocities/p-aero-rad_sec</property>
-				<property>stages/spacecraft</property>
 				<table>
-					<independentVar lookup="row">systems/spacecraft/main-chute-dropped</independentVar>
+					<independentVar lookup="row">aero/qbar-modified-psf</independentVar>
 					<tableData>
-						0.0		1.0
-						1.0		0.0
+						0	0
+						1	10
+						10	100
+						100	100
 					</tableData>
 				</table>
-				<value>-0.05</value>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<table>
+					<independentVar lookup="row">velocities/p-aero-rad_sec</independentVar>
+					<tableData>
+						-10	-10
+						0	0
+						10	10
+					</tableData>
+				</table>
+				<sum>
+					<product>
+						<value>-0.4</value>
+						<table>
+							<independentVar lookup="row">systems/spacecraft/main-chute-pos-norm</independentVar>
+							<tableData>
+								0	1
+								1	0
+							</tableData>
+						</table>
+					</product>
+					<product>
+						<property>aero/bi2vel</property>
+						<value>-42.0</value>
+						<table>
+							<independentVar lookup="row">systems/spacecraft/main-chute-pos-norm</independentVar>
+							<tableData>
+								0	0
+								1	1
+							</tableData>
+						</table>
+					</product>
+				</sum>
+				<property>stages/spacecraft</property>
 			</product>
 			</function>
 
 <!--
 
-			<function name="aero/coefficient/Clr_TEST">
+			<function name="aero/coefficient/Clrs_BrakeChute">
 			<description>
-				Vertical force roll moment compensation TEST
+				Roll Moment coefficient due to roll speed
 			</description>
 			<product>
-				<property>external_reactions/centrifugal-force-lbs</property>
-				<property>calculations/calculations/cg-y-vertical-rolled-in</property>
-				<sin>
-					<property>attitude/pitch-rad</property>
-				</sin>
-				<quotient>
-					<value> 0.0254 </value>
-					<value> 0.3048 </value>
-				</quotient>
-				<value> -1 </value>
+				<table>
+					<independentVar lookup="row">aero/qbar-modified-psf</independentVar>
+					<tableData>
+						0	0
+						1	10
+						10	100
+						100	100
+					</tableData>
+				</table>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>aero/bi2vel</property>
+				<table>
+					<independentVar lookup="row">velocities/p-aero-rad_sec</independentVar>
+					<tableData>
+						-10	-10
+						0	0
+						10	10
+					</tableData>
+				</table>
+				<property>stages/spacecraft</property>
+				<value>-100.0</value>
+				<pow>
+					<property>systems/spacecraft/brake-chute-pos-norm</property>
+					<value>2.0</value>
+				</pow>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/brake-chute-dropped</property>
+				</difference>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/brake-chute-teared</property>
+				</difference>
+			</product>
+			</function>
+
+			<function name="aero/coefficient/Clrs_MainChute">
+			<description>
+				Roll Moment coefficient due to roll speed
+			</description>
+			<product>
+				<table>
+					<independentVar lookup="row">aero/qbar-modified-psf</independentVar>
+					<tableData>
+						0	0
+						1	10
+						10	100
+						100	100
+					</tableData>
+				</table>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>aero/bi2vel</property>
+				<table>
+					<independentVar lookup="row">velocities/p-aero-rad_sec</independentVar>
+					<tableData>
+						-10	-10
+						0	0
+						10	10
+					</tableData>
+				</table>
+				<property>stages/spacecraft</property>
+				<value>-200.0</value>
+				<pow>
+					<property>systems/spacecraft/main-chute-pos-norm</property>
+					<value>2.0</value>
+				</pow>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/main-chute-dropped</property>
+				</difference>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/main-chute-teared</property>
+				</difference>
+			</product>
+			</function>
+
+-->
+
+		</axis>
+
+		<axis name="YAW">
+
+			<function name="aero/coefficient/Cnr_Spacecraft">
+			<description>
+				Yaw moment coefficient due to yaw speed
+			</description>
+			<product>
+				<table>
+					<independentVar lookup="row">aero/qbar-modified-psf</independentVar>
+					<tableData>
+						0	0
+						1	10
+						10	100
+						100	100
+					</tableData>
+				</table>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<table>
+					<independentVar lookup="row">velocities/r-aero-rad_sec</independentVar>
+					<tableData>
+						-10	-10
+						0	0
+						10	10
+					</tableData>
+				</table>
+				<sum>
+					<product>
+						<value>-0.4</value>
+						<table>
+							<independentVar lookup="row">systems/spacecraft/main-chute-pos-norm</independentVar>
+							<tableData>
+								0	1
+								1	0
+							</tableData>
+						</table>
+					</product>
+					<product>
+						<property>aero/ci2vel</property>
+						<value>-42.0</value>
+						<table>
+							<independentVar lookup="row">systems/spacecraft/main-chute-pos-norm</independentVar>
+							<tableData>
+								0	0
+								1	1
+							</tableData>
+						</table>
+					</product>
+				</sum>
+				<property>stages/spacecraft</property>
+			</product>
+			</function>
+
+<!--
+
+			<function name="aero/coefficient/Cnr_BrakeChute">
+			<description>
+				Yaw moment coefficient due to yaw speed
+			</description>
+			<product>
+				<table>
+					<independentVar lookup="row">aero/qbar-modified-psf</independentVar>
+					<tableData>
+						0	0
+						1	10
+						10	100
+						100	100
+					</tableData>
+				</table>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>aero/ci2vel</property>
+				<table>
+					<independentVar lookup="row">velocities/r-aero-rad_sec</independentVar>
+					<tableData>
+						-10	-10
+						0	0
+						10	10
+					</tableData>
+				</table>
+				<property>stages/spacecraft</property>
+				<value>-50.0</value>
+				<pow>
+					<property>systems/spacecraft/brake-chute-pos-norm</property>
+					<value>2.0</value>
+				</pow>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/brake-chute-dropped</property>
+				</difference>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/brake-chute-teared</property>
+				</difference>
+			</product>
+			</function>
+
+			<function name="aero/coefficient/Cnr_MainChute">
+			<description>
+				Yaw moment coefficient due to yaw speed
+			</description>
+			<product>
+				<table>
+					<independentVar lookup="row">aero/qbar-modified-psf</independentVar>
+					<tableData>
+						0	0
+						1	10
+						10	100
+						100	100
+					</tableData>
+				</table>
+				<property>metrics/Sw-sqft</property>
+				<property>metrics/cbarw-ft</property>
+				<property>aero/ci2vel</property>
+				<table>
+					<independentVar lookup="row">velocities/r-aero-rad_sec</independentVar>
+					<tableData>
+						-10	-10
+						0	0
+						10	10
+					</tableData>
+				</table>
+				<property>stages/spacecraft</property>
+				<value>-75.0</value>
+				<pow>
+					<property>systems/spacecraft/main-chute-pos-norm</property>
+					<value>2.0</value>
+				</pow>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/main-chute-dropped</property>
+				</difference>
+				<difference>
+					<value>1</value>
+					<property>systems/spacecraft/main-chute-teared</property>
+				</difference>
 			</product>
 			</function>
 
@@ -3657,6 +4226,9 @@
 		</axis>
 
 	</aerodynamics>
+
+	<system file="Angles">
+	</system>
 
 	<system file="Temperature">
 	</system>
@@ -3685,6 +4257,9 @@
 	<system file="Gascontrol">
 	</system>
 
+	<system file="Orientationcomputer">
+	</system>
+
 	<system file="Controlhandle">
 	</system>
 
@@ -3707,6 +4282,12 @@
 	</system>
 
 	<system file="TDU">
+	</system>
+
+	<system file="Sounds">
+	</system>
+
+	<system file="Arthorizon">
 	</system>
 
 </fdm_config>

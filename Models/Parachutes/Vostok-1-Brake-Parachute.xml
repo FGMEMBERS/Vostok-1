@@ -39,6 +39,38 @@
 		</condition>
 	</animation>
 
+	<animation>
+		<type>rotate</type>
+		<property>fdm/jsbsim/attitude/pitch-rad</property>
+		<factor>-57.2957</factor>
+		<center>
+			<x-m>0.0</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.0</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<property>fdm/jsbsim/attitude/roll-rad</property>
+		<factor>57.2957</factor>
+		<center>
+			<x-m>0.0</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
 	<enable-hot type="bool">false</enable-hot>
 
 </PropertyList>

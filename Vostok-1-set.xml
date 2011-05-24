@@ -13,6 +13,9 @@
 	<fdm>
 		<jsbsim>
 			<one type="float">1.0</one>
+			<fcs>
+				<center-brake-cmd-norm type="float">1.0</center-brake-cmd-norm>
+			</fcs>
 			<propulsion>
 				<engine n="0">
 					<green type="float">0.0</green>
@@ -401,6 +404,9 @@
 					<transparency type="float">0.0</transparency>
 				</engine>
 			</propulsion>
+			<accelerations>
+				<Nz-max type="float">15.0</Nz-max>
+			</accelerations>
 			<stages>
 				<first type="bool">0.0</first>
 				<second type="bool">0.0</second>
@@ -425,21 +431,22 @@
 					<drop type="bool">0</drop>
 					<dropped type="bool">0</dropped>
 					<elevator-delayed-norm type="float">0.0</elevator-delayed-norm>
-					<computer>
-						<on type="bool">1</on>
-						<stabilize type="bool">0</stabilize>
+					<pitch-mass-moment-part type="float">0.0</pitch-mass-moment-part>
+					<control>
 						<left-engine-rad type="float">0.0</left-engine-rad>
 						<right-engine-rad type="float">0.0</right-engine-rad>
 						<forward-engine-rad type="float">0.0</forward-engine-rad>
 						<back-engine-rad type="float">0.0</back-engine-rad>
-						<pitch-factor type="float">10.0</pitch-factor>
-						<pitch-speed-factor type="float">100.0</pitch-speed-factor>
-						<pitch-speed-limit type="float">15.0</pitch-speed-limit>
-						<roll-factor type="float">2.0</roll-factor>
-						<roll-speed-factor type="float">200.0</roll-speed-factor>
-						<roll-speed-limit type="float">15.0</roll-speed-limit>
+						<mass-control type="float">0.0</mass-control>
+						<control-min type="float">-0.785</control-min>
+						<control-max type="float">0.785</control-max>
 						<pitch-cmd-norm type="float">0.0</pitch-cmd-norm>
-					</computer>
+						<roll-cmd-norm type="float">0.0</roll-cmd-norm>
+						<factor-add type="float">0.0</factor-add>
+						<q-gained type="float">0.0</q-gained>
+						<p-gained type="float">0.0</p-gained>
+						<r-gained type="float">0.0</r-gained>
+					</control>
 				</unit>
 				<unit n="1">
 					<active type="bool">1</active>
@@ -466,21 +473,20 @@
 					<mass-translate type="float">0</mass-translate>
 					<drop type="bool">0</drop>
 					<dropped type="bool">0</dropped>
-					<computer>
-						<on type="bool">1</on>
-						<stabilize type="bool">0</stabilize>
+					<pitch-mass-moment-part type="float">0.0</pitch-mass-moment-part>
+					<control>
 						<left-engine-rad type="float">0.0</left-engine-rad>
 						<right-engine-rad type="float">0.0</right-engine-rad>
 						<forward-engine-rad type="float">0.0</forward-engine-rad>
 						<back-engine-rad type="float">0.0</back-engine-rad>
-						<pitch-factor type="float">10.0</pitch-factor>
-						<pitch-speed-factor type="float">100.0</pitch-speed-factor>
-						<pitch-speed-limit type="float">15.0</pitch-speed-limit>
-						<roll-factor type="float">2.0</roll-factor>
-						<roll-speed-factor type="float">200.0</roll-speed-factor>
-						<roll-speed-limit type="float">15.0</roll-speed-limit>
-						<pitch-cmd-norm type="float">0.0</pitch-cmd-norm>
-					</computer>
+						<mass-control type="float">0.0</mass-control>
+						<control-min type="float">-0.785</control-min>
+						<control-max type="float">0.785</control-max>
+						<factor-add type="float">0.0</factor-add>
+						<q-gained type="float">0.0</q-gained>
+						<p-gained type="float">0.0</p-gained>
+						<r-gained type="float">0.0</r-gained>
+					</control>
 				</unit>
 				<unit n="3">
 					<active type="bool">0</active>
@@ -495,6 +501,24 @@
 					<mass-translate type="float">0</mass-translate>
 					<drop type="bool">0</drop>
 					<dropped type="bool">0</dropped>
+					<pitch-mass-moment-part type="float">0.0</pitch-mass-moment-part>
+					<control>
+						<pitch-forward type="float">0.0</pitch-forward>
+						<pitch-back type="float">0.0</pitch-back>
+						<yaw-left type="float">0.0</yaw-left>
+						<yaw-right type="float">0.0</yaw-right>
+						<roll-forward-left type="float">0.0</roll-forward-left>
+						<roll-back-right type="float">0.0</roll-back-right>
+						<roll-forward-right type="float">0.0</roll-forward-right>
+						<roll-back-left type="float">0.0</roll-back-left>
+						<mass-control type="float">0.0</mass-control>
+						<control-min type="float">-1.0</control-min>
+						<control-max type="float">1.0</control-max>
+						<factor-add type="float">0.0</factor-add>
+						<q-gained type="float">0.0</q-gained>
+						<p-gained type="float">0.0</p-gained>
+						<r-gained type="float">0.0</r-gained>
+					</control>
 				</unit>
 				<unit n="4">
 					<active type="bool">0</active>
@@ -512,6 +536,24 @@
 					<dropped type="bool">0</dropped>
 					<separate type="bool">0</separate>
 					<separated type="float">0</separated>
+					<pitch-mass-moment-part type="float">0.0</pitch-mass-moment-part>
+					<control>
+						<pitch-forward type="float">0.0</pitch-forward>
+						<pitch-back type="float">0.0</pitch-back>
+						<yaw-left type="float">0.0</yaw-left>
+						<yaw-right type="float">0.0</yaw-right>
+						<roll-forward-left type="float">0.0</roll-forward-left>
+						<roll-back-right type="float">0.0</roll-back-right>
+						<roll-forward-right type="float">0.0</roll-forward-right>
+						<roll-back-left type="float">0.0</roll-back-left>
+						<mass-control type="float">0.0</mass-control>
+						<control-min type="float">-1.0</control-min>
+						<control-max type="float">1.0</control-max>
+						<factor-add type="float">0.0</factor-add>
+						<q-gained type="float">0.0</q-gained>
+						<p-gained type="float">0.0</p-gained>
+						<r-gained type="float">0.0</r-gained>
+					</control>
 				</unit>
 				<unit n="5">
 					<active type="bool">0</active>
@@ -537,7 +579,8 @@
 					<alpha-rad type="float">0.0</alpha-rad>
 					<beta-rad type="float">0.0</beta-rad>
 					<temp type="float">0.0</temp>
-					<flow-mach-c type="float">0.0</flow-mach-c>
+					<P-sum-psf type="float">0.0</P-sum-psf>
+					<stagnation-mach-c type="float">0.0</stagnation-mach-c>
 					<flow-mach-red type="float">0.0</flow-mach-red>
 					<flow-mach-green type="float">0.0</flow-mach-green>
 					<flow-mach-blue type="float">0.0</flow-mach-blue>
@@ -562,12 +605,14 @@
 					<flow-mach-d16-green type="float">0.0</flow-mach-d16-green>
 					<flow-mach-d16-blue type="float">0.0</flow-mach-d16-blue>
 					<flow-mach-d16-transparency type="float">0.0</flow-mach-d16-transparency>
+					<recovery-mach-c type="float">0.0</recovery-mach-c>
 					<surface-mach-c type="float">0.0</surface-mach-c>
 					<surface-mach-red type="float">0.0</surface-mach-red>
 					<surface-mach-green type="float">0.0</surface-mach-green>
 					<surface-mach-blue type="float">0.0</surface-mach-blue>
 				</temperature>
 				<alpha-rotated-rad type="float">0.0</alpha-rotated-rad>
+				<beta-rotated-rad type="float">0.0</beta-rotated-rad>
 				<qbar-modified-psf type="float">0.0</qbar-modified-psf>
 				<qbar-modified-kgm2 type="float">0.0</qbar-modified-kgm2>
 				<coefficient>
@@ -614,6 +659,112 @@
 				<roll-drag-compensative-force-lbs type="float">0.0</roll-drag-compensative-force-lbs>
 			</external_reactions>
 			<systems>
+				<angles>
+					<r-orig-11 type="float" >0.0</r-orig-11>
+					<r-orig-12 type="float">0.0</r-orig-12>
+					<r-orig-13 type="float">0.0</r-orig-13>
+					<r-orig-21 type="float">0.0</r-orig-21>
+					<r-orig-22 type="float">0.0</r-orig-22>
+					<r-orig-23 type="float">0.0</r-orig-23>
+					<r-orig-31 type="float">0.0</r-orig-31>
+					<r-orig-32 type="float">0.0</r-orig-32>
+					<r-orig-33 type="float">0.0</r-orig-33>
+
+					<r-up-11 type="float">0.0</r-up-11>
+					<r-up-12 type="float">0.0</r-up-12>
+					<r-up-13 type="float">0.0</r-up-13>
+					<r-up-21 type="float">0.0</r-up-21>
+					<r-up-22 type="float">0.0</r-up-22>
+					<r-up-23 type="float">0.0</r-up-23>
+					<r-up-31 type="float">0.0</r-up-31>
+					<r-up-32 type="float">0.0</r-up-32>
+					<r-up-33 type="float">0.0</r-up-33>
+
+					<r-nose-11 type="float">0.0</r-nose-11>
+					<r-nose-12 type="float">0.0</r-nose-12>
+					<r-nose-13 type="float">0.0</r-nose-13>
+					<r-nose-21 type="float">0.0</r-nose-21>
+					<r-nose-22 type="float">0.0</r-nose-22>
+					<r-nose-23 type="float">0.0</r-nose-23>
+					<r-nose-31 type="float">0.0</r-nose-31>
+					<r-nose-32 type="float">0.0</r-nose-32>
+					<r-nose-33 type="float">0.0</r-nose-33>
+
+					<heading-true-rad type="float">0.0</heading-true-rad>
+					<pitch-rad type="float">0.0</pitch-rad>
+					<roll-rad type="float">0.0</roll-rad>
+
+					<nose-heading-rad type="float">0.0</nose-heading-rad>
+					<nose-pitch-rad type="float">0.0</nose-pitch-rad>
+					<nose-roll-rad type="float">0.0</nose-roll-rad>
+
+				</angles>
+				<orientationcomputer>
+					<factor-angle type="float">1.2732</factor-angle>
+
+					<factor-input type="float">0.0872</factor-input>
+					<factor-speed type="float">1.0</factor-speed>
+					<factor-acceleration type="float">1.0</factor-acceleration>
+					<factor-control type="float">1.0</factor-control>
+					<factor-output type="float">1.0</factor-output>
+					<output-min type="float">-0.785</output-min>
+					<output-max type="float">0.785</output-max>
+
+					<q-angle-control type="float">0.0</q-angle-control>
+					<q-angle type="float">0.0</q-angle>
+					<q-drift type="float">0.0</q-drift>
+					<q-return type="float">0.0</q-return>
+					<q-pid-input type="float">0.0</q-pid-input>
+					<q-hold type="bool">0</q-hold>
+					<q-hold-active type="float">0.0</q-hold-active>
+
+					<q-command type="float">0</q-command>
+					<q-input type="float">0</q-input>
+
+					<q-acceleration type="float">0.0</q-acceleration>
+					<q-control-acceleration type="float">0.0</q-control-acceleration>
+					<q-control-return type="float">0.0</q-control-return>
+					<q-control-add type="float">0.0</q-control-add>
+					<q-control type="float">0.0</q-control>
+					<q-output type="float">0.0</q-output>
+
+					<p-angle-control type="float">0.0</p-angle-control>
+					<p-angle type="float">0.0</p-angle>
+					<p-drift type="float">0.0</p-drift>
+					<p-return type="float">0.0</p-return>
+					<p-pid-input type="float">0.0</p-pid-input>
+					<p-hold type="bool">0</p-hold>
+					<p-hold-active type="float">0.0</p-hold-active>
+
+					<p-command type="float">0</p-command>
+					<p-input type="float">0</p-input>
+
+					<p-acceleration type="float">0.0</p-acceleration>
+					<p-control-acceleration type="float">0.0</p-control-acceleration>
+					<p-control-return type="float">0.0</p-control-return>
+					<p-control-add type="float">0.0</p-control-add>
+					<p-control type="float">0.0</p-control>
+					<p-output type="float">0.0</p-output>
+
+					<r-angle-control type="float">0.0</r-angle-control>
+					<r-angle type="float">0.0</r-angle>
+					<r-drift type="float">0.0</r-drift>
+					<r-return type="float">0.0</r-return>
+					<r-pid-input type="float">0.0</r-pid-input>
+					<r-hold type="bool">0</r-hold>
+					<r-hold-active type="float">0.0</r-hold-active>
+
+					<r-command type="float">0</r-command>
+					<r-input type="float">0</r-input>
+
+					<r-acceleration type="float">0.0</r-acceleration>
+					<r-control-acceleration type="float">0.0</r-control-acceleration>
+					<r-control-return type="float">0.0</r-control-return>
+					<r-control-add type="float">0.0</r-control-add>
+					<r-control type="float">0.0</r-control>
+					<r-output type="float">0.0</r-output>
+
+				</orientationcomputer>
 				<tdu>
 					<hard-antennas-extraction-started type="bool">0</hard-antennas-extraction-started>
 					<hard-antennas-pos-norm type="float">0.0</hard-antennas-pos-norm>
@@ -635,7 +786,7 @@
 					<brake-chute-pos-norm type="float">0</brake-chute-pos-norm>
 					<brake-chute-dropped type="bool">0</brake-chute-dropped>
 					<brake-qbar-max type="float">1500</brake-qbar-max>
-					<brake-rot-max type="float">0.523</brake-rot-max>
+					<brake-rot-max type="float">3.14</brake-rot-max>
 					<brake-chute-teared type="bool">0</brake-chute-teared>
 					<main-chute-extracted type="bool">0</main-chute-extracted>
 					<main-chute-pos-norm type="float">0</main-chute-pos-norm>
@@ -652,24 +803,6 @@
 					<engine-rot-max type="float">0.174</engine-rot-max>
 					<ground-contact type="bool">0</ground-contact>
 				</spacecraft>
-				<third_computer>
-					<on type="bool">1</on>
-					<stabilize type="bool">0</stabilize>
-					<pitch-forward type="float">0.0</pitch-forward>
-					<pitch-back type="float">0.0</pitch-back>
-					<yaw-left type="float">0.0</yaw-left>
-					<yaw-right type="float">0.0</yaw-right>
-					<roll-forward-left type="float">0.0</roll-forward-left>
-					<roll-back-right type="float">0.0</roll-back-right>
-					<roll-forward-right type="float">0.0</roll-forward-right>
-					<roll-back-left type="float">0.0</roll-back-left>
-					<pitch-factor type="float">10.0</pitch-factor>
-					<pitch-speed-factor type="float">100.0</pitch-speed-factor>
-					<pitch-speed-limit type="float">15.0</pitch-speed-limit>
-					<roll-factor type="float">2.0</roll-factor>
-					<roll-speed-factor type="float">200.0</roll-speed-factor>
-					<roll-speed-limit type="float">15.0</roll-speed-limit>
-				</third_computer>
 				<tdu_computer>
 					<on type="bool">1</on>
 					<stabilize type="bool">0</stabilize>
@@ -690,7 +823,7 @@
 					<command-factor type="float">0.1</command-factor>
 				</tdu_computer>
 				<gascontrol>
-					<serviceable type="float">1</serviceable>
+					<serviceable type="bool">1</serviceable>
 					<lock-command type="float">1</lock-command>
 					<lock-pos type="float">1</lock-pos>
 					<lock-switch type="float">1</lock-switch>
@@ -703,7 +836,7 @@
 					<shift-oscillator-pos type="float">0</shift-oscillator-pos>
 				</gascontrol>
 				<controlhandle>
-					<serviceable type="float">1</serviceable>
+					<serviceable type="bool">1</serviceable>
 					<handle-moved type="bool">0</handle-moved>
 					<button-input type="float">0</button-input>
 					<button-command type="float">0</button-command>
@@ -742,6 +875,23 @@
 					<stage-three-oxigen-lbs type="float">0.0</stage-three-oxigen-lbs>
 					<stage-three-fuel-lbs type="float">0.0</stage-three-fuel-lbs>
 					<stage-three-thrust-tons type="float">0.0</stage-three-thrust-tons>
+
+					<gm type="float">14.07644180e15</gm>
+					<semimajor-axis-length-ft type="float">0.0</semimajor-axis-length-ft>
+					<eccentricity type="float">0.0</eccentricity>
+					<apoapsis-ft type="float">0.0</apoapsis-ft>
+					<apoapsis-km type="float">0.0</apoapsis-km>
+					<apoapsis-indicated-km type="float">0.0</apoapsis-indicated-km>
+					<apoapsis-hunderds-km type="float">0.0</apoapsis-hunderds-km>
+					<apoapsis-tens-km type="float">0.0</apoapsis-tens-km>
+					<apoapsis-ones-km type="float">0.0</apoapsis-ones-km>
+					<periapsis-ft type="float">0.0</periapsis-ft>
+					<periapsis-km type="float">0.0</periapsis-km>
+					<periapsis-indicated-km type="float">0.0</periapsis-indicated-km>
+					<periapsis-hunderds-km type="float">0.0</periapsis-hunderds-km>
+					<periapsis-tens-km type="float">0.0</periapsis-tens-km>
+					<periapsis-ones-km type="float">0.0</periapsis-ones-km>
+
 				</enginespanel>
 				<orientationpanel>
 					<g-force-absolute type="float">0.0</g-force-absolute>
@@ -757,7 +907,7 @@
 					<qbar-indicated-psm type="float">0.0</qbar-indicated-psm>
 				</orientationpanel>
 				<mainpanel>
-					<serviceable type="float">1</serviceable>
+					<serviceable type="bool">1</serviceable>
 					<prev-time type="float">0.0</prev-time>
 
 					<clock-main-vernier-input type="bool">0</clock-main-vernier-input>
@@ -781,6 +931,7 @@
 					<clock-daytime-vernier-pos type="float">0.0</clock-daytime-vernier-pos>
 					<clock-daytime-vernier-switch type="bool">0.0</clock-daytime-vernier-switch>
 					<clock-daytime-vernier-angle type="float">0.0</clock-daytime-vernier-angle>
+
 					<indicator n="0">
 						<on type="bool">0</on>
 					</indicator>
@@ -854,8 +1005,34 @@
 						<on type="bool">0</on>
 					</indicator>
 				</mainpanel>
+				<orbitcounter>
+					<launchpad-longitude type="float">0.0</launchpad-longitude>
+					<antipode-longitude-calculated type="float">0.0</antipode-longitude-calculated>
+					<antipode-longitude-circle type="float">0.0</antipode-longitude-circle>
+					<antipode-longitude type="float">180.0</antipode-longitude>
+					<pad-distance type="float">0.0</pad-distance>
+					<half-orbit-distance type="float">0.0</half-orbit-distance>
+					<near-pad type="bool">0.0</near-pad>
+					<near-half type="bool">0.0</near-half>
+					<orbit-half-command type="bool">0.0</orbit-half-command>
+					<orbit-half-pos type="float">0.0</orbit-half-pos>
+					<half-made type="bool">0.0</half-made>
+					<orbit-full-command type="bool">0.0</orbit-full-command>
+					<orbit-full-pos type="float">0.0</orbit-full-pos>
+					<orbit-next-calculated type="float">0.0</orbit-next-calculated>
+					<orbit-next type="float">0.0</orbit-next>
+					<orbit-incremented type="float">0.0</orbit-incremented>
+					<orbit type="float">0.0</orbit>
+					<orbit-hundreds type="float">0.0</orbit-hundreds>
+					<orbit-tens type="float">0.0</orbit-tens>
+					<orbit-ones type="float">0.0</orbit-ones>
+					<orbit-offset type="float">0.0</orbit-offset>
+					<orbit-setted type="float">0.0</orbit-setted>
+					<orbit-set type="bool">0.0</orbit-set>
+					<long-test type="float">0.0</long-test>
+				</orbitcounter>
 				<rightswitchpanel>
-					<serviceable type="float">1</serviceable>
+					<serviceable type="bool">1</serviceable>
 
 					<cover-input type="bool">0</cover-input>
 					<cover-command type="bool">0</cover-command>
@@ -962,7 +1139,15 @@
 					<landing-engine-light type="bool">0</landing-engine-light>
 				</rightswitchpanel>
 				<vzor>
-					<serviceable type="float">1</serviceable>
+					<serviceable type="bool">1</serviceable>
+
+					<mirror-shift-x type="float">0.0</mirror-shift-x>
+					<mirror-shift-y type="float">0.0</mirror-shift-y>
+					<mirror-shift-day type="float">0.0</mirror-shift-day>
+					<mirror-angle-deg type="float">0.0</mirror-angle-deg>
+
+					<mirror-shift-night type="float">0.0</mirror-shift-night>
+					<mirror-shift type="float">0.0</mirror-shift>
 
 					<cover-input type="bool">1</cover-input>
 					<cover-command type="bool">1</cover-command>
@@ -993,8 +1178,20 @@
 					<up-left-light type="float">0.0</up-left-light>
 					<up-right-light type="float">0.0</up-right-light>
 				</vzor>
+				<globus>
+					<eci-modified-fps type="float">0.0</eci-modified-fps>
+					<landing-angle-calculated type="float">0.0</landing-angle-calculated>
+					<landing-angle-deg type="float">0.0</landing-angle-deg>
+					<landing-or-position type="float">0.0</landing-or-position>
+					<north-east-deg type="float">0.0</north-east-deg>
+					<heading-true-deg type="float">0.0</heading-true-deg>
+					<test1 type="float">0.0</test1>
+					<test2 type="float">0.0</test2>
+					<roll-deg type="float">0.0</roll-deg>
+					<pitch-deg type="float">0.0</pitch-deg>
+				</globus>
 				<backilluminator>
-					<serviceable type="float">1</serviceable>
+					<serviceable type="bool">1</serviceable>
 
 					<cover-input type="bool">1</cover-input>
 					<cover-command type="bool">1</cover-command>
@@ -1014,7 +1211,7 @@
 					<petal-shift-eight type="float">0.0</petal-shift-eight>
 				</backilluminator>
 				<rightilluminator>
-					<serviceable type="float">1</serviceable>
+					<serviceable type="bool">1</serviceable>
 
 					<cover-input type="bool">1</cover-input>
 					<cover-command type="bool">1</cover-command>
@@ -1034,7 +1231,12 @@
 					<petal-shift-eight type="float">0.0</petal-shift-eight>
 				</rightilluminator>
 				<leftswitchpanel>
-					<serviceable type="float">1</serviceable>
+					<serviceable type="bool">1</serviceable>
+
+					<globus-input type="bool">1</globus-input>
+					<globus-command type="bool">1</globus-command>
+					<globus-pos type="float">1.0</globus-pos>
+					<globus-switch type="bool">1.0</globus-switch>
 
 					<vzor-input type="bool">0</vzor-input>
 					<vzor-command type="bool">0</vzor-command>
@@ -1100,12 +1302,97 @@
 						<time-sec type="float">0.0</time-sec>
 					</click>
 					<prev-time type="float">0.0</prev-time>
+					<wind type="float">0.0</wind>
+					<view-internal type="bool">0.0</view-internal>
+					<view-external type="bool">0.0</view-external>
+					<first-engines type="float">0.0</first-engines>
+					<first-engines-internal type="float">0.0</first-engines-internal>
+					<first-engines-external type="float">0.0</first-engines-external>
+					<first-separation-internal type="float">0.0</first-separation-internal>
+					<first-separation-external type="float">0.0</first-separation-external>
+					<fairings-separation-internal type="float">0.0</fairings-separation-internal>
+					<fairings-separation-external type="float">0.0</fairings-separation-external>
+					<second-separation-internal type="float">0.0</second-separation-internal>
+					<second-separation-external type="float">0.0</second-separation-external>
+					<third-engine type="float">0.0</third-engine>
+					<third-engine-internal type="float">0.0</third-engine-internal>
+					<third-engine-external type="float">0.0</third-engine-external>
+					<third-separation-internal type="float">0.0</third-separation-internal>
+					<third-separation-external type="float">0.0</third-separation-external>
+					<tdu-hard-antennas-internal type="float">0.0</tdu-hard-antennas-internal>
+					<tdu-hard-antennas-external type="float">0.0</tdu-hard-antennas-external>
+					<tdu-radiators-internal type="float">0.0</tdu-radiators-internal>
+					<tdu-radiators-external type="float">0.0</tdu-radiators-external>
+					<tdu-whip-antennas-internal type="float">0.0</tdu-whip-antennas-internal>
+					<tdu-whip-antennas-external type="float">0.0</tdu-whip-antennas-external>
+					<tdu-antennas-extraction-internal type="float">0.0</tdu-antennas-extraction-internal>
+					<tdu-antennas-extraction-external type="float">0.0</tdu-antennas-extraction-external>
+					<tdu-engine type="float">0.0</tdu-engine>
+					<tdu-engine-internal type="float">0.0</tdu-engine-internal>
+					<tdu-engine-external type="float">0.0</tdu-engine-external>
+					<tdu-maneur-engines type="float">0.0</tdu-maneur-engines>
+					<tdu-maneur-engines-internal type="float">0.0</tdu-maneur-engines-internal>
+					<tdu-maneur-engines-external type="float">0.0</tdu-maneur-engines-external>
+					<tdu-separation-internal type="float">0.0</tdu-separation-internal>
+					<tdu-separation-external type="float">0.0</tdu-separation-external>
+					<spacecraft-burning-internal type="float">0.0</spacecraft-burning-internal>
+					<spacecraft-burning-external type="float">0.0</spacecraft-burning-external>
+					<brake-chute-internal type="float">0.0</brake-chute-internal>
+					<brake-chute-external type="float">0.0</brake-chute-external>
+					<main-chute-internal type="float">0.0</main-chute-internal>
+					<main-chute-external type="float">0.0</main-chute-external>
+					<landing-sensor type="float">0.0</landing-sensor>
+					<landing-sensor-internal type="float">0.0</landing-sensor-internal>
+					<landing-sensor-external type="float">0.0</landing-sensor-external>
+					<landing-engine type="float">0.0</landing-engine>
+					<landing-engine-internal type="float">0.0</landing-engine-internal>
+					<landing-engine-external type="float">0.0</landing-engine-external>
+					<g-cracking>
+						<on type="bool">0</on>
+						<volume-internal type="float">0.0</volume-internal>
+						<volume-external type="float">0.0</volume-external>
+						<next-time type="float">0.0</next-time>
+					</g-cracking>
 				</sounds>
 				<crashes>
+					<serviceable type="bool">1</serviceable>
 					<prev-time type="float">0.0</prev-time>
 					<crashed type="bool">0</crashed>
 					<crash-type type="string"></crash-type>
 				</crashes>
+				<arthorizon>
+					<on type="bool">1</on>
+					<serviceable type="bool">1</serviceable>
+					<button-command type="bool">0</button-command>
+					<button-pos type="float">0</button-pos>
+
+					<roll-speed-drift type="float">0</roll-speed-drift>
+					<roll-speed-return type="float">0</roll-speed-return>
+					<roll-speed-input type="float">0</roll-speed-input>
+					<roll-speed type="float">0</roll-speed>
+
+					<roll-drift-rad type="float">0</roll-drift-rad>
+					<roll-return-rad type="float">0</roll-return-rad>
+					<roll-store-rad type="float">0</roll-store-rad>
+					<roll-input-rad type="float">0</roll-input-rad>
+					<roll-rad type="float">0</roll-rad>
+					<roll-offset-deg type="float">0</roll-offset-deg>
+					<roll-indicated-deg type="float">0</roll-indicated-deg>
+
+					<pitch-speed-drift type="float">0</pitch-speed-drift>
+					<pitch-speed-return type="float">0</pitch-speed-return>
+					<pitch-speed-input type="float">0</pitch-speed-input>
+					<pitch-speed type="float">0</pitch-speed>
+
+					<pitch-drift-rad type="float">0</pitch-drift-rad>
+					<pitch-return-rad type="float">0</pitch-return-rad>
+					<pitch-store-rad type="float">0</pitch-store-rad>
+					<pitch-input-rad type="float">0</pitch-input-rad>
+					<pitch-rad type="float">0</pitch-rad>
+					<pitch-offset-deg type="float">0</pitch-offset-deg>
+					<pitch-indicated-deg type="float">0</pitch-indicated-deg>
+
+				</arthorizon>
 			</systems>
 			<velocities>
 				<initial-orbital-speed-fps type="float">0.0</initial-orbital-speed-fps>
@@ -1298,7 +1585,6 @@
 			</camera-group>
 		</rendering>
 
-
 		<help>
 			<title>Vostok-1</title>
 			<line>Aircraft documentation in /Vostok-1/Documentation directory</line>
@@ -1308,7 +1594,59 @@
 			</key>
 			<key>
 				<name>C</name>
-				<desc>On/Off Control handle (Off at start up)</desc>
+				<desc>Control handle button</desc>
+			</key>
+			<key>
+				<name>O</name>
+				<desc>Open/Close cOntrol panel</desc>
+			</key>
+			<key>
+				<name>S</name>
+				<desc>Ignite first and Second stages</desc>
+			</key>
+			<key>
+				<name>F</name>
+				<desc>Drop Fairings</desc>
+			</key>
+			<key>
+				<name>G</name>
+				<desc>Globus position/landing positon</desc>
+			</key>
+			<key>
+				<name>Shift-F</name>
+				<desc>Drop First stage</desc>
+			</key>
+			<key>
+				<name>Shift-S</name>
+				<desc>Drop Second stage</desc>
+			</key>
+			<key>
+				<name>H</name>
+				<desc>Ignite tHird stage</desc>
+			</key>
+			<key>
+				<name>Shift-H</name>
+				<desc>Drop tHird stage</desc>
+			</key>
+			<key>
+				<name>U</name>
+				<desc>Ignite/Stop tdU engine</desc>
+			</key>
+			<key>
+				<name>Shift-U</name>
+				<desc>Drop tdU</desc>
+			</key>
+			<key>
+				<name>B</name>
+				<desc>Extract Brake parachute</desc>
+			</key>
+			<key>
+				<name>M</name>
+				<desc>Extract Main parachute</desc>
+			</key>
+			<key>
+				<name>L</name>
+				<desc>Extract Landing engine sensor</desc>
 			</key>
 		</help>
 
@@ -1324,8 +1662,11 @@
 
 		<view n="0">
 			<name>Cosmonaut View</name>
+			<type>lookfrom</type>
 			<internal type="bool" archive="y">true</internal>
 			<config>
+				<from-model type="bool">true</from-model>
+				<from-model-idx type="int">0</from-model-idx>
 				<x-offset-m type="double" archive="y">0.0</x-offset-m>
 				<y-offset-m type="double" archive="y">19.694</y-offset-m>
 				<z-offset-m type="double" archive="y">0.45</z-offset-m>
@@ -1358,24 +1699,96 @@
 			</config>
 		</view>
 
+		<view n="3">
+			<enabled type="bool" archive="y">false</enabled>
+		</view>
+
+		<view n="4">
+			<enabled type="bool" archive="y">false</enabled>
+		</view>
+
+		<view n="101">
+			<name>Left Panel View</name>
+			<type>lookfrom</type>
+			<internal type="bool" archive="y">true</internal>
+			<config>
+				<from-model type="bool">true</from-model>
+				<from-model-idx type="int">0</from-model-idx>
+				<x-offset-m type="double" archive="y">0.0</x-offset-m>
+				<y-offset-m type="double" archive="y">19.694</y-offset-m>
+				<z-offset-m type="double" archive="y">0.45</z-offset-m>
+				<pitch-offset-deg type="double">-3.0</pitch-offset-deg>
+				<heading-offset-deg type="double">51.0</heading-offset-deg>
+				<default-field-of-view-deg type="double">97</default-field-of-view-deg>
+			</config>
+		</view>
+
+		<view n="102">
+			<name>Right Panel View</name>
+			<type>lookfrom</type>
+			<internal type="bool" archive="y">true</internal>
+			<config>
+				<from-model type="bool">true</from-model>
+				<from-model-idx type="int">0</from-model-idx>
+				<x-offset-m type="double" archive="y">0.0</x-offset-m>
+				<y-offset-m type="double" archive="y">19.694</y-offset-m>
+				<z-offset-m type="double" archive="y">0.45</z-offset-m>
+				<pitch-offset-deg type="double">-10.0</pitch-offset-deg>
+				<heading-offset-deg type="double">310.0</heading-offset-deg>
+				<default-field-of-view-deg type="double">35</default-field-of-view-deg>
+			</config>
+		</view>
+
+		<view n="103">
+			<name>Vzor View</name>
+			<type>lookfrom</type>
+			<internal type="bool" archive="y">true</internal>
+			<config>
+				<from-model type="bool">true</from-model>
+				<from-model-idx type="int">0</from-model-idx>
+				<x-offset-m type="double" archive="y">0.0</x-offset-m>
+				<y-offset-m type="double" archive="y">19.694</y-offset-m>
+				<z-offset-m type="double" archive="y">0.45</z-offset-m>
+				<pitch-offset-deg type="double">0.0</pitch-offset-deg>
+				<heading-offset-deg type="double">0.0</heading-offset-deg>
+				<default-field-of-view-deg type="double">50</default-field-of-view-deg>
+			</config>
+		</view>
+
+		<view n="104">
+			<name>Main Panel View</name>
+			<type>lookfrom</type>
+			<internal type="bool" archive="y">true</internal>
+			<config>
+				<from-model type="bool">true</from-model>
+				<from-model-idx type="int">0</from-model-idx>
+				<x-offset-m type="double" archive="y">0.0</x-offset-m>
+				<y-offset-m type="double" archive="y">19.694</y-offset-m>
+				<z-offset-m type="double" archive="y">0.45</z-offset-m>
+				<pitch-offset-deg type="double">19.0</pitch-offset-deg>
+				<heading-offset-deg type="double">0.0</heading-offset-deg>
+				<default-field-of-view-deg type="double">47</default-field-of-view-deg>
+			</config>
+		</view>
+
 		<sound>
 			<audible>true</audible>
 			<path>Aircraft/Vostok-1/Sounds/Vostok-1-Sounds.xml</path>
 		</sound>
 
 		<model>
-			<path>Aircraft/Vostok-1/Models/Vostok-1-Model.xml</path>
-			<Vostok-1-model>
+			<path>Aircraft/Vostok-1/Models/Vostok-1.xml</path>
+			<Vostok-1>
 				<particles>
 					<enabled type="bool">true</enabled>
 				</particles>
-			</Vostok-1-model>
+			</Vostok-1>
 		</model>
 
 <!--
 
 		<submodels>
-			<serviceable type="float">1</serviceable>
+			<serviceable type="bool">1</serviceable>
 			<path>Aircraft/Vostok-1/Models/Vostok-1-Submodels.xml</path>
 		</submodels>
 
@@ -1419,25 +1832,6 @@
 	<input>
 		<keyboard>
 
-<!-- Test key On/Off
-			<key n="98">
-				<name>B</name>
-				<desc>Test key</desc>
-				<binding n="0">
-					<command>nasal</command>
-					<script>Vostok1.press_test_key()</script>
-				</binding>
-				<mod-up>
-					<binding>
-						<command>nasal</command>
-						<script>Vostok1.unpress_test_key()</script>
-					</binding>
-				</mod-up>
-			</key>
-
- -->
-
-<!-- Swap throttle lock -->
 			<key n="114">
 				<name>R</name>
 				<desc>Lock/Unlock thRottle handle</desc>
@@ -1447,20 +1841,137 @@
 				</binding>
 			</key>
 
-<!-- Stabilize key On/Off -->
 			<key n="99">
 				<name>C</name>
-				<desc>Control on/off</desc>
+				<desc>Control On/Off</desc>
 				<binding n="0">
 					<command>nasal</command>
-					<script>Vostok1.press_angle_hold_computer()</script>
+					<script>setprop("fdm/jsbsim/systems/controlhandle/button-input", 1)</script>
 				</binding>
 				<mod-up>
 					<binding>
 						<command>nasal</command>
-						<script>Vostok1.unpress_angle_hold_computer()</script>
+						<script>setprop("fdm/jsbsim/systems/controlhandle/button-input", 0)</script>
 					</binding>
 				</mod-up>
+			</key>
+
+			<key n="111">
+				<name>O</name>
+				<desc>Open/Close cOntrol panel</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>Vostok1.bitswap("fdm/jsbsim/systems/rightswitchpanel/cover-input")</script>
+				</binding>
+			</key>
+
+			<key n="115">
+				<name>S</name>
+				<desc>Ignite first and Second stage</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/one-two-ignition-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="70">
+				<name>Shift-F</name>
+				<desc>Drop First stage</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/one-drop-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="102">
+				<name>F</name>
+				<desc>Drop Fairings</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/fairings-drop-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="103">
+				<name>G</name>
+				<desc>Globus position/landing position</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>Vostok1.bitswap("fdm/jsbsim/systems/leftswitchpanel/globus-input")</script>
+				</binding>
+			</key>
+
+
+			<key n="83">
+				<name>Shift-S</name>
+				<desc>Drop Second stage</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/two-drop-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="104">
+				<name>H</name>
+				<desc>Ignite tHird stage</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/three-ignition-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="72">
+				<name>Shift-H</name>
+				<desc>Drop tHird stage</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/three-drop-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="117">
+				<name>U</name>
+				<desc>Ignite/Stop tdU engine</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/tdu-ignition-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="85">
+				<name>Shift-U</name>
+				<desc>Drop tdU</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/tdu-drop-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="98">
+				<name>B</name>
+				<desc>Extract Brake parachute</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/brake-parachute-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="109">
+				<name>M</name>
+				<desc>Extract Main parachute</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/main-parachute-input", 1)</script>
+				</binding>
+			</key>
+
+			<key n="108">
+				<name>L</name>
+				<desc>Extract Landing engine sensor</desc>
+				<binding n="0">
+					<command>nasal</command>
+					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/landing-engine-input", 1)</script>
+				</binding>
 			</key>
 
 		</keyboard>
@@ -1473,22 +1984,6 @@
 			<file>Aircraft/Vostok-1/Nasal/Stages.nas</file>
 			<script>start_stages();</script>
 		</stages>
-		<first_computer>
-			<file>Aircraft/Vostok-1/Nasal/First_Computer.nas</file>
-			<script>start_computer();</script>
-		</first_computer>
-		<second_computer>
-			<file>Aircraft/Vostok-1/Nasal/Second_Computer.nas</file>
-			<script>start_computer();</script>
-		</second_computer>
-		<third_computer>
-			<file>Aircraft/Vostok-1/Nasal/Third_Computer.nas</file>
-			<script>start_computer();</script>
-		</third_computer>
-		<tdu_computer>
-			<file>Aircraft/Vostok-1/Nasal/TDU_Computer.nas</file>
-			<script>start_computer();</script>
-		</tdu_computer>
 		<mainpanel>
 			<file>Aircraft/Vostok-1/Nasal/Main_Panel.nas</file>
 			<script>start_mainpanel();</script>

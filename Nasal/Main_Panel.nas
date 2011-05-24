@@ -268,6 +268,72 @@ clock_daytime_up = func
 	}
 }
 
+# set startup configuration
+orbit_end_init = func
+{
+	setprop("fdm/jsbsim/systems/orbitcounter/orbit", 0);
+}
+
+init_orbit = func
+{
+	var longitude = getprop("fdm/jsbsim/position/long-gc-deg");
+	if (longitude!=nil)
+	{
+		setprop("fdm/jsbsim/systems/orbitcounter/launchpad-longitude", longitude);
+	}
+	settimer(orbit_end_init, 3);
+}
+
+# Change main clock offset
+orbit_down = func
+{
+	var orbit = getprop("fdm/jsbsim/systems/orbitcounter/orbit");
+	var orbit_offset = getprop("fdm/jsbsim/systems/orbitcounter/orbit-offset");
+	if (
+		(orbit!=nil)
+		and (orbit_offset!=nil)
+	)
+	{
+		orbit=orbit-1;
+		if (orbit<0)
+		{
+			orbit=0;
+		}
+		orbit_offset=orbit_offset-1;
+		setprop("fdm/jsbsim/systems/orbitcounter/orbit-setted", orbit);
+		setprop("fdm/jsbsim/systems/orbitcounter/orbit-offset", orbit_offset);
+		setprop("fdm/jsbsim/systems/orbitcounter/orbit-set", 1);
+		settimer(end_orbit_set, 0.1);
+	}
+}
+
+orbit_up = func
+{
+	var orbit = getprop("fdm/jsbsim/systems/orbitcounter/orbit");
+	var orbit_offset = getprop("fdm/jsbsim/systems/orbitcounter/orbit-offset");
+	if (
+		(orbit!=nil)
+		and (orbit_offset!=nil)
+	)
+	{
+		orbit=orbit+1;
+		if (orbit>999)
+		{
+			orbit=0;
+		}
+		orbit_offset=orbit_offset+1;
+		setprop("fdm/jsbsim/systems/orbitcounter/orbit-setted", orbit);
+		setprop("fdm/jsbsim/systems/orbitcounter/orbit-offset", orbit_offset);
+		setprop("fdm/jsbsim/systems/orbitcounter/orbit-set", 1);
+		settimer(end_orbit_set, 0.1);
+	}
+}
+
+end_orbit_set = func
+{
+	setprop("fdm/jsbsim/systems/orbitcounter/orbit-set", 0);
+}
+
 #--------------------------------------------------------------------
 # Main panel
 
@@ -276,4 +342,5 @@ start_mainpanel= func
 {
 	init_chron();
 	chron ();
+	init_orbit();
 }

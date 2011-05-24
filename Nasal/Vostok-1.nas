@@ -90,26 +90,13 @@ init_positions=func
 }
 
 #--------------------------------------------------------------------
-#Angle hold computers
-press_angle_hold_computer=func
-	{
-		setprop("fdm/jsbsim/systems/controlhandle/button-input", 1);
-	}
+#Init views
+init_views=func
+{
+	setprop("sim/view[3]/enabled", 0);
+	setprop("sim/view[4]/enabled", 0);
+}
 
-unpress_angle_hold_computer=func
-	{
-		setprop("fdm/jsbsim/systems/controlhandle/button-input", 0);
-	}
-
-#--------------------------------------------------------------------
-#Test key
-press_test_key=func
-	{
-	}
-
-unpress_test_key=func
-	{
-	}
 
 #--------------------------------------------------------------------
 #Aircraft refuel
@@ -143,6 +130,14 @@ init_position=func
 		{
 			setprop("fdm/jsbsim/velocities/initial-orbital-speed-fps", -1);
 		}
+	}
+
+#--------------------------------------------------------------------
+#Init instrumentation
+init_instrumentation=func
+	{
+		setprop("fdm/jsbsim/systems/arthorizon/on", 1);
+		mainpanel.init_orbit();
 	}
 
 #--------------------------------------------------------------------
@@ -209,7 +204,9 @@ start_init=func
 
 init_craft=func
 	{
+		init_views();
 		init_position();
+		init_instrumentation();
 	}
 
 final_init=func

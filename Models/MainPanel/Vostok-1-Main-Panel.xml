@@ -20,6 +20,16 @@
 	<enable-hot type="bool">false</enable-hot>
 
 	<animation>
+		<type>select</type>
+		<condition>
+			<equals>
+				<property>sim/current-view/internal</property>
+				<value>true</value>
+			</equals>
+		</condition>
+	</animation>
+
+	<animation>
 		<type>material</type>
 		<object-name>MP_Bolts</object-name>
 		<object-name>MP_CBase</object-name>
@@ -475,17 +485,33 @@
 	<animation>
 		<type>rotate</type>
 		<object-name>MP_Globus</object-name>
-		<property>fdm/jsbsim/systems/orientationpanel/heading-modified-rad</property>
-		<factor>57.2957795130823208768</factor>
+		<property>fdm/jsbsim/systems/globus/pitch-deg</property>
+		<factor>1.0</factor>
 		<center>
+			<x-m>0.060904</x-m>
+			<y-m>-0.047362</y-m>
+			<z-m>0.0</z-m>
 		</center>
 		<axis>
-			<x1-m>-1.0</x1-m>
-			<y1-m>-0.047362</y1-m>
-			<z1-m>0.0</z1-m>
-			<x2-m>1.0</x2-m>
-			<y2-m>-0.047362</y2-m>
-			<z2-m>0.0</z2-m>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>MP_Globus</object-name>
+		<property>fdm/jsbsim/systems/globus/roll-deg</property>
+		<center>
+			<x-m>0.060904</x-m>
+			<y-m>-0.047362</y-m>
+			<z-m>0.0</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
 		</axis>
 	</animation>
 
@@ -520,6 +546,23 @@
 			<x>0</x>
 			<y>0</y>
 			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>MP_MIndicator</object-name>
+		<property>fdm/jsbsim/systems/globus/landing-or-position</property>
+		<factor>180.0</factor>
+		<center>
+			<x-m>0.077489</x-m>
+			<y-m>-0.068714</y-m>
+			<z-m>-0.061004</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
 		</axis>
 	</animation>
 
@@ -763,8 +806,6 @@
 	</animation>
 
 <!-- Clock inflight -->
-
-0.082613 -0.117882 0.102467
 
 	<animation>
 		<type>rotate</type>
@@ -1066,6 +1107,122 @@
 			<green-prop>fdm/jsbsim/light/green</green-prop>
 			<blue-prop>fdm/jsbsim/light/blue</blue-prop>
 		</emission>
+	</animation>
+
+	<!-- orbit indicator-->
+
+	<animation>
+		<type>rotate</type>
+		<object-name>MP_OCDiskThree</object-name>
+		<property>fdm/jsbsim/systems/orbitcounter/orbit-hundreds</property>
+		<factor>36</factor>
+		<center>
+			<x-m>0.066922</x-m>
+			<y-m>0.048723</y-m>
+			<z-m> -0.032163</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>MP_OCDiskTwo</object-name>
+		<property>fdm/jsbsim/systems/orbitcounter/orbit-tens</property>
+		<factor>36</factor>
+		<center>
+			<x-m>0.066922</x-m>
+			<y-m>0.048723</y-m>
+			<z-m> -0.032163</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>MP_OCDiskOne</object-name>
+		<property>fdm/jsbsim/systems/orbitcounter/orbit-ones</property>
+		<factor>36</factor>
+		<center>
+			<x-m>0.066922</x-m>
+			<y-m>0.048723</y-m>
+			<z-m> -0.032163</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>MP_OCUp</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>nasal</command>
+				<script>mainpanel.orbit_up()</script>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>nasal</command>
+				<script>mainpanel.orbit_up()</script>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>pick</type>
+		<object-name>MP_OCDown</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>nasal</command>
+				<script>mainpanel.orbit_down()</script>
+			</binding>
+		</action>
+		<action>
+			<button>1</button>
+			<repeatable>true</repeatable>
+			<interval-sec>0.2</interval-sec>
+			<binding>
+				<command>nasal</command>
+				<script>mainpanel.orbit_down()</script>
+			</binding>
+		</action>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>MP_OCVernier</object-name>
+		<property>fdm/jsbsim/systems/orbitcounter/orbit-offset</property>
+		<factor>15</factor>
+		<center>
+			<x-m>0.096878</x-m>
+			<y-m>0.064846</y-m>
+			<z-m>-0.049048</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
 	</animation>
 
 	<enable-hot type="bool">false</enable-hot>

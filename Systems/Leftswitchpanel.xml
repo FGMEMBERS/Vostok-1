@@ -36,6 +36,50 @@
 
 	<channel name="Leftswitchpanel">
 
+	<!-- Globus switch -->
+
+		<switch name="calculations/leftswitchpanel/globus-allowed">
+			<default value="systems/leftswitchpanel/globus-command"/>
+			<test logic="AND" value="systems/leftswitchpanel/globus-input">
+				systems/leftswitchpanel/serviceable eq 1
+			</test>
+			<output>systems/leftswitchpanel/globus-command</output>
+		</switch>
+
+		<kinematic name="calculations/leftswitchpanel/globus-pos">
+			<input>systems/leftswitchpanel/globus-command</input>
+			<traverse>
+			<setting>
+				<position>0</position>
+				<time>0</time>
+			</setting>
+			<setting>
+				<position>1</position>
+				<time>0.1</time>
+			</setting>
+			</traverse>
+			<output>systems/leftswitchpanel/globus-pos</output>
+		</kinematic>
+
+		<switch name="calculations/leftswitchpanel/globus-not-allowed">
+			<default value="systems/leftswitchpanel/globus-input"/>
+			<test logic="AND" value="systems/leftswitchpanel/globus-command">
+				systems/leftswitchpanel/serviceable eq 0
+			</test>
+			<output>systems/leftswitchpanel/globus-input</output>
+		</switch>
+
+		<switch name="calculations/leftswitchpanel/globus-switch">
+			<default value="systems/leftswitchpanel/globus-switch"/>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/globus-pos ge 0.5
+			</test>
+			<test logic="AND" value="0">
+				systems/leftswitchpanel/globus-pos lt 0.5
+			</test>
+			<output>systems/leftswitchpanel/globus-switch</output>
+		</switch>
+
 	<!-- Vzor switch -->
 
 		<switch name="calculations/leftswitchpanel/vzor-allowed">
@@ -323,6 +367,11 @@
 
 		<switch name="calculations/leftswitchpanel/click">
 			<default value="systems/sounds/click/on"/>
+			<test logic="AND" value="1">
+				systems/leftswitchpanel/globus-pos ge 0.25
+				systems/leftswitchpanel/globus-pos le 0.75
+				systems/sounds/click/on == 0
+			</test>
 			<test logic="AND" value="1">
 				systems/leftswitchpanel/vzor-pos ge 0.25
 				systems/leftswitchpanel/vzor-pos le 0.75

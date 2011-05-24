@@ -174,7 +174,7 @@
 			<z2-m>-0.047</z2-m>
 		</axis>
 	</animation>
-
+<!--
 	<animation>
 		<type>translate</type>
 		<object-name>SC_UUAPin1</object-name>
@@ -234,6 +234,7 @@
 			<z2-m>0.101</z2-m>
 		</axis>
 	</animation>
+-->
 
 	<animation>
 		<type>select</type>
@@ -282,6 +283,8 @@
 			<z2-m>-0.047</z2-m>
 		</axis>
 	</animation>
+
+<!--
 
 	<animation>
 		<type>translate</type>
@@ -342,6 +345,8 @@
 			<z2-m>0.101</z2-m>
 		</axis>
 	</animation>
+
+-->
 
 	<animation>
 		<type>select</type>

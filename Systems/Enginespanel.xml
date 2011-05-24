@@ -471,6 +471,224 @@
 			<output>systems/enginespanel/stage-three-thrust-tons</output>
 		</fcs_function>
 
+		<!-- Orbit parameters calculation -->
+
+		<fcs_function name="systems/enginespanel/semimajor-axis-length-ft">
+		<description>
+			This equation calculates the semimajor-axis length in feet. a = mu/(2*mu/r - v^2) 
+		</description>
+		<function>
+			<quotient>
+				<p> systems/enginespanel/gm </p>
+				<difference>
+					<quotient>
+						<product>
+							<v> 2.0 </v>
+							<p> systems/enginespanel/gm </p>
+						</product>
+						<p> position/radius-to-vehicle-ft </p>
+					</quotient>
+					<pow>
+						<p> velocities/eci-velocity-mag-fps </p>
+						<v> 2.0 </v>
+					</pow>
+				</difference>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/eccentricity">
+		<description>
+			This equation calculates eccentricity. e = sqrt (1 - [ r v cos(gamma) ]^2 / {a * mu})
+		</description>
+		<function>
+			<pow>
+				<difference>
+					<value> 1.0 </value>
+					<quotient>
+						<pow>
+							<product>
+								<property> position/radius-to-vehicle-ft </property>
+								<property> velocities/eci-velocity-mag-fps </property>
+								<cos>
+									<property> flight-path/gamma-rad </property>
+								</cos>
+							</product>
+							<value> 2.0 </value>
+						</pow>
+						<product>
+							<property> systems/enginespanel/semimajor-axis-length-ft </property>
+							<property> systems/enginespanel/gm </property>
+						</product>
+					</quotient>
+				</difference>
+				<value> 0.5 </value>
+			</pow>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/apoapsis-ft">
+		<function>
+			<difference>
+				<product>
+					<property>systems/enginespanel/semimajor-axis-length-ft</property>
+					<sum>
+						<value>1</value>
+						<property>systems/enginespanel/eccentricity</property>
+					</sum>
+				</product>
+				<property>ic/sea-level-radius-ft</property>
+			</difference>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/apoapsis-km">
+		<function>
+			<quotient>
+				<property>systems/enginespanel/apoapsis-ft</property>
+				<value>3280.83989501312335958005</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/apoapsis-indicated-km">
+		<function>
+			<table>
+				<independentVar lookup="row">systems/enginespanel/apoapsis-km</independentVar>
+				<tableData>
+					-1.0		0.0
+					0.0		0.0
+					999.0		999.0
+					1000.0		999.0
+				</tableData>
+			</table>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/apoapsis-hundreds-km">
+		<function>
+			<integer>	
+				<quotient>
+					<property>systems/enginespanel/apoapsis-indicated-km</property>
+					<value>100</value>
+				</quotient>
+			</integer>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/apoapsis-tens-km">
+		<function>
+			<integer>	
+				<product>
+					<fraction>
+						<quotient>
+							<property>systems/enginespanel/apoapsis-indicated-km</property>
+							<value>100</value>
+						</quotient>
+					</fraction>
+					<value>10</value>
+				</product>
+			</integer>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/apoapsis-ones-km">
+		<function>
+			<integer>	
+				<product>
+					<fraction>
+						<quotient>
+							<property>systems/enginespanel/apoapsis-indicated-km</property>
+							<value>10</value>
+						</quotient>
+					</fraction>
+					<value>10</value>
+				</product>
+			</integer>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/periapsis-ft">
+		<function>
+			<difference>
+				<product>
+					<property>systems/enginespanel/semimajor-axis-length-ft</property>
+					<difference>
+						<value>1</value>
+						<property>systems/enginespanel/eccentricity</property>
+					</difference>
+				</product>
+				<property>ic/sea-level-radius-ft</property>
+			</difference>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/periapsis-km">
+		<function>
+			<quotient>
+				<property>systems/enginespanel/periapsis-ft</property>
+				<value>3280.83989501312335958005</value>
+			</quotient>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/periapsis-indicated-km">
+		<function>
+			<table>
+				<independentVar lookup="row">systems/enginespanel/periapsis-km</independentVar>
+				<tableData>
+					-1.0		0.0
+					0.0		0.0
+					999.0		999.0
+					1000.0		999.0
+				</tableData>
+			</table>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/periapsis-hundreds-km">
+		<function>
+			<integer>	
+				<quotient>
+					<property>systems/enginespanel/periapsis-indicated-km</property>
+					<value>100</value>
+				</quotient>
+			</integer>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/periapsis-tens-km">
+		<function>
+			<integer>	
+				<product>
+					<fraction>
+						<quotient>
+							<property>systems/enginespanel/periapsis-indicated-km</property>
+							<value>100</value>
+						</quotient>
+					</fraction>
+					<value>10</value>
+				</product>
+			</integer>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/enginespanel/periapsis-ones-km">
+		<function>
+			<integer>	
+				<product>
+					<fraction>
+						<quotient>
+							<property>systems/enginespanel/periapsis-indicated-km</property>
+							<value>10</value>
+						</quotient>
+					</fraction>
+					<value>10</value>
+				</product>
+			</integer>
+		</function>
+		</fcs_function>
+
 	</channel>
 
 </system>
