@@ -13,6 +13,9 @@
 		<description> Enginespanel </description>
 	</fileheader>
 
+	<!-- Required input from FlightGear: -->
+	<property>/position/sea-level-radius-ft</property>
+
 <!--	That must be aded to set file
 
 	<fdm>
@@ -537,7 +540,7 @@
 						<property>systems/enginespanel/eccentricity</property>
 					</sum>
 				</product>
-				<property>ic/sea-level-radius-ft</property>
+				<property>/position/sea-level-radius-ft</property>
 			</difference>
 		</function>
 		</fcs_function>
@@ -618,7 +621,7 @@
 						<property>systems/enginespanel/eccentricity</property>
 					</difference>
 				</product>
-				<property>ic/sea-level-radius-ft</property>
+				<property>/position/sea-level-radius-ft</property>
 			</difference>
 		</function>
 		</fcs_function>
