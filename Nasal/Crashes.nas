@@ -7,11 +7,11 @@
 #crashes.init_crashes(); gotta be called on manual aircraft restart
 
 # helper 
-end_crashes = func 
+var end_crashes = func 
 	{
 	}
 
-crashes = func 
+var crashes = func 
 	{
 		var in_service = getprop("fdm/jsbsim/systems/crashes/serviceable" );
 		if (in_service == nil)
@@ -34,10 +34,10 @@ crashes = func
 		var altitude_ground=getprop("fdm/jsbsim/position/h-agl-ft");
 		var qbar=getprop("fdm/jsbsim/aero/qbar-modified-kgm2");
 		var maximum_altitude_ft=getprop("fdm/jsbsim/aero/maximum-altitude-ft");
-		p_rad_sec=getprop("fdm/jsbsim/velocities/p-aero-rad_sec");
-		q_rad_sec=getprop("fdm/jsbsim/velocities/q-aero-rad_sec");
-		r_rad_sec=getprop("fdm/jsbsim/velocities/r-aero-rad_sec");
-		ground_contact=getprop("fdm/jsbsim/systems/spacecraft/ground-contact");
+		var p_rad_sec=getprop("fdm/jsbsim/velocities/p-aero-rad_sec");
+		var q_rad_sec=getprop("fdm/jsbsim/velocities/q-aero-rad_sec");
+		var r_rad_sec=getprop("fdm/jsbsim/velocities/r-aero-rad_sec");
+		var ground_contact=getprop("fdm/jsbsim/systems/spacecraft/ground-contact");
 
 		var stage_active=[0,0,0,0,0,0];
 		stage_active[0]=getprop("fdm/jsbsim/stages/unit[0]/active");
@@ -444,7 +444,7 @@ crashes = func
 		settimer(crashes, repeat_time);
 	}
 
-crash=func(crash_message, crash_russian_message)
+var crash=func(crash_message, crash_russian_message)
 	{
 
 		var crashed=getprop("fdm/jsbsim/systems/crashes/crashed");
@@ -464,7 +464,7 @@ crash=func(crash_message, crash_russian_message)
 		}
 	}
 
-simulation_pause=func
+var simulation_pause=func
 	{
 		setprop("sim/replay/disable", 1);
 		setprop("sim/freeze/clock", 1);
@@ -472,7 +472,7 @@ simulation_pause=func
 		setprop("fdm/jsbsim/systems/crashes/crashed", 1);
 	}
 
-breakage=func(breakage_message, breakage_russian_message)
+var breakage=func(breakage_message, breakage_russian_message)
 	{
 
 		var window=screen.window.new();
@@ -486,7 +486,7 @@ breakage=func(breakage_message, breakage_russian_message)
 	}
 
 # set startup configuration
-init_crashes=func
+var init_crashes=func
 	{
 		setprop("fdm/jsbsim/systems/crashes/serviceable", 1);
 		setprop("fdm/jsbsim/systems/crashes/crashed", 0);
@@ -494,7 +494,7 @@ init_crashes=func
 	}
 
 # set startup configuration
-start_crashes=func
+var start_crashes=func
 {
 	init_crashes();
 	var time_elapsed=getprop("fdm/jsbsim/simulation/sim-time-sec");

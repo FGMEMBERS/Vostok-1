@@ -6,10 +6,10 @@
 # Sound timer
 
 # helper 
-stop_sounds = func {
+var stop_sounds = func {
 }
 
-sounds = func 
+var sounds = func 
 	{
 		# inflight time
 		var time = getprop("fdm/jsbsim/simulation/sim-time-sec");
@@ -100,18 +100,18 @@ sounds = func
 		settimer(sounds, 0.0);
 	}
 
-crack_sound = func
+var crack_sound = func
 	{
 		setprop("fdm/jsbsim/systems/sounds/g-cracking/on", 1);
 		settimer(end_crack_sound, 1);
 	}
 
-end_crack_sound = func
+var end_crack_sound = func
 	{
 		setprop("fdm/jsbsim/systems/sounds/g-cracking/on", 0);
 	}
 
 # set startup configuration
-init_sounds = func
+var init_sounds = func
 {
 }

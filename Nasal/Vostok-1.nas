@@ -6,7 +6,7 @@
 
 #--------------------------------------------------------------------
 #Common bit swap function
-bitswap = func (bit_name)
+var bitswap = func (bit_name)
 	{
 		set_pos=getprop(bit_name);
 		if (set_pos==nil)
@@ -30,7 +30,7 @@ bitswap = func (bit_name)
 
 #--------------------------------------------------------------------
 #Init FDM
-init_fdm=func
+var init_fdm=func
 {
 	setprop("fdm/jsbsim/fcs/throttle-cmd-norm", 0);
 	setprop("fdm/jsbsim/fcs/throttle-pos-norm", 0);
@@ -61,7 +61,7 @@ init_fdm();
 
 #--------------------------------------------------------------------
 #Init Controls
-init_controls=func
+var init_controls=func
 {
 	setprop("controls/gear/brake-parking", 0);
 	setprop("controls/gear/gear-down", 1);
@@ -75,7 +75,7 @@ init_controls();
 
 #--------------------------------------------------------------------
 #Init positions
-init_positions=func
+var init_positions=func
 {
 	setprop("surface-positions/elevator-pos-norm", 0);
 	setprop("surface-positions/left-aileron-pos-norm", 0);
@@ -91,7 +91,7 @@ init_positions=func
 
 #--------------------------------------------------------------------
 #Init views
-init_views=func
+var init_views=func
 {
 	setprop("sim/view[3]/enabled", 0);
 	setprop("sim/view[4]/enabled", 0);
@@ -100,15 +100,15 @@ init_views=func
 
 #--------------------------------------------------------------------
 #Aircraft refuel
-aircraft_start_refuel=func
+var aircraft_start_refuel=func
 	{
 	}
 
-aircraft_end_refuel=func
+var aircraft_end_refuel=func
 	{
 	}
 
-aircraft_refuel=func
+var aircraft_refuel=func
 	{
 		aircraft_start_refuel();
 		settimer(aircraft_end_refuel, 1);
@@ -116,10 +116,10 @@ aircraft_refuel=func
 
 #--------------------------------------------------------------------
 #Init position
-init_position=func
+var init_position=func
 	{
 		#Get startup orbital speed
-		initial_orbital_speed=getprop("fdm/jsbsim/velocities/eci-velocity-mag-fps");
+		var initial_orbital_speed=getprop("fdm/jsbsim/velocities/eci-velocity-mag-fps");
 		if (
 			(initial_orbital_speed!=nil)
 		)
@@ -134,7 +134,7 @@ init_position=func
 
 #--------------------------------------------------------------------
 #Init instrumentation
-init_instrumentation=func
+var init_instrumentation=func
 	{
 		setprop("fdm/jsbsim/systems/arthorizon/on", 1);
 		mainpanel.init_orbit();
@@ -142,7 +142,7 @@ init_instrumentation=func
 
 #--------------------------------------------------------------------
 #Aircraft restart
-end_aircraftrestart=func
+var end_aircraftrestart=func
 	{
 		init_position();
 		aircraft_end_refuel();
@@ -165,7 +165,7 @@ end_aircraftrestart=func
 		setprop("sim/menubar/default/menu[1]/item[8]/enabled", 1);
 	}
 
-aircraft_restart=func
+var aircraft_restart=func
 	{
 		#Lock replay
 		setprop("sim/replay/disable", 1);
@@ -192,7 +192,7 @@ setprop("sim/freeze/state-saved/master", 0);
 
 #Init aircraft
 #--------------------------------------------------------------------
-start_init=func
+var start_init=func
 	{
 		setprop("fdm/jsbsim/init/on", 1);
 		setprop("fdm/jsbsim/init/finally-initialized", 0);
@@ -202,17 +202,17 @@ start_init=func
 		final_init();
 	}
 
-init_craft=func
+var init_craft=func
 	{
 		init_views();
 		init_position();
 		init_instrumentation();
 	}
 
-final_init=func
+var final_init=func
 	{
-		initialization=getprop("fdm/jsbsim/init/on");
-		time_elapsed=getprop("fdm/jsbsim/simulation/sim-time-sec");
+		var initialization=getprop("fdm/jsbsim/init/on");
+		var time_elapsed=getprop("fdm/jsbsim/simulation/sim-time-sec");
 		if (
 			(initialization!=nil)
 			and

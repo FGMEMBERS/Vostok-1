@@ -6,10 +6,10 @@
 # Chronometer
 
 # helper 
-stop_chron = func {
+var stop_chron = func {
 }
 
-chron = func 
+var chron = func 
 	{
 		# check power
 		var in_service = getprop("fdm/jsbsim/systems/mainpanel/serviceable" );
@@ -82,12 +82,12 @@ chron = func
 	}
 
 # set startup configuration
-init_chron = func
+var init_chron = func
 {
 }
 
 # Change main clock offset
-clock_main_down = func
+var clock_main_down = func
 {
 	offset_sec = getprop("instrumentation/clock/offset-sec");
 	vernier_angle = getprop("fdm/jsbsim/systems/mainpanel/clock-main-vernier-angle");
@@ -112,7 +112,7 @@ clock_main_down = func
 	}
 }
 
-clock_main_up = func
+var clock_main_up = func
 {	offset_sec = getprop("instrumentation/clock/offset-sec");
 	vernier_angle = getprop("fdm/jsbsim/systems/mainpanel/clock-main-vernier-angle");
 	vernier_switch = getprop("fdm/jsbsim/systems/mainpanel/clock-main-vernier-switch");
@@ -137,7 +137,7 @@ clock_main_up = func
 }
 
 # Change inflight clock offset
-clock_inflight_down = func
+var clock_inflight_down = func
 {
 	sec = getprop("fdm/jsbsim/systems/mainpanel/clock-inflight-sec");
 	vernier_angle = getprop("fdm/jsbsim/systems/mainpanel/clock-inflight-vernier-angle");
@@ -166,7 +166,7 @@ clock_inflight_down = func
 	}
 }
 
-clock_inflight_up = func
+var clock_inflight_up = func
 {
 	sec = getprop("fdm/jsbsim/systems/mainpanel/clock-inflight-sec");
 	vernier_angle = getprop("fdm/jsbsim/systems/mainpanel/clock-inflight-vernier-angle");
@@ -196,7 +196,7 @@ clock_inflight_up = func
 }
 
 # Change daytime clock offset
-clock_daytime_down = func
+var clock_daytime_down = func
 {
 	sec = getprop("fdm/jsbsim/systems/mainpanel/clock-daytime-sec");
 	disk_sec = getprop("fdm/jsbsim/systems/mainpanel/clock-daytime-disk-sec");
@@ -232,7 +232,7 @@ clock_daytime_down = func
 	}
 }
 
-clock_daytime_up = func
+var clock_daytime_up = func
 {
 	sec = getprop("fdm/jsbsim/systems/mainpanel/clock-daytime-sec");
 	disk_sec = getprop("fdm/jsbsim/systems/mainpanel/clock-daytime-disk-sec");
@@ -269,12 +269,12 @@ clock_daytime_up = func
 }
 
 # set startup configuration
-orbit_end_init = func
+var orbit_end_init = func
 {
 	setprop("fdm/jsbsim/systems/orbitcounter/orbit", 0);
 }
 
-init_orbit = func
+var init_orbit = func
 {
 	var longitude = getprop("fdm/jsbsim/position/long-gc-deg");
 	if (longitude!=nil)
@@ -285,7 +285,7 @@ init_orbit = func
 }
 
 # Change main clock offset
-orbit_down = func
+var orbit_down = func
 {
 	var orbit = getprop("fdm/jsbsim/systems/orbitcounter/orbit");
 	var orbit_offset = getprop("fdm/jsbsim/systems/orbitcounter/orbit-offset");
@@ -307,7 +307,7 @@ orbit_down = func
 	}
 }
 
-orbit_up = func
+var orbit_up = func
 {
 	var orbit = getprop("fdm/jsbsim/systems/orbitcounter/orbit");
 	var orbit_offset = getprop("fdm/jsbsim/systems/orbitcounter/orbit-offset");
@@ -329,7 +329,7 @@ orbit_up = func
 	}
 }
 
-end_orbit_set = func
+var end_orbit_set = func
 {
 	setprop("fdm/jsbsim/systems/orbitcounter/orbit-set", 0);
 }
@@ -338,7 +338,7 @@ end_orbit_set = func
 # Main panel
 
 # start main panel process first time
-start_mainpanel= func
+var start_mainpanel= func
 {
 	init_chron();
 	chron ();

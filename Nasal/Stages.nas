@@ -8,11 +8,11 @@
 #stages.init_stages(); gotta be called on manual aircraft restart
 
 # helper 
-end_stages = func 
+var end_stages = func 
 	{
 	}
 
-stages = func 
+var stages = func 
 	{
 		var in_service = getprop("fdm/jsbsim/stages/serviceable" );
 		if (in_service == nil)
@@ -623,25 +623,25 @@ stages = func
 	}
 
 					#Inits and separations
-start_change=func
+var start_change=func
 	{
 		setprop("fdm/jsbsim/stages/change", 1);
 	}
 
-end_change=func
+var end_change=func
 	{
 		setprop("fdm/jsbsim/stages/change", 0);
 	}
 
 					#First stage
 
-first_stage_stop_engine=func
+var first_stage_stop_engine=func
 	{
 		#Turn off controlled dignition
 		setprop("fdm/jsbsim/stages/unit[0]/ignited", 0);
 	}
 
-first_stage_add_fuel=func
+var first_stage_add_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[0]/level-gal_us", 9264.7);
@@ -677,7 +677,7 @@ first_stage_add_fuel=func
 		setprop("consumables/fuel/tank[7]/level-lbs", 24724.00);
 	}
 
-first_stage_add_weights=func
+var first_stage_add_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[0]", 2623.0);
@@ -690,7 +690,7 @@ first_stage_add_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[7]", 5643.0);
 	}
 
-first_stage_allow_engines=func
+var first_stage_allow_engines=func
 	{
 		#Send jsb ignition comand to engines
 		setprop("fdm/jsbsim/propulsion/engine[0]/set-running", 1);
@@ -703,7 +703,7 @@ first_stage_allow_engines=func
 		setprop("fdm/jsbsim/propulsion/engine[7]/set-running", 1);
 	}
 
-first_stage_ground=func
+var first_stage_ground=func
 	{
 		#Contact ground points
 		setprop("controls/gear/gear-down", 1);
@@ -714,13 +714,13 @@ first_stage_ground=func
 		setprop("fdm/jsbsim/gear/unit[3]/pos-norm", 1);
 	}
 
-first_stage_activate=func
+var first_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[0]/active", 1);
 	}
 
-first_stage_drop_fuel=func
+var first_stage_drop_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[0]/level-gal_us", 0.1);
@@ -756,7 +756,7 @@ first_stage_drop_fuel=func
 		setprop("consumables/fuel/tank[7]/level-lbs", 0.1);
 	}
 
-first_stage_drop_weights=func
+var first_stage_drop_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[0]", 0);
@@ -769,7 +769,7 @@ first_stage_drop_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[7]", 0);
 	}
 
-first_stage_deground=func
+var first_stage_deground=func
 	{
 		#Contact ground points
 		setprop("controls/gear/gear-down", 0);
@@ -780,13 +780,13 @@ first_stage_deground=func
 		setprop("fdm/jsbsim/gear/unit[3]/pos-norm", 0);
 	}
 
-first_stage_deactivate=func
+var first_stage_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[0]/active", 0);
 	}
 
-first_stage_init=func
+var first_stage_init=func
 	{
 		first_stage_stop_engine();
 		first_stage_ground();
@@ -796,7 +796,7 @@ first_stage_init=func
 		first_stage_activate();
 	}
 
-first_stage_separate=func
+var first_stage_separate=func
 	{
 		first_stage_stop_engine();
 		first_stage_deground();
@@ -807,45 +807,45 @@ first_stage_separate=func
 
 					#Fairings
 
-fairings_stop_engine=func
+var fairings_stop_engine=func
 	{
 		setprop("fdm/jsbsim/stages/unit[1]/ignited", 0);
 	}
 
-fairings_add_weights=func
+var fairings_add_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[14]", 716.50);
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[15]", 716.50);
 	}
 
-fairings_activate=func
+var fairings_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[1]/active", 1);
 	}
 
-fairings_drop_weights=func
+var fairings_drop_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[14]", 0);
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[15]", 0);
 	}
 
-fairings_deactivate=func
+var fairings_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[1]/active", 0);
 	}
 
-fairings_init=func
+var fairings_init=func
 	{
 		fairings_stop_engine();
 		fairings_add_weights();
 		fairings_activate();
 	}
 
-fairings_separate=func
+var fairings_separate=func
 	{
 		fairings_stop_engine();
 		fairings_drop_weights();
@@ -854,13 +854,13 @@ fairings_separate=func
 
 					#Second stage
 
-second_stage_stop_engine=func
+var second_stage_stop_engine=func
 	{
 		#Turn off controlled dignition
 		setprop("fdm/jsbsim/stages/unit[2]/ignited", 0);
 	}
 
-second_stage_add_fuel=func
+var second_stage_add_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[8]/level-gal_us", 10853.5);
@@ -880,7 +880,7 @@ second_stage_add_fuel=func
 		setprop("consumables/fuel/tank[11]/level-lbs", 29359.00);
 	}
 
-second_stage_add_weights=func
+var second_stage_add_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[8]", 1408.0);
@@ -891,7 +891,7 @@ second_stage_add_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[13]", 13828.0);
 	}
 
-second_stage_allow_engines=func
+var second_stage_allow_engines=func
 	{
 		#Send jsb ignition comand to engines
 		setprop("fdm/jsbsim/propulsion/engine[8]/set-running", 1);
@@ -902,13 +902,13 @@ second_stage_allow_engines=func
 		setprop("fdm/jsbsim/propulsion/engine[13]/set-running", 1);
 	}
 
-second_stage_activate=func
+var second_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[2]/active", 1);
 	}
 
-second_stage_drop_fuel=func
+var second_stage_drop_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[8]/level-gal_us", 0.1);
@@ -928,7 +928,7 @@ second_stage_drop_fuel=func
 		setprop("consumables/fuel/tank[11]/level-lbs", 0.1);
 	}
 
-second_stage_drop_weights=func
+var second_stage_drop_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[8]", 0);
@@ -939,13 +939,13 @@ second_stage_drop_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[13]", 0);
 	}
 
-second_stage_deactivate=func
+var second_stage_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[2]/active", 0);
 	}
 
-second_stage_init=func
+var second_stage_init=func
 	{
 		second_stage_stop_engine();
 		second_stage_add_fuel();
@@ -954,7 +954,7 @@ second_stage_init=func
 		second_stage_activate();
 	}
 
-second_stage_separate=func
+var second_stage_separate=func
 	{
 		second_stage_stop_engine();
 		second_stage_drop_fuel();
@@ -964,13 +964,13 @@ second_stage_separate=func
 
 					#Third stage
 
-third_stage_stop_engine=func
+var third_stage_stop_engine=func
 	{
 		#Turn off controlled dignition
 		setprop("fdm/jsbsim/stages/unit[3]/ignited", 0);
 	}
 
-third_stage_add_fuel=func
+var third_stage_add_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[12]/level-gal_us", 731.5);
@@ -990,7 +990,7 @@ third_stage_add_fuel=func
 		setprop("consumables/fuel/tank[15]/level-lbs", 2204.00);
 	}
 
-third_stage_add_weights=func
+var third_stage_add_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[16]", 133.37);
@@ -1003,7 +1003,7 @@ third_stage_add_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[23]", 2711.68);
 	}
 
-third_stage_allow_engines=func
+var third_stage_allow_engines=func
 	{
 		#Send jsb ignition comand to engines
 		setprop("fdm/jsbsim/propulsion/engine[14]/set-running", 1);
@@ -1017,13 +1017,13 @@ third_stage_allow_engines=func
 		setprop("fdm/jsbsim/propulsion/engine[22]/set-running", 1);
 	}
 
-third_stage_activate=func
+var third_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[3]/active", 1);
 	}
 
-third_stage_drop_fuel=func
+var third_stage_drop_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[12]/level-gal_us", 0.1);
@@ -1043,7 +1043,7 @@ third_stage_drop_fuel=func
 		setprop("consumables/fuel/tank[15]/level-lbs", 0.1);
 	}
 
-third_stage_drop_weights=func
+var third_stage_drop_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[16]", 0);
@@ -1056,13 +1056,13 @@ third_stage_drop_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[23]", 0);
 	}
 
-third_stage_deactivate=func
+var third_stage_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[3]/active", 0);
 	}
 
-third_stage_init=func
+var third_stage_init=func
 	{
 		third_stage_stop_engine();
 		third_stage_add_fuel();
@@ -1071,7 +1071,7 @@ third_stage_init=func
 		third_stage_activate();
 	}
 
-third_stage_separate=func
+var third_stage_separate=func
 	{
 		third_stage_stop_engine();
 		third_stage_drop_fuel();
@@ -1081,14 +1081,14 @@ third_stage_separate=func
 
 					#TDU stage
 
-tdu_stage_stop_engine=func
+var tdu_stage_stop_engine=func
 	{
 		#Turn off controlled dignition
 		setprop("fdm/jsbsim/stages/unit[4]/ignited", 0);
 		setprop("fdm/jsbsim/stages/unit[4]/maneur-ignited", 0);
 	}
 
-tdu_stage_add_fuel=func
+var tdu_stage_add_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[16]/level-gal_us", 18.105);
@@ -1138,7 +1138,7 @@ tdu_stage_add_fuel=func
 		setprop("consumables/fuel/tank[25]/selected", 1.0);
 	}
 
-tdu_stage_add_weights=func
+var tdu_stage_add_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[24]", 108.02);
@@ -1149,7 +1149,7 @@ tdu_stage_add_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[29]", 2711.68);
 	}
 
-tdu_stage_allow_engines=func
+var tdu_stage_allow_engines=func
 	{
 		#Send jsb ignition comand to engines
 		setprop("fdm/jsbsim/propulsion/engine[23]/set-running", 1);
@@ -1171,12 +1171,12 @@ tdu_stage_allow_engines=func
 		setprop("fdm/jsbsim/propulsion/engine[39]/set-running", 1);
 	}
 
-tdu_stage_start_maneur_engines=func
+var tdu_stage_start_maneur_engines=func
 	{
 		setprop("fdm/jsbsim/stages/unit[4]/maneur-ignited", 1);
 	}
 
-tdu_stage_activate=func
+var tdu_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[4]/activated", 0);
@@ -1191,7 +1191,7 @@ tdu_stage_activate=func
 		setprop("fdm/jsbsim/stages/unit[4]/active", 1);
 	}
 
-tdu_stage_drop_fuel=func
+var tdu_stage_drop_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[16]/level-gal_us", 0.1);
@@ -1235,7 +1235,7 @@ tdu_stage_drop_fuel=func
 		setprop("consumables/fuel/tank[25]/level-lbs", 0.1);
 	}
 
-tdu_stage_drop_weights=func
+var tdu_stage_drop_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[24]", 0);
@@ -1246,7 +1246,7 @@ tdu_stage_drop_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[29]", 0);
 	}
 
-tdu_stage_deactivate=func
+var tdu_stage_deactivate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[4]/activated", 0);
@@ -1261,7 +1261,7 @@ tdu_stage_deactivate=func
 		setprop("fdm/jsbsim/stages/unit[4]/active", 0);
 	}
 
-tdu_stage_init=func
+var tdu_stage_init=func
 	{
 		tdu_stage_stop_engine();
 		tdu_stage_add_fuel();
@@ -1271,7 +1271,7 @@ tdu_stage_init=func
 		tdu_stage_activate();
 	}
 
-tdu_stage_separate=func
+var tdu_stage_separate=func
 	{
 		tdu_stage_stop_engine();
 		tdu_stage_drop_fuel();
@@ -1281,13 +1281,13 @@ tdu_stage_separate=func
 
 					#Spacecraft
 
-spacecraft_stop_engine=func
+var spacecraft_stop_engine=func
 	{
 		#Turn off controlled dignition
 		setprop("fdm/jsbsim/stages/unit[5]/ignited", 0);
 	}
 
-spacecraft_add_fuel=func
+var spacecraft_add_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[26]/level-gal_us", 1.325);
@@ -1299,7 +1299,7 @@ spacecraft_add_fuel=func
 		setprop("consumables/fuel/tank[27]/level-lbs", 9.956);
 	}
 
-spacecraft_add_weights=func
+var spacecraft_add_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[30]", 2711.68);
@@ -1307,13 +1307,13 @@ spacecraft_add_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[32]", 1355.84);
 	}
 
-spacecraft_allow_engines=func
+var spacecraft_allow_engines=func
 	{
 		#Send jsb ignition comand to engines
 		setprop("fdm/jsbsim/propulsion/engine[40]/set-running", 1);
 	}
 
-spacecraft_additional_activation=func
+var spacecraft_additional_activation=func
 	{
 		setprop("fdm/jsbsim/systems/spacecraft/chute-cover-dropped", 0);
 
@@ -1332,14 +1332,14 @@ spacecraft_additional_activation=func
 		setprop("fdm/jsbsim/systems/spacecraft/ground-contact", 0);
 	}
 
-spacecraft_activate=func
+var spacecraft_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[5]/activated", 0);
 		setprop("fdm/jsbsim/stages/unit[5]/active", 1);
 }
 
-spacecraft_drop_fuel=func
+var spacecraft_drop_fuel=func
 	{
 		#Tanks
 		setprop("consumables/fuel/tank[26]/level-gal_us", 0.1);
@@ -1351,7 +1351,7 @@ spacecraft_drop_fuel=func
 		setprop("consumables/fuel/tank[27]/level-lbs", 0.1);
 	}
 
-spacecraft_drop_weights=func
+var spacecraft_drop_weights=func
 	{
 		#Weights
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[30]", 0);
@@ -1359,14 +1359,14 @@ spacecraft_drop_weights=func
 		setprop("fdm/jsbsim/inertia/pointmass-weight-lbs[32]", 0);
 	}
 
-spacecraft_deactivate=func
+var spacecraft_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[5]/active", 0);
 		setprop("fdm/jsbsim/stages/unit[5]/activated", 0);
 	}
 
-spacecraft_init=func
+var spacecraft_init=func
 	{
 		spacecraft_stop_engine();
 		spacecraft_add_fuel();
@@ -1376,7 +1376,7 @@ spacecraft_init=func
 		spacecraft_activate();
 	}
 
-spacecraft_separate=func
+var spacecraft_separate=func
 	{
 		spacecraft_stop_engine();
 		spacecraft_drop_fuel();
@@ -1388,7 +1388,7 @@ spacecraft_separate=func
 
 					#First stage drop
 
-start_first_stage_drop=func
+var start_first_stage_drop=func
 	{
 		start_change();
 		first_stage_stop_engine();
@@ -1396,7 +1396,7 @@ start_first_stage_drop=func
 		settimer(first_stage_drop_phase_one, 0.3);
 	}
 
-first_stage_drop_phase_one=func
+var first_stage_drop_phase_one=func
 	{
 		first_stage_drop_fuel();
 		first_stage_drop_weights();
@@ -1404,7 +1404,7 @@ first_stage_drop_phase_one=func
 		settimer(first_stage_drop_phase_two, 2.0);
 	}
 
-first_stage_drop_phase_two=func
+var first_stage_drop_phase_two=func
 	{
 		first_stage_deactivate();
 
@@ -1444,7 +1444,7 @@ first_stage_drop_phase_two=func
 		settimer(end_first_stage_drop, 2);
 	}
 
-end_first_stage_drop=func
+var end_first_stage_drop=func
 	{
 		end_change();
 
@@ -1460,21 +1460,21 @@ end_first_stage_drop=func
 
 					#Fairings drop
 
-start_fairings_drop=func
+var start_fairings_drop=func
 	{
 		start_change();
 		fairings_stop_engine();
 		settimer(fairings_drop_phase_one, 0.3);
 	}
 
-fairings_drop_phase_one=func
+var fairings_drop_phase_one=func
 	{
 		fairings_drop_weights();
 		setprop("fdm/jsbsim/stages/unit[1]/drop", 1);
 		settimer(fairings_drop_phase_two, 2.0);
 	}
 
-fairings_drop_phase_two=func
+var fairings_drop_phase_two=func
 	{
 		fairings_deactivate();
 		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
@@ -1505,7 +1505,7 @@ fairings_drop_phase_two=func
 		settimer(end_fairings_drop, 2);
 	}
 
-end_fairings_drop=func
+var end_fairings_drop=func
 	{
 		setprop("ai/ballistic-forces/force[4]/force-lb", 0);
 		setprop("ai/ballistic-forces/force[5]/force-lb", 0);
@@ -1517,7 +1517,7 @@ end_fairings_drop=func
 
 					#Second stage drop
 
-start_second_stage_drop=func
+var start_second_stage_drop=func
 	{
 		start_change();
 		second_stage_stop_engine();
@@ -1525,14 +1525,14 @@ start_second_stage_drop=func
 		settimer(second_stage_drop_phase_one, 0.3);
 	}
 
-second_stage_drop_phase_one=func
+var second_stage_drop_phase_one=func
 	{
 		second_stage_drop_fuel();
 		third_stage_add_fuel();
 		settimer(second_stage_drop_phase_two, 0.3);
 	}
 
-second_stage_drop_phase_two=func
+var second_stage_drop_phase_two=func
 	{
 		second_stage_drop_weights();
 		third_stage_add_weights();
@@ -1550,7 +1550,7 @@ second_stage_drop_phase_two=func
 		settimer(second_stage_drop_phase_three, 2.0);
 	}
 
-second_stage_drop_phase_three=func
+var second_stage_drop_phase_three=func
 	{
 
 		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
@@ -1578,7 +1578,7 @@ second_stage_drop_phase_three=func
 	}
 
 
-end_second_stage_drop=func
+var end_second_stage_drop=func
 	{
 		setprop("ai/ballistic-forces/force[6]/force-lb", 0);
 		setprop("fdm/jsbsim/stages/unit[2]/dropped", 1);
@@ -1588,7 +1588,7 @@ end_second_stage_drop=func
 
 					#Third stage drop
 
-start_third_stage_drop=func
+var start_third_stage_drop=func
 	{
 		start_change();
 		third_stage_stop_engine();
@@ -1596,14 +1596,14 @@ start_third_stage_drop=func
 		settimer(third_stage_drop_phase_one, 0.3);
 	}
 
-third_stage_drop_phase_one=func
+var third_stage_drop_phase_one=func
 	{
 		third_stage_drop_fuel();
 		tdu_stage_add_fuel();
 		settimer(third_stage_drop_phase_two, 0.3);
 	}
 
-third_stage_drop_phase_two=func
+var third_stage_drop_phase_two=func
 	{
 		third_stage_drop_weights();
 		tdu_stage_add_weights();
@@ -1619,7 +1619,7 @@ third_stage_drop_phase_two=func
 		settimer(third_stage_drop_phase_three, 2.0);
 	}
 
-third_stage_drop_phase_three=func
+var third_stage_drop_phase_three=func
 	{
 		tdu_stage_allow_engines();
 
@@ -1647,7 +1647,7 @@ third_stage_drop_phase_three=func
 		settimer(end_third_stage_drop, 2);
 	}
 
-end_third_stage_drop=func
+var end_third_stage_drop=func
 	{
 		tdu_stage_start_maneur_engines();
 
@@ -1659,7 +1659,7 @@ end_third_stage_drop=func
 
 					#Tdu stage drop
 
-start_tdu_stage_drop=func
+var start_tdu_stage_drop=func
 	{
 		start_change();
 		tdu_stage_stop_engine();
@@ -1667,7 +1667,7 @@ start_tdu_stage_drop=func
 		settimer(tdu_stage_drop_phase_one, 0.3);
 	}
 
-tdu_stage_drop_phase_one=func
+var tdu_stage_drop_phase_one=func
 	{
 		tdu_stage_drop_fuel();
 		spacecraft_add_fuel();
@@ -1675,7 +1675,7 @@ tdu_stage_drop_phase_one=func
 		settimer(tdu_stage_drop_phase_two, 3.0);
 	}
 
-tdu_stage_drop_phase_two=func
+var tdu_stage_drop_phase_two=func
 	{
 		tdu_stage_drop_weights();
 		spacecraft_add_weights();
@@ -1685,7 +1685,7 @@ tdu_stage_drop_phase_two=func
 		settimer(tdu_stage_drop_phase_three, 2.0);
 	}
 
-tdu_stage_drop_phase_three=func
+var tdu_stage_drop_phase_three=func
 	{
 		spacecraft_allow_engines();
 
@@ -1713,7 +1713,7 @@ tdu_stage_drop_phase_three=func
 		settimer(end_tdu_stage_drop, 2);
 	}
 
-end_tdu_stage_drop=func
+var end_tdu_stage_drop=func
 	{
 		setprop("ai/ballistic-forces/force[8]/force-lb", 0);
 		setprop("fdm/jsbsim/stages/unit[4]/dropped", 1);
@@ -1723,7 +1723,7 @@ end_tdu_stage_drop=func
 
 					#Left hatch and antenna drop
 
-start_brake_chute_extraction=func
+var start_brake_chute_extraction=func
 	{
 		start_change();
 		setprop("fdm/jsbsim/systems/spacecraft/chute-cover-drop", 1);
@@ -1731,7 +1731,7 @@ start_brake_chute_extraction=func
 		settimer(brake_chute_extraction_phase_one, 0.0);
 	}
 
-brake_chute_extraction_phase_one=func
+var brake_chute_extraction_phase_one=func
 	{
 
 		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
@@ -1763,7 +1763,7 @@ brake_chute_extraction_phase_one=func
 		settimer(end_brake_chute_extraction, 2);
 	}
 
-end_brake_chute_extraction=func
+var end_brake_chute_extraction=func
 	{
 		setprop("ai/ballistic-forces/force[9]/force-lb", 0);
 		setprop("ai/ballistic-forces/force[10]/force-lb", 0);
@@ -1773,7 +1773,7 @@ end_brake_chute_extraction=func
 
 					#Shifts
 
-second_stage_shift=func
+var second_stage_shift=func
 	{
 		var on=getprop("fdm/jsbsim/stages/unit[2]/active");
 		if (
@@ -1802,7 +1802,7 @@ second_stage_shift=func
 	}
 
 
-fairings_shift=func
+var fairings_shift=func
 	{
 		var first_on=getprop("fdm/jsbsim/stages/unit[0]/active");
 		var second_on=getprop("fdm/jsbsim/stages/unit[2]/active");
@@ -1830,7 +1830,7 @@ fairings_shift=func
 		}
 	}
 
-third_stage_shift=func
+var third_stage_shift=func
 	{
 		var first_on=getprop("fdm/jsbsim/stages/unit[0]/active");
 		var second_on=getprop("fdm/jsbsim/stages/unit[2]/active");
@@ -1860,7 +1860,7 @@ third_stage_shift=func
 		}
 	}
 
-tdu_stage_shift=func
+var tdu_stage_shift=func
 	{
 		var first_on=getprop("fdm/jsbsim/stages/unit[0]/active");
 		var second_on=getprop("fdm/jsbsim/stages/unit[2]/active");
@@ -1891,7 +1891,7 @@ tdu_stage_shift=func
 		}
 	}
 
-spacecraft_shift=func
+var spacecraft_shift=func
 	{
 		var first_on=getprop("fdm/jsbsim/stages/unit[0]/active");
 		var second_on=getprop("fdm/jsbsim/stages/unit[2]/active");
@@ -1931,7 +1931,7 @@ spacecraft_shift=func
 		}
 	}
 
-view_shift=func
+var view_shift=func
 	{
 		var first_on=getprop("fdm/jsbsim/stages/unit[0]/active");
 		var second_on=getprop("fdm/jsbsim/stages/unit[2]/active");
@@ -1996,7 +1996,7 @@ view_shift=func
 	}
 
 # set startup configuration
-init_stages=func
+var init_stages=func
 	{
 		setprop("fdm/jsbsim/stages/serviceable", 1);
 		setprop("fdm/jsbsim/stages/command", 0);
@@ -2025,7 +2025,7 @@ init_stages=func
 		view_shift();
 	}
 
-extra_activation=func
+var extra_activation=func
 	{
 		setprop("fdm/jsbsim/systems/spacecraft/chute-cover-drop", 0);
 		setprop("fdm/jsbsim/systems/spacecraft/chute-cover-dropped", 0);
@@ -2046,7 +2046,7 @@ extra_activation=func
 	}
 
 # set startup configuration
-start_stages=func
+var start_stages=func
 	{
 		init_stages();
 		var time_elapsed=getprop("fdm/jsbsim/simulation/sim-time-sec");
