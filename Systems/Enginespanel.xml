@@ -13,8 +13,18 @@
 		<description> Enginespanel </description>
 	</fileheader>
 
-	<!-- Required input from FlightGear: -->
-	<property>/position/sea-level-radius-ft</property>
+	<!-- Required input from FlightGear:
+	     /position/sea-level-radius-ft mapped to ic/sea-level-radius-ft
+	     A delay is necessary to give FG time to create the property.
+	-->
+	<channel name="input from FG">
+		<switch name="ic/sea-level-radius-ft">
+			<default value="0.0"/>
+			<test logic="AND" value="/position/sea-level-radius-ft">
+				simulation/sim-time-sec GT 0.1
+			</test>
+		</switch>
+	</channel>
 
 <!--	That must be aded to set file
 
@@ -540,7 +550,7 @@
 						<property>systems/enginespanel/eccentricity</property>
 					</sum>
 				</product>
-				<property>/position/sea-level-radius-ft</property>
+				<property>ic/sea-level-radius-ft</property>
 			</difference>
 		</function>
 		</fcs_function>
@@ -621,7 +631,7 @@
 						<property>systems/enginespanel/eccentricity</property>
 					</difference>
 				</product>
-				<property>/position/sea-level-radius-ft</property>
+				<property>ic/sea-level-radius-ft</property>
 			</difference>
 		</function>
 		</fcs_function>
