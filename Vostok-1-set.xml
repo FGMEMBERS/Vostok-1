@@ -1524,9 +1524,6 @@
 		<gear n="17">
 			<wow type="bool">0.0</wow>
 		</gear>
-		<gear n="">
-			<wow type="bool">0.0</wow>
-		</gear>
 		<gear n="18">
 			<wow type="bool">0.0</wow>
 		</gear>
@@ -1794,7 +1791,7 @@
 
 -->
 
-<!-- Main menu 
+<!-- Main menu
 
 		<menubar>
 
