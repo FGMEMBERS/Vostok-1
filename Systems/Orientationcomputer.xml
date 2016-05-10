@@ -47,7 +47,7 @@
 			<output>systems/orientationcomputer/r-drift</output>
 		</fcs_function>
 
-		<!-- If not then quickly retirn it to zero. -->
+		<!-- If not then quickly return it to zero. -->
 
 		<fcs_function name="calculations/orientationcomputer/q-return">
 		<function>
@@ -278,6 +278,13 @@
 			<output>systems/orientationcomputer/r-input</output>
 		</switch>
 
+		<switch name="systems/orientationcomputer/factor-control-protected">
+			<default value="systems/orientationcomputer/factor-control"/>
+			<test value="0.0">
+				calculations/orientationcomputer/pid-trigger == 1
+			</test>
+		</switch>
+
 		<!-- q, elevator, pitch calculations -->
 
 		<fcs_function name="calculations/orientationcomputer/q-acceleration">
@@ -316,12 +323,28 @@
 			<output>systems/orientationcomputer/q-control-return</output>
 		</fcs_function>
 
+		<fcs_function name="calculations/orientationcomputer/q-control-init">
+		<function>
+			<product>
+				<property>systems/orientationcomputer/q-control</property>
+				<value>-0.01</value>
+			</product>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/orientationcomputer/q-control-add-protected">
+			<default value="systems/orientationcomputer/q-control-add"/>
+			<test value="calculations/orientationcomputer/q-control-init">
+				calculations/orientationcomputer/pid-trigger == 1
+			</test>
+		</switch>
+
 		<pid name="calculations/orientationcomputer/q-control">
-			<input>systems/orientationcomputer/q-control-add</input>
+			<input>systems/orientationcomputer/q-control-add-protected</input>
 			<kp>0.0</kp>
 			<ki>systems/orientationcomputer/factor-control</ki>
 			<kd>0.0</kd>
-			<trigger>calculations/orientationcomputer/pid-trigger</trigger>
+			<!--<trigger>calculations/orientationcomputer/pid-trigger</trigger>-->
 			<output>systems/orientationcomputer/q-control</output>
 		</pid>
 
@@ -377,12 +400,28 @@
 			<output>systems/orientationcomputer/p-control-return</output>
 		</fcs_function>
 
+		<fcs_function name="calculations/orientationcomputer/p-control-init">
+		<function>
+			<product>
+				<property>systems/orientationcomputer/p-control</property>
+				<value>-0.01</value>
+			</product>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/orientationcomputer/p-control-add-protected">
+			<default value="systems/orientationcomputer/p-control-add"/>
+			<test value="calculations/orientationcomputer/p-control-init">
+				calculations/orientationcomputer/pid-trigger == 1
+			</test>
+		</switch>
+
 		<pid name="calculations/orientationcomputer/p-control">
-			<input>systems/orientationcomputer/p-control-add</input>
+			<input>systems/orientationcomputer/p-control-add-protected</input>
 			<kp>0.0</kp>
 			<ki>systems/orientationcomputer/factor-control</ki>
 			<kd>0.0</kd>
-			<trigger>calculations/orientationcomputer/pid-trigger</trigger>
+			<!--<trigger>calculations/orientationcomputer/pid-trigger</trigger>-->
 			<output>systems/orientationcomputer/p-control</output>
 		</pid>
 
@@ -438,12 +477,29 @@
 			<output>systems/orientationcomputer/r-control-return</output>
 		</fcs_function>
 
+		<fcs_function name="calculations/orientationcomputer/r-control-init">
+		<function>
+			<product>
+				<property>systems/orientationcomputer/r-control</property>
+				<value>-0.01</value>
+			</product>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/orientationcomputer/r-control-add-protected">
+			<default value="systems/orientationcomputer/r-control-add"/>
+			<test value="calculations/orientationcomputer/r-control-init">
+				calculations/orientationcomputer/pid-trigger == 1
+			</test>
+		</switch>
+
+
 		<pid name="calculations/orientationcomputer/r-control">
-			<input>systems/orientationcomputer/r-control-add</input>
+			<input>systems/orientationcomputer/r-control-add-protected</input>
 			<kp>0.0</kp>
 			<ki>systems/orientationcomputer/factor-control</ki>
 			<kd>0.0</kd>
-			<trigger>calculations/orientationcomputer/pid-trigger</trigger>
+			<!--<trigger>calculations/orientationcomputer/pid-trigger</trigger>-->
 			<output>systems/orientationcomputer/r-control</output>
 		</pid>
 
