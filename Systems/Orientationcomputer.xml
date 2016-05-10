@@ -116,11 +116,21 @@
 
 		<!-- Angle pids -->
 
+		<!-- to prevent integrator windup on the pad, use a trigger -->
+
+		<switch name="calculations/orientationcomputer/pid-trigger">
+			<default value="0.0"/>
+			<test value="1.0">
+				position/h-agl-ft lt 47.0
+			</test>
+		</switch>
+
 		<pid name="calculations/orientationcomputer/q-angle">
 			<input>systems/orientationcomputer/q-pid-input</input>
 			<kp>0.0</kp>
 			<ki>1.0</ki>
 			<kd>0.0</kd>
+			<trigger>calculations/orientationcomputer/pid-trigger</trigger>
 			<output>systems/orientationcomputer/q-angle</output>
 		</pid>
 
@@ -129,6 +139,7 @@
 			<kp>0.0</kp>
 			<ki>1.0</ki>
 			<kd>0.0</kd>
+			<trigger>calculations/orientationcomputer/pid-trigger</trigger>
 			<output>systems/orientationcomputer/p-angle</output>
 		</pid>
 
@@ -137,6 +148,7 @@
 			<kp>0.0</kp>
 			<ki>1.0</ki>
 			<kd>0.0</kd>
+			<trigger>calculations/orientationcomputer/pid-trigger</trigger>
 			<output>systems/orientationcomputer/r-angle</output>
 		</pid>
 
@@ -309,6 +321,7 @@
 			<kp>0.0</kp>
 			<ki>systems/orientationcomputer/factor-control</ki>
 			<kd>0.0</kd>
+			<trigger>calculations/orientationcomputer/pid-trigger</trigger>
 			<output>systems/orientationcomputer/q-control</output>
 		</pid>
 
@@ -369,6 +382,7 @@
 			<kp>0.0</kp>
 			<ki>systems/orientationcomputer/factor-control</ki>
 			<kd>0.0</kd>
+			<trigger>calculations/orientationcomputer/pid-trigger</trigger>
 			<output>systems/orientationcomputer/p-control</output>
 		</pid>
 
@@ -429,6 +443,7 @@
 			<kp>0.0</kp>
 			<ki>systems/orientationcomputer/factor-control</ki>
 			<kd>0.0</kd>
+			<trigger>calculations/orientationcomputer/pid-trigger</trigger>
 			<output>systems/orientationcomputer/r-control</output>
 		</pid>
 

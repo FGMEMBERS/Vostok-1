@@ -150,9 +150,9 @@ var stages = func
 			or (view_pitch_offset_deg[5]==nil)
 			or (view_pitch_offset_deg[6]==nil)
 
-			or (view_heading_offset_deg[0]==nil)
-			or (view_heading_offset_deg[1]==nil)
-			or (view_heading_offset_deg[2]==nil)
+			#or (view_heading_offset_deg[0]==nil)
+			#or (view_heading_offset_deg[1]==nil)
+			#or (view_heading_offset_deg[2]==nil)
 			or (view_heading_offset_deg[3]==nil)
 			or (view_heading_offset_deg[4]==nil)
 			or (view_heading_offset_deg[5]==nil)
