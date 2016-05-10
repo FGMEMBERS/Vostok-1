@@ -1572,6 +1572,13 @@
 
 	<sim>
 
+   <systems>
+    <property-rule n="100"> 
+     <name>pass-through</name> 	
+     <path>Systems/pass-through.xml</path>  
+    </property-rule>
+   </systems>
+
 		<startup>
 			<splash-texture>Aircraft/Vostok-1/Vostok-1-Splash.png</splash-texture>
 		</startup>
