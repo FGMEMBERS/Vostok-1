@@ -410,12 +410,6 @@ var crashes = func
 			crash("G force exceeds -5", "Uskorenie prevysilo -5");
 		}
 
-		if (altitude>maximum_altitude_ft)
-		{
-			setprop("fdm/jsbsim/systems/crashes/crashed", 1);
-			setprop("fdm/jsbsim/systems/crashes/crash-type", "Alititude exceeds "~(maximum_altitude_ft*0.3048/1000)~"km");
-			crash("Alititude exceeds "~(maximum_altitude_ft*0.3048/1000)~"km", "Vysota prevysila "~(maximum_altitude_ft*0.3048/1000)~"km");
-		}
 
 		if (
 			((altitude_ground-vertical_speed*5)<0)
