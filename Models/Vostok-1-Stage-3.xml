@@ -68,6 +68,22 @@
 		</condition>
 	</animation>
 
+<model>
+<path>Aircraft/Vostok-1/Models/Effects/stage3-exhaust.xml</path>
+     <offsets>
+       <x-m> 0.0 </x-m>
+       <y-m> 0.0</y-m>
+       <z-m> -3.411 </z-m>
+       <pitch-deg>90.0</pitch-deg>
+     </offsets>
+   <condition>
+ 	<greater-than>
+	<property>/fdm/jsbsim/propulsion/engine[14]/thrust-lbs</property>
+ 	<value>0</value>
+ 	</greater-than>
+     </condition>
+</model>
+
 	<!-- Exhausts -->
 
 	<!-- Main

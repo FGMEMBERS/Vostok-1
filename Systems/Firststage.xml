@@ -552,6 +552,7 @@
 
 		<!-- Main engines -->
 
+		<!--
 		<fcs_function name="propulsion/engine[0]/red">
 		<function>
 			<sum>
@@ -768,12 +769,12 @@
 				<value>2</value>
 			</quotient>
 		</function>
-		</fcs_function>
+		</fcs_function>-->
 
 		<!-- Maneur engines -->
 
 
-		<fcs_function name="propulsion/engine[1]/red">
+		<!--<fcs_function name="propulsion/engine[1]/red">
 		<function>
 			<sum>
 				<value>0.949</value>
@@ -990,7 +991,7 @@
 				<value>2</value>
 			</quotient>
 		</function>
-		</fcs_function>
+		</fcs_function>-->
 
 	</channel>
 

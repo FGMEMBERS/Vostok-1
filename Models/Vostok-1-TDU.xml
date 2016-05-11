@@ -1409,7 +1409,171 @@
 
 	<!-- Exhausts -->
 
+	<!-- main exhaust -->
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-exhaust.xml</path>
+     		<offsets>
+       			<x-m> 0.0 </x-m>
+       			<y-m> 0.0</y-m>
+       			<z-m> -1.021 </z-m>
+       			<pitch-deg>90.0</pitch-deg>
+			<heading-deg>0.0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[23]/thrust-lbs</property>
+ 			<value>0</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<!-- fwd maneuver thruster -->
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-maneuver-exhaust.xml</path>
+     		<offsets>
+      			<x-m>-0.456</x-m>
+			<y-m>0.0</y-m>
+			<z-m>-0.713</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>180.0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[24]/thrust-lbs</property>
+ 			<value>0.5</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<!-- aft maneuver thruster -->
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-maneuver-exhaust.xml</path>
+     		<offsets>
+			<x-m>0.456</x-m>
+			<y-m>0.0</y-m>
+			<z-m>-0.713</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>0.0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[25]/thrust-lbs</property>
+ 			<value>0.5</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<!-- left maneuver thruster -->
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-maneuver-exhaust.xml</path>
+     		<offsets>
+			<x-m>0.0</x-m>
+			<y-m>-0.456</y-m>
+			<z-m>-0.713</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>-90.0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[26]/thrust-lbs</property>
+ 			<value>0.5</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<!-- right maneuver thruster -->
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-maneuver-exhaust.xml</path>
+     		<offsets>
+			<x-m>0.0</x-m>
+			<y-m>0.456</y-m>
+			<z-m>-0.713</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>90.0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[27]/thrust-lbs</property>
+ 			<value>0.5</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<!-- forward left maneuver thruster -->
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-maneuver-exhaust.xml</path>
+     		<offsets>
+			<x-m>-0.395</x-m>
+			<y-m>-0.084</y-m>
+			<z-m>-0.766</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>-90.0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[28]/thrust-lbs</property>
+ 			<value>0.5</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<!-- back right maneuver thruster -->
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-maneuver-exhaust.xml</path>
+     		<offsets>
+			<x-m>0.395</x-m>
+			<y-m>0.084</y-m>
+			<z-m>-0.766</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>90.0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[29]/thrust-lbs</property>
+ 			<value>0.5</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<!-- forward right maneuver thruster -->
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-maneuver-exhaust.xml</path>
+     		<offsets>
+			<x-m>-0.395</x-m>
+			<y-m>0.084</y-m>
+			<z-m>-0.766</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>90.0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[30]/thrust-lbs</property>
+ 			<value>0.5</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<!-- back left maneuver thruster -->
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-maneuver-exhaust.xml</path>
+     		<offsets>
+			<x-m>0.395</x-m>
+			<y-m>-0.084</y-m>
+			<z-m>-0.766</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>-90.0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[31]/thrust-lbs</property>
+ 			<value>0.5</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
 	<!-- Main
+
+
 
 	<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/TDU/Vostok-1-TDU-Main-Exhaust.xml</path>
@@ -1609,6 +1773,142 @@
 	<!-- Maneur -->
 
 	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-cold-gas.xml</path>
+     		<offsets>
+			<x-m>-1.404</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.2</z-m>
+			<pitch-deg>-54.58</pitch-deg>
+			<heading-deg>180</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[32]/thrust-lbs</property>
+ 			<value>0.0</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-cold-gas.xml</path>
+     		<offsets>
+			<x-m>1.404</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.2</z-m>
+			<pitch-deg>-54.58</pitch-deg>
+			<heading-deg>0</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[33]/thrust-lbs</property>
+ 			<value>0.0</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-cold-gas.xml</path>
+     		<offsets>
+			<x-m>0.0</x-m>
+			<y-m>-1.207</y-m>
+			<z-m>0.149</z-m>
+			<pitch-deg>-54.58</pitch-deg>
+			<heading-deg>-90</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[34]/thrust-lbs</property>
+ 			<value>0.0</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-cold-gas.xml</path>
+     		<offsets>
+			<x-m>0.0</x-m>
+			<y-m>1.207</y-m>
+			<z-m>0.149</z-m>
+			<pitch-deg>-54.58</pitch-deg>
+			<heading-deg>90</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[35]/thrust-lbs</property>
+ 			<value>0.0</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-cold-gas.xml</path>
+     		<offsets>
+			<x-m>-0.751</x-m>
+			<y-m>-0.871</y-m>
+			<z-m>0.559</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>-45</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[36]/thrust-lbs</property>
+ 			<value>0.0</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-cold-gas.xml</path>
+     		<offsets>
+			<x-m>0.751</x-m>
+			<y-m>0.871</y-m>
+			<z-m>0.559</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>135</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[37]/thrust-lbs</property>
+ 			<value>0.0</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-cold-gas.xml</path>
+     		<offsets>
+			<x-m>-0.751</x-m>
+			<y-m>0.871</y-m>
+			<z-m>0.576</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>45</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[38]/thrust-lbs</property>
+ 			<value>0.0</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/tdu-cold-gas.xml</path>
+     		<offsets>
+			<x-m>0.751</x-m>
+			<y-m>-0.871</y-m>
+			<z-m>0.589</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>-135</heading-deg>
+     		</offsets>
+   		<condition>
+ 			<greater-than>
+			<property>/fdm/jsbsim/propulsion/engine[39]/thrust-lbs</property>
+ 			<value>0.0</value>
+ 			</greater-than>
+     		</condition>
+	</model>
+
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/TDU/Vostok-1-TDU-PME-Forward.xml</path>
 		<offsets>
 			<x-m>-1.404</x-m>
@@ -1617,9 +1917,9 @@
 			<pitch-deg>-54.58</pitch-deg>
 			<heading-deg>180</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
-	<model>
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/TDU/Vostok-1-TDU-PME-Back.xml</path>
 		<offsets>
 			<x-m>1.404</x-m>
@@ -1628,9 +1928,9 @@
 			<pitch-deg>-54.58</pitch-deg>
 			<heading-deg>0</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
-	<model>
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/TDU/Vostok-1-TDU-PME-Left.xml</path>
 		<offsets>
 			<x-m>0.0</x-m>
@@ -1639,9 +1939,9 @@
 			<pitch-deg>-54.58</pitch-deg>
 			<heading-deg>-90</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
-	<model>
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/TDU/Vostok-1-TDU-PME-Right.xml</path>
 		<offsets>
 			<x-m>0.0</x-m>
@@ -1650,9 +1950,9 @@
 			<pitch-deg>-54.58</pitch-deg>
 			<heading-deg>90</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
-	<model>
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/TDU/Vostok-1-TDU-PME-Forward-Left.xml</path>
 		<offsets>
 			<x-m>-0.751</x-m>
@@ -1661,9 +1961,9 @@
 			<pitch-deg>0.0</pitch-deg>
 			<heading-deg>-45</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
-	<model>
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/TDU/Vostok-1-TDU-PME-Back-Right.xml</path>
 		<offsets>
 			<x-m>0.751</x-m>
@@ -1672,9 +1972,9 @@
 			<pitch-deg>0.0</pitch-deg>
 			<heading-deg>135</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
-	<model>
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/TDU/Vostok-1-TDU-PME-Forward-Right.xml</path>
 		<offsets>
 			<x-m>-0.751</x-m>
@@ -1683,9 +1983,9 @@
 			<pitch-deg>0.0</pitch-deg>
 			<heading-deg>45</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
-	<model>
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/TDU/Vostok-1-TDU-PME-Back-Left.xml</path>
 		<offsets>
 			<x-m>0.751</x-m>
@@ -1694,7 +1994,7 @@
 			<pitch-deg>0.0</pitch-deg>
 			<heading-deg>-135</heading-deg>
 		</offsets>
-	</model>
+	</model>-->
 
 	<enable-hot type="bool">false</enable-hot>
 
