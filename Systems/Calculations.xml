@@ -182,6 +182,24 @@
 		</function>
 		</fcs_function>
 
+		<fcs_function name="calculations/calculations/engine-flame-collimation">
+		<function>
+			<sum>
+			<value>0.15</value>
+			<product>
+				<value>0.4</value>
+				<difference>
+				<value>1.0</value>
+				<quotient>
+					<property>/environment/pressure-inhg</property>
+					<property>/environment/pressure-sea-level-inhg</property>
+				</quotient>
+				</difference>
+			</product>
+			</sum>
+		</function>
+		</fcs_function>
+
 	</channel>
 
 </system>

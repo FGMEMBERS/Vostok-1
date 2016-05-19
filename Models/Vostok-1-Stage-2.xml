@@ -2,6 +2,7 @@
 
 <!--
 	Author: Slavutinsky Victor
+	Additions: Thorsten Renk 2016
 -->
 
 <PropertyList>
@@ -18,6 +19,32 @@
 	</offsets>
 
 	<enable-hot type="bool">false</enable-hot>
+
+<model>
+<path>Aircraft/Vostok-1/Models/Effects/main-exhaust.xml</path>
+     <offsets>
+       <x-m> 0.0 </x-m>
+       <y-m> 0.0</y-m>
+       <z-m> -28.677 </z-m>
+       <pitch-deg>90.0</pitch-deg>
+     </offsets>
+   <condition>
+ 	<greater-than>
+	<property>/fdm/jsbsim/propulsion/engine[9]/thrust-lbs</property>
+ 	<value>0</value>
+ 	</greater-than>
+     </condition>
+</model>
+
+<model>
+<path>Aircraft/Vostok-1/Models/Effects/smoke.xml</path>
+     <offsets>
+       <x-m> 0.0 </x-m>
+       <y-m> 0.0</y-m>
+       <z-m> -28.677 </z-m>
+       <pitch-deg>0.0</pitch-deg>
+     </offsets>
+</model>
 
 	<!-- Add exhaust models
 
