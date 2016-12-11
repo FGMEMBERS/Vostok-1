@@ -13,7 +13,7 @@
 	<offsets>
 		<x-m>0.0</x-m>
 		<y-m>0.0</y-m>
-		<z-m>0.0</z-m>
+		<z-m>1.8</z-m>
 		<pitch-deg>0</pitch-deg>
 	</offsets>
 
@@ -38,6 +38,19 @@
 			</and>
 		</condition>
 	</animation>
+
+    <effect> 
+	<inherits-from>Aircraft/Vostok-1/Models/Effects/main_chute</inherits-from>
+        <object-name>MC_Chute</object-name>
+        <object-name>MC_Cords</object-name>
+        <object-name>MC_CEDown</object-name>
+        <object-name>MC_CEPUp</object-name>
+        <object-name>MC_CEUp</object-name>
+	<object-name>MC_CordDown</object-name>
+	<object-name>MC_CordUp</object-name>
+	<object-name>MC_Engine</object-name>
+    </effect>
+
 
 	<!-- Add exhaust models-->
 

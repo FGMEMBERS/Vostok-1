@@ -71,6 +71,13 @@
 		</axis>
 	</animation>
 
+    <effect> 
+	<inherits-from>Aircraft/Vostok-1/Models/Effects/brake_chute</inherits-from>
+        <object-name>DC_Chute</object-name>
+        <object-name>DC_Cords</object-name>
+        <object-name>DC_MCord</object-name>
+    </effect>
+
 	<enable-hot type="bool">false</enable-hot>
 
 </PropertyList>
