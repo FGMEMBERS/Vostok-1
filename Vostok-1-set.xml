@@ -1596,6 +1596,13 @@
 
 	<sim>
 
+		<tags>
+			<tag>spaceship</tag>
+			<tag>1960s</tag>
+			<tag>supersonic</tag>
+			<tag>rocket</tag>
+		</tags>
+
    <systems>
     <property-rule n="100"> 
      <name>pass-through</name> 	
