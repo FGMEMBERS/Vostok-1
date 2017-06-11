@@ -2011,6 +2011,21 @@ var view_shift=func
 		}
 	}
 
+
+# set startup in orbit
+
+var set_speed = func {
+
+	var latitude = getprop("/position/latitude-deg") * 3.1415/180.0;
+	var heading = getprop("/orientation/heading-deg") * 3.1415/180.0;
+
+	var rotation_boost = 1579.0 * math.cos(latitude) * math.sin(heading);
+	setprop("/velocities/uBody-fps", 25650.0 - rotation_boost);
+	setprop("/orientation/pitch-deg", -88.0);
+
+}
+
+
 # set startup configuration
 var init_stages=func
 	{
@@ -2018,12 +2033,25 @@ var init_stages=func
 		setprop("fdm/jsbsim/stages/command", 0);
 		setprop("fdm/jsbsim/stages/repeat-time", 0);
 
-		first_stage_init();
-		second_stage_init();
-		fairings_init();
-		third_stage_separate();
-		tdu_stage_separate();
-		spacecraft_separate();
+		if (getprop("/sim/presets/stage") == 1)
+			{
+			set_speed();
+			first_stage_separate();
+			second_stage_separate();
+			fairings_separate();
+			third_stage_separate();
+			tdu_stage_init();
+			spacecraft_separate();
+			}
+		else	
+			{
+			first_stage_init();
+			second_stage_init();
+			fairings_init();
+			third_stage_separate();
+			tdu_stage_separate();
+			spacecraft_separate();
+			}
 
 		#first_stage_separate();
 		#second_stage_separate();
@@ -2060,6 +2088,9 @@ var extra_activation=func
 		setprop("fdm/jsbsim/systems/spacecraft/engine-sensor-teared", 0);
 		setprop("fdm/jsbsim/systems/spacecraft/ground-contact", 0);
 	}
+
+
+
 
 # set startup configuration
 var start_stages=func
