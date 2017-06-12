@@ -2021,6 +2021,7 @@ var set_speed = func {
 
 	var rotation_boost = 1579.0 * math.cos(latitude) * math.sin(heading);
 	setprop("/velocities/uBody-fps", 25650.0 - rotation_boost);
+	setprop("/velocities/wBody-fps", 150.0);
 	setprop("/orientation/pitch-deg", -88.0);
 
 }
