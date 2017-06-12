@@ -47,6 +47,18 @@
 	<!-- Add exhaust models-->
 
 	<model>
+		<path>Aircraft/Vostok-1/Models/Exhausts/Spacecraft/Vostok-1-Plasma-Trail.xml</path>
+		<name>SC_PlasmaTrail</name>
+		<offsets>
+			<x-m>0.0</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.0</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>0</heading-deg>
+		</offsets>
+	</model>
+
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/Spacecraft/Vostok-1-Flow-Cone.xml</path>
 		<name>SC_FlowCone</name>
 		<offsets>
@@ -109,11 +121,11 @@
 				<value>true</value>
 			</equals>
 		</condition>
-	</animation>
+	</animation>-->
 
 	<!-- Make surface glow on reentry-->
 
-	<animation>
+	<!--<animation>
 		<type>material</type>
 		<object-name>SC_Out</object-name>
 		<object-name>SC_HFOut</object-name>
@@ -145,7 +157,7 @@
 			<green-prop>fdm/jsbsim/aero/temperature/surface-mach-green</green-prop>
 			<blue-prop>fdm/jsbsim/aero/temperature/surface-mach-blue</blue-prop>
 		</emission>
-	</animation>
+	</animation>-->
 
 	<!--Up whip antennas-->
 
