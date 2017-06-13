@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+    <name>vostok-glow</name>
+    <inherits-from>Effects/space-combined</inherits-from>
+    <parameters>
+	<darkmap-enabled type="int">2</darkmap-enabled>
+	<darkmap-factor type="float">0.5</darkmap-factor>
+	<delta_T type="float"><use>/test/delta-T</use></delta_T>
+	<texture n="3">
+		<image>Aircraft/Vostok-1/Models/Effects/heatmap.png</image>
+		<type>2d</type>
+		<filter>linear-mipmap-linear</filter>
+		<wrap-s>clamp</wrap-s>
+		<wrap-t>clamp</wrap-t>
+		<internal-format>normalized</internal-format>
+	</texture>
+    </parameters>
+</PropertyList>
