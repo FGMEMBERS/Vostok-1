@@ -61,4 +61,65 @@
 		
 	</channel>
 
+
+	<channel name="Charring due to heat">
+	
+		<fcs_function name="systems/temperature/char-arg">
+		<function>
+			<product>
+				<max>
+					<difference>
+						<property>systems/temperature/plasma-temperature-F</property>
+						<value>2000.0</value>
+					</difference>
+					<value>0.0</value>
+				</max>
+				<value>0.00001</value>
+			</product>
+		</function>
+		</fcs_function>
+		
+		<pid name="systems/temperature/char-integrated">
+			<input>systems/temperature/char-arg</input>
+			<kp>0.0</kp>
+			<ki>1.0</ki>
+			<kd>0.0</kd>
+		</pid>
+		
+		<fcs_function name="systems/temperature/char-factor-final">
+		<function>
+			<min>
+				<value>3.0</value>
+				<property>systems/temperature/char-integrated</property>
+			</min>
+		</function>
+		</fcs_function>
+		
+		<fcs_function name="systems/temperature/char-refl-correction-final">
+		<function>
+			<difference>
+				<value>0.4</value>
+				<product>
+					<property>systems/temperature/char-factor-final</property>
+					<value>0.3</value>
+				</product>
+			</difference>
+		</function>
+		</fcs_function>
+		
+		<fcs_function name="systems/temperature/char-shininess">
+		<function>
+			<difference>
+					<value>32.0</value>
+					<product>
+						<property>systems/temperature/char-factor-final</property>
+						<value>9.0</value>
+					</product>
+			</difference>
+		</function>
+		</fcs_function>
+	
+	</channel>
+
+
 </system>

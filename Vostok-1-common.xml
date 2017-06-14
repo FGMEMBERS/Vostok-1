@@ -1609,12 +1609,12 @@
 			<tag>rocket</tag>
 		</tags>
 
-   <systems>
-    <property-rule n="100"> 
-     <name>pass-through</name> 	
-     <path>Systems/pass-through.xml</path>  
-    </property-rule>
-   </systems>
+		<systems>
+		    <property-rule n="100"> 
+		     <name>pass-through</name> 	
+		     <path>Systems/pass-through.xml</path>  
+		    </property-rule>
+		</systems>
 
 		<startup>
 			<splash-texture>Aircraft/Vostok-1/Vostok-1-Splash.png</splash-texture>
@@ -1701,7 +1701,7 @@
 
 		<flight-model>jsb</flight-model>
 		<status>beta</status>
-		<author>Victor Slavutinskiy, Thorsten Renk</author>
+		<author>Victor Slavutinsky, Thorsten Renk</author>
 		<rating>
 			<FDM type="int">3</FDM>
 			<systems type="int">3</systems>
