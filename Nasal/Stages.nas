@@ -1,11 +1,22 @@
 #
-# Author: Slavutinsky Victor
+# Author: Slavutinsky Victor, changes and additions Thorsten Renk 2017
 #
 
 # Stages stages. Change weights, points of view, inital fuel tanks contents due to stages change.
 # Currently active stages is setted as 1.
 
 #stages.init_stages(); gotta be called on manual aircraft restart
+
+# use a view manager to force view resets only when views are changed to 
+# allow user to change views
+
+var viewHelper = {
+
+	lastView: -1,
+	currentView: 0,
+
+};
+
 
 # helper 
 var end_stages = func 
@@ -69,6 +80,7 @@ var stages = func
 		view_heading_offset_deg[6]=getprop("sim/view[104]/config/heading-offset-deg");
 
 		var current_view_name=getprop("sim/current-view/name");
+		viewHelper.currentView = getprop("/sim/current-view/view-number");
 
 		var one_two_ignition_switch=getprop("fdm/jsbsim/systems/rightswitchpanel/one-two-ignition-switch");
 		var one_drop_switch=getprop("fdm/jsbsim/systems/rightswitchpanel/one-drop-switch");
@@ -218,7 +230,7 @@ var stages = func
 		third_stage_shift();
 		tdu_stage_shift();
 		spacecraft_shift();
-		view_shift();
+		#view_shift();
 
 		#Effect colors
 
@@ -576,25 +588,35 @@ var stages = func
 
 		#Views
 
+
 		if (current_view_name=="Cosmonaut View")
 		{
-			setprop("sim/current-view/x-offset-m", view_offset_x[0]);
-			setprop("sim/current-view/y-offset-m", view_offset_y[0]);
-			setprop("sim/current-view/z-offset-m", view_offset_z[0]);
+			if (viewHelper.currentView != viewHelper.lastView)
+				{
+				setprop("sim/current-view/x-offset-m", view_offset_x[0]);
+				setprop("sim/current-view/y-offset-m", view_offset_y[0]);
+				setprop("sim/current-view/z-offset-m", view_offset_z[0]);
+				}
 		}
 
 		if (current_view_name=="Tail View")
 		{
-			setprop("sim/current-view/x-offset-m", view_offset_x[1]);
-			setprop("sim/current-view/y-offset-m", view_offset_y[1]);
-			setprop("sim/current-view/z-offset-m", view_offset_z[1]);
+			if (viewHelper.currentView != viewHelper.lastView)
+				{
+				setprop("sim/current-view/x-offset-m", view_offset_x[1]);
+				setprop("sim/current-view/y-offset-m", view_offset_y[1]);
+				setprop("sim/current-view/z-offset-m", view_offset_z[1]);
+				}
 		}
 
 		if (current_view_name=="Side View")
 		{
-			setprop("sim/current-view/x-offset-m", view_offset_x[2]);
-			setprop("sim/current-view/y-offset-m", view_offset_y[2]);
-			setprop("sim/current-view/z-offset-m", view_offset_z[2]);
+			if (viewHelper.currentView != viewHelper.lastView)
+				{
+				setprop("sim/current-view/x-offset-m", view_offset_x[2]);
+				setprop("sim/current-view/y-offset-m", view_offset_y[2]);
+				setprop("sim/current-view/z-offset-m", view_offset_z[2]);
+				}
 		}
 
 		if (current_view_name=="Left Panel View")
@@ -632,6 +654,8 @@ var stages = func
 			setprop("sim/current-view/pitch-offset-deg", view_pitch_offset_deg[6]);
 			setprop("sim/current-view/heading-offset-deg", view_heading_offset_deg[6]);
 		}
+
+		viewHelper.lastView = viewHelper.currentView;
 
 		setprop("fdm/jsbsim/stages/command", 0);
 
@@ -734,6 +758,7 @@ var first_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[0]/active", 1);
+		view_shift();
 	}
 
 var first_stage_drop_fuel=func
@@ -800,6 +825,8 @@ var first_stage_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[0]/active", 0);
+		viewHelper.lastView = -1;
+		view_shift();
 	}
 
 var first_stage_init=func
@@ -839,6 +866,7 @@ var fairings_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[1]/active", 1);
+		view_shift();
 	}
 
 var fairings_drop_weights=func
@@ -922,6 +950,7 @@ var second_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[2]/active", 1);
+		view_shift();
 	}
 
 var second_stage_drop_fuel=func
@@ -959,6 +988,8 @@ var second_stage_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[2]/active", 0);
+		viewHelper.lastView = -1;
+		view_shift();
 	}
 
 var second_stage_init=func
@@ -1037,6 +1068,7 @@ var third_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[3]/active", 1);
+		settimer(view_shift, 0.3);
 	}
 
 var third_stage_drop_fuel=func
@@ -1076,6 +1108,8 @@ var third_stage_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[3]/active", 0);
+		viewHelper.lastView = -1;
+		view_shift();
 	}
 
 var third_stage_init=func
@@ -1205,6 +1239,7 @@ var tdu_stage_activate=func
 		setprop("fdm/jsbsim/systems/tdu/whip-antennas-pos-norm", 0);
 		setprop("fdm/jsbsim/systems/tdu/whip-antennas-extracted", 0);
 		setprop("fdm/jsbsim/stages/unit[4]/active", 1);
+		view_shift();
 	}
 
 var tdu_stage_drop_fuel=func
@@ -1275,6 +1310,8 @@ var tdu_stage_deactivate=func
 		setprop("fdm/jsbsim/systems/tdu/whip-antennas-pos-norm", 0);
 		setprop("fdm/jsbsim/systems/tdu/whip-antennas-extracted", 0);
 		setprop("fdm/jsbsim/stages/unit[4]/active", 0);
+		viewHelper.lastView = -1;
+		view_shift();
 	}
 
 var tdu_stage_init=func
@@ -1353,6 +1390,7 @@ var spacecraft_activate=func
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[5]/activated", 0);
 		setprop("fdm/jsbsim/stages/unit[5]/active", 1);
+		view_shift();
 }
 
 var spacecraft_drop_fuel=func
@@ -1955,10 +1993,14 @@ var spacecraft_shift=func
 
 var view_shift=func
 	{
+
 		var first_on=getprop("fdm/jsbsim/stages/unit[0]/active");
 		var second_on=getprop("fdm/jsbsim/stages/unit[2]/active");
 		var third_on=getprop("fdm/jsbsim/stages/unit[3]/active");
 		var tdu_on=getprop("fdm/jsbsim/stages/unit[4]/active");
+
+		#print("Fist: ", first_on, " Second: ", second_on, " Third: ", third_on, " TDU: ", tdu_on);
+
 		if (!((first_on==nil)
 			or (second_on==nil)
 			or (third_on==nil)
@@ -1967,7 +2009,7 @@ var view_shift=func
 		{
 			if (
 				(first_on==1)
-				or (second_on==1)
+				or (second_on==1) 
 			)
 			{
 				setprop("sim/view[0]/config/y-offset-m", 19.74);
@@ -1980,7 +2022,7 @@ var view_shift=func
 			}
 			else
 			{
-				if (third_on==1)
+				if (third_on==1) 				
 				{
 					setprop("sim/view[0]/config/y-offset-m", 2.238);
 					setprop("sim/view[1]/config/y-offset-m", -10.0);
