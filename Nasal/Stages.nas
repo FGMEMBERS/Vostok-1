@@ -1680,6 +1680,7 @@ var start_tdu_stage_drop=func
 		start_change();
 		tdu_stage_stop_engine();
 		spacecraft_stop_engine();
+		init_tdu_ballistic();  # this calls the Nasal simulation of co-orbiting objects
 		settimer(tdu_stage_drop_phase_one, 0.3);
 	}
 
@@ -1708,21 +1709,26 @@ var tdu_stage_drop_phase_three=func
 		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
 		var heading=props.globals.getNode("orientation/heading-deg", 1).getValue(0);
 
-		var ballistics=props.globals.getNode("ai/models").getChildren("ballistic");
-		foreach(var ballistic; ballistics)
-		{
-			var name=ballistic.getName();
-			if (
-				(name="TDU")
-			)
-			{
-				ballistic.getChild("controls", 0, 1).getChild("slave-to-ac", 0, 1).setValue(0);
-			}
-		}
+		# add a little separation velocity
+		var wBody = getprop("/velocities/wBody-fps");
+		setprop("/velocities/wBody-fps", wBody - 1.0);
 
-		setprop("ai/ballistic-forces/force[8]/force-lb", 3368*2.0);
-		setprop("ai/ballistic-forces/force[8]/force-azimuth-deg", heading);
-		setprop("ai/ballistic-forces/force[8]/force-elevation-deg", pitch-90);
+
+		#var ballistics=props.globals.getNode("ai/models").getChildren("ballistic");
+		#foreach(var ballistic; ballistics)
+		#{
+		#	var name=ballistic.getName();
+		#	if (
+		#		(name="TDU")
+		#	)
+		#	{
+		#		ballistic.getChild("controls", 0, 1).getChild("slave-to-ac", 0, 1).setValue(0);
+		#	}
+		#}
+
+		#setprop("ai/ballistic-forces/force[8]/force-lb", 3368*2.0);
+		#setprop("ai/ballistic-forces/force[8]/force-azimuth-deg", heading);
+		#setprop("ai/ballistic-forces/force[8]/force-elevation-deg", pitch-90);
 
 		setprop("fdm/jsbsim/stages/unit[4]/drop", 0);
 

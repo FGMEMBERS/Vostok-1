@@ -2081,6 +2081,7 @@
 		<stages>
 			<file>Aircraft/Vostok-1/Nasal/Stages.nas</file>
 			<script>start_stages();</script>
+			<file>Aircraft/Vostok-1/Nasal/Discarded_Stages.nas</file>
 		</stages>
 		<mainpanel>
 			<file>Aircraft/Vostok-1/Nasal/Main_Panel.nas</file>
