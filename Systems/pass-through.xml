@@ -46,4 +46,11 @@
    <output>/fdm/jsbsim/systems/angles/nose-roll-deg</output>
   </filter>
 
+ <filter>
+   <type>gain</type>
+   <gain>1.0</gain>
+   <input>/fdm/jsbsim/calculations/calculations/engine-flame-collimation</input>
+   <output>/sim/systems/various/engine-flame-collimation</output>
+ </filter>
+
  </PropertyList>
