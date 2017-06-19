@@ -37,4 +37,20 @@
 		</axis>
 	</animation>
 
+	<model>
+		<path>Aircraft/Vostok-1/Models/Effects/main-exhaust.xml</path>
+	     	<offsets>
+		       <x-m> 0.196 </x-m>
+		       <y-m> 0.0</y-m>
+		       <z-m> -19.553 </z-m>
+		       <pitch-deg>87.8</pitch-deg>
+	     	</offsets>
+	   	<condition>
+	 		<greater-than>
+				<property>/fdm/jsbsim/propulsion/engine[6]/thrust-lbs</property>
+	 			<value>0</value>
+	 		</greater-than>
+	     	</condition>
+	</model>
+
 </PropertyList>
