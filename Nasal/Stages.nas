@@ -1576,6 +1576,10 @@ var start_second_stage_drop=func
 		start_change();
 		second_stage_stop_engine();
 		third_stage_stop_engine();
+
+		if (getprop("/sim/config/vostok-1/simulate-dropped-stages") == 1)
+			{init_ss_ballistic();}  # this calls the Nasal simulation of co-orbiting objects
+
 		settimer(second_stage_drop_phase_one, 0.3);
 	}
 
@@ -1607,24 +1611,8 @@ var second_stage_drop_phase_two=func
 var second_stage_drop_phase_three=func
 	{
 
-		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
-		var heading=props.globals.getNode("orientation/heading-deg", 1).getValue(0);
-
-		var ballistics=props.globals.getNode("ai/models").getChildren("ballistic");
-		foreach(var ballistic; ballistics)
-		{
-			var name=ballistic.getName();
-			if (
-				(name="Second Stage")
-			)
-			{
-				ballistic.getChild("controls", 0, 1).getChild("slave-to-ac", 0, 1).setValue(0);
-			}
-		}
-
-		setprop("ai/ballistic-forces/force[6]/force-lb", 16312*2);
-		setprop("ai/ballistic-forces/force[6]/force-azimuth-deg", heading);
-		setprop("ai/ballistic-forces/force[6]/force-elevation-deg", pitch-90);
+		var wBody = getprop("/velocities/wBody-fps");
+		setprop("/velocities/wBody-fps", wBody - 3.0);
 
 		setprop("fdm/jsbsim/stages/unit[2]/drop", 0);
 
@@ -1634,7 +1622,6 @@ var second_stage_drop_phase_three=func
 
 var end_second_stage_drop=func
 	{
-		setprop("ai/ballistic-forces/force[6]/force-lb", 0);
 		setprop("fdm/jsbsim/stages/unit[2]/dropped", 1);
 		third_stage_allow_engines();
 		end_change();
@@ -1647,6 +1634,8 @@ var start_third_stage_drop=func
 		start_change();
 		third_stage_stop_engine();
 		tdu_stage_stop_engine();
+		if (getprop("/sim/config/vostok-1/simulate-dropped-stages") == 1)
+			{init_ts_ballistic();}  # this calls the Nasal simulation of co-orbiting objects
 		settimer(third_stage_drop_phase_one, 0.3);
 	}
 
@@ -1677,24 +1666,9 @@ var third_stage_drop_phase_three=func
 	{
 		tdu_stage_allow_engines();
 
-		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
-		var heading=props.globals.getNode("orientation/heading-deg", 1).getValue(0);
+		var wBody = getprop("/velocities/wBody-fps");
+		setprop("/velocities/wBody-fps", wBody - 1.0);
 
-		var ballistics=props.globals.getNode("ai/models").getChildren("ballistic");
-		foreach(var ballistic; ballistics)
-		{
-			var name=ballistic.getName();
-			if (
-				(name="Third Stage")
-			)
-			{
-				ballistic.getChild("controls", 0, 1).getChild("slave-to-ac", 0, 1).setValue(0);
-			}
-		}
-
-		setprop("ai/ballistic-forces/force[7]/force-lb", 3420*2);
-		setprop("ai/ballistic-forces/force[7]/force-azimuth-deg", heading);
-		setprop("ai/ballistic-forces/force[7]/force-elevation-deg", pitch-90);
 
 		setprop("fdm/jsbsim/stages/unit[3]/drop", 0);
 
@@ -1705,7 +1679,6 @@ var end_third_stage_drop=func
 	{
 		tdu_stage_start_maneur_engines();
 
-		setprop("ai/ballistic-forces/force[7]/force-lb", 0);
 		setprop("fdm/jsbsim/stages/unit[3]/dropped", 1);
 
 		end_change();
@@ -1718,7 +1691,10 @@ var start_tdu_stage_drop=func
 		start_change();
 		tdu_stage_stop_engine();
 		spacecraft_stop_engine();
-		init_tdu_ballistic();  # this calls the Nasal simulation of co-orbiting objects
+
+		if (getprop("/sim/config/vostok-1/simulate-dropped-stages") == 1)
+			{init_tdu_ballistic();}  # this calls the Nasal simulation of co-orbiting objects
+
 		settimer(tdu_stage_drop_phase_one, 0.3);
 	}
 
@@ -1744,29 +1720,9 @@ var tdu_stage_drop_phase_three=func
 	{
 		spacecraft_allow_engines();
 
-		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
-		var heading=props.globals.getNode("orientation/heading-deg", 1).getValue(0);
-
 		# add a little separation velocity
 		var wBody = getprop("/velocities/wBody-fps");
 		setprop("/velocities/wBody-fps", wBody - 1.0);
-
-
-		#var ballistics=props.globals.getNode("ai/models").getChildren("ballistic");
-		#foreach(var ballistic; ballistics)
-		#{
-		#	var name=ballistic.getName();
-		#	if (
-		#		(name="TDU")
-		#	)
-		#	{
-		#		ballistic.getChild("controls", 0, 1).getChild("slave-to-ac", 0, 1).setValue(0);
-		#	}
-		#}
-
-		#setprop("ai/ballistic-forces/force[8]/force-lb", 3368*2.0);
-		#setprop("ai/ballistic-forces/force[8]/force-azimuth-deg", heading);
-		#setprop("ai/ballistic-forces/force[8]/force-elevation-deg", pitch-90);
 
 		setprop("fdm/jsbsim/stages/unit[4]/drop", 0);
 
@@ -1775,7 +1731,6 @@ var tdu_stage_drop_phase_three=func
 
 var end_tdu_stage_drop=func
 	{
-		setprop("ai/ballistic-forces/force[8]/force-lb", 0);
 		setprop("fdm/jsbsim/stages/unit[4]/dropped", 1);
 		spacecraft_additional_activation();
 		end_change();

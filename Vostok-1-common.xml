@@ -1620,6 +1620,13 @@
 			<splash-texture>Aircraft/Vostok-1/Vostok-1-Splash.png</splash-texture>
 		</startup>
 
+    		<config>
+      			<vostok-1>
+		    		<simulate-booster-drop type="int">0</simulate-booster-drop>
+				<simulate-dropped-stages type="int">1</simulate-dropped-stages>
+	  		</vostok-1>
+    		</config>
+
 		<rendering>
 			<camera-group>
 				<zfar type="double">1.64e6</zfar>

@@ -17,6 +17,24 @@ var tdu_loop_flag = 0;
 var tdu_offset_vec = [];
 
 
+# hashes for managing separated 3rd stage
+
+var tsState = {};
+var tsCoord = {};
+var tsModel = {};
+
+var ts_loop_flag = 0;
+var ts_offset_vec = [];
+
+# hashes for managing separated 2nd stage
+
+var ssState = {};
+var ssCoord = {};
+var ssModel = {};
+
+var ss_loop_flag = 0;
+var ss_offset_vec = [];
+
 
 ###########################################################################
 # basic state vector management for imposed external accelerations
@@ -362,4 +380,190 @@ if (dist > 5000.0)
 	}
 
 if (tdu_loop_flag >0 ) {settimer(func{ update_tdu(delta_lon);} ,0.0);}
+}
+
+
+###########################################################################
+# dropped 3rd stage routines
+###########################################################################
+
+var init_ts_ballistic = func {
+
+
+var pitch = getprop("/orientation/pitch-deg");
+var yaw =getprop("/orientation/heading-deg");
+var roll = getprop("/orientation/roll-deg");
+
+var lon = getprop("/position/longitude-deg");
+
+
+tsCoord = geo.aircraft_position() ;
+
+
+
+tsState = stateVector.new (tsCoord.x(),tsCoord.y(),tsCoord.z(),0,0,0,yaw, pitch - lon, roll);
+
+tsModel = place_model("ts-ballistic", "Aircraft/Vostok-1/Models/Vostok-1-Stage-3-ballistic.xml", tsCoord.lat(), tsCoord.lon(), tsCoord.alt() * m_to_ft, yaw,pitch,roll);
+
+
+
+var lat = getprop("/position/latitude-deg") * math.pi/180.0;
+var lon = getprop("/position/longitude-deg") * math.pi/180.0;
+var dt = getprop("/sim/time/delta-sec");
+
+var vxoffset = 3.5 * math.cos(lon) * math.pow(dt/0.05,3.0);
+var vyoffset = 3.5 * math.sin(lon) * math.pow(dt/0.05,3.0);
+var vzoffset = 0.0;
+
+
+settimer(func { 
+		tsState.vx = getprop("/fdm/jsbsim/velocities/eci-x-fps") * ft_to_m + vxoffset;
+		tsState.vy = getprop("/fdm/jsbsim/velocities/eci-y-fps") * ft_to_m + vyoffset;
+		tsState.vz = getprop("/fdm/jsbsim/velocities/eci-z-fps") * ft_to_m + vzoffset;
+		ts_loop_flag = 1;
+		update_ts(0.0); },0);
+
+}
+
+var update_ts = func (delta_lon) {
+
+var vostokCoord = geo.aircraft_position();
+var dt = getprop("/sim/time/delta-sec");# * getprop("/sim/speed-up");
+
+
+delta_lon = delta_lon + dt * earth_rotation_deg_s * 1.004;
+
+var F = get_force (tsState, vostokCoord);
+tsState.update(F[0], F[1], F[2], 0.0,0.0,0.0);
+tsCoord.set_xyz(tsState.x, tsState.y, tsState.z);
+tsCoord.set_lon(tsCoord.lon() - delta_lon);
+
+
+if (ts_loop_flag < 3)
+	{
+	if (ts_loop_flag ==1)
+		{
+		ts_offset_vec = [tsCoord.x()-vostokCoord.x(), tsCoord.y()-vostokCoord.y(),tsCoord.z()-vostokCoord.z()];
+		}
+	if (ts_loop_flag == 2)
+		{
+		var offset1_vec = [tsCoord.x()-vostokCoord.x(), tsCoord.y()-vostokCoord.y(),tsCoord.z()-vostokCoord.z()];
+		var v_offset_vec = [(offset1_vec[0] - ts_offset_vec[0]) / dt, (offset1_vec[1] - ts_offset_vec[1]) / dt, (offset1_vec[2] - ts_offset_vec[2]) / dt];
+		#print(v_offset_vec[0], " ", v_offset_vec[1], " ", v_offset_vec[2]);
+
+
+		tsState = compute_state_correction  (tsState, tsCoord, vostokCoord, v_offset_vec, delta_lon);
+
+
+		#tsCoord.set_lon(tsCoord.lon() - delta_lon);
+		}
+	ts_loop_flag = ts_loop_flag + 1;
+
+
+	}
+
+set_coords("ts-ballistic", tsCoord, tsState);
+
+var dist = vostokCoord.distance_to(tsCoord);
+if (dist > 5000.0) 
+	{
+	print ("Third stage simulation ends");
+	tsModel.remove();
+	ts_loop_flag = 0;
+	}
+
+if (ts_loop_flag >0 ) {settimer(func{ update_ts(delta_lon);} ,0.0);}
+}
+
+
+###########################################################################
+# dropped 2nd stage routines
+###########################################################################
+
+var init_ss_ballistic = func {
+
+
+var pitch = getprop("/orientation/pitch-deg");
+var yaw =getprop("/orientation/heading-deg");
+var roll = getprop("/orientation/roll-deg");
+
+var lon = getprop("/position/longitude-deg");
+
+
+ssCoord = geo.aircraft_position() ;
+
+
+
+ssState = stateVector.new (ssCoord.x(),ssCoord.y(),ssCoord.z(),0,0,0,yaw, pitch - lon, roll);
+
+ssModel = place_model("ss-ballistic", "Aircraft/Vostok-1/Models/Vostok-1-Stage-2-ballistic.xml", ssCoord.lat(), ssCoord.lon(), ssCoord.alt() * m_to_ft, yaw,pitch,roll);
+
+
+
+var lat = getprop("/position/latitude-deg") * math.pi/180.0;
+var lon = getprop("/position/longitude-deg") * math.pi/180.0;
+var dt = getprop("/sim/time/delta-sec");
+
+var vxoffset = 3.5 * math.cos(lon) * math.pow(dt/0.05,3.0);
+var vyoffset = 3.5 * math.sin(lon) * math.pow(dt/0.05,3.0);
+var vzoffset = 0.0;
+
+
+settimer(func { 
+		ssState.vx = getprop("/fdm/jsbsim/velocities/eci-x-fps") * ft_to_m + vxoffset;
+		ssState.vy = getprop("/fdm/jsbsim/velocities/eci-y-fps") * ft_to_m + vyoffset;
+		ssState.vz = getprop("/fdm/jsbsim/velocities/eci-z-fps") * ft_to_m + vzoffset;
+		ss_loop_flag = 1;
+		update_ss(0.0); },0);
+
+}
+
+var update_ss = func (delta_lon) {
+
+var vostokCoord = geo.aircraft_position();
+var dt = getprop("/sim/time/delta-sec");# * getprop("/sim/speed-up");
+
+
+delta_lon = delta_lon + dt * earth_rotation_deg_s * 1.004;
+
+var F = get_force (ssState, vostokCoord);
+ssState.update(F[0], F[1], F[2], 0.0,0.0,0.0);
+ssCoord.set_xyz(ssState.x, ssState.y, ssState.z);
+ssCoord.set_lon(ssCoord.lon() - delta_lon);
+
+
+if (ss_loop_flag < 3)
+	{
+	if (ss_loop_flag ==1)
+		{
+		ss_offset_vec = [ssCoord.x()-vostokCoord.x(), ssCoord.y()-vostokCoord.y(),ssCoord.z()-vostokCoord.z()];
+		}
+	if (ss_loop_flag == 2)
+		{
+		var offset1_vec = [ssCoord.x()-vostokCoord.x(), ssCoord.y()-vostokCoord.y(),ssCoord.z()-vostokCoord.z()];
+		var v_offset_vec = [(offset1_vec[0] - ss_offset_vec[0]) / dt, (offset1_vec[1] - ss_offset_vec[1]) / dt, (offset1_vec[2] - ss_offset_vec[2]) / dt];
+		#print(v_offset_vec[0], " ", v_offset_vec[1], " ", v_offset_vec[2]);
+
+
+		ssState = compute_state_correction  (ssState, ssCoord, vostokCoord, v_offset_vec, delta_lon);
+
+
+		#ssCoord.set_lon(ssCoord.lon() - delta_lon);
+		}
+	ss_loop_flag = ss_loop_flag + 1;
+
+
+	}
+
+set_coords("ss-ballistic", ssCoord, ssState);
+
+var dist = vostokCoord.distance_to(ssCoord);
+if (dist > 5000.0) 
+	{
+	print ("Second stage simulation ends");
+	ssModel.remove();
+	ss_loop_flag = 0;
+	}
+
+if (ss_loop_flag >0 ) {settimer(func{ update_ss(delta_lon);} ,0.0);}
 }
