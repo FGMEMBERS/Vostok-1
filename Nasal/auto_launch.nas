@@ -70,7 +70,11 @@ else if (stage == 2) # fly through max. qbar
 	var qbar=getprop("fdm/jsbsim/aero/qbar-modified-kgm2");
 	var alt = getprop("/position/altitude-ft");
 
-	if (qbar > 3900.0)
+	if (qbar > 4900.0)
+		{
+		setprop("/controls/engines/engine/throttle", 0.65);
+		}
+	else if (qbar > 3800.0)
 		{
 		setprop("/controls/engines/engine/throttle", 0.73);
 		}
@@ -130,16 +134,43 @@ else if (stage == 4)
 	else if (g_force < 1.0)
 		{
 		setprop("/fdm/jsbsim/systems/rightswitchpanel/two-drop-input", 1);
-		stage = 5;
+		setprop("/fdm/jsbsim/systems/autopilot/att-mode", 2);
+		
+		settimer( func {
+				stage = 5;
+				setprop("/fdm/jsbsim/systems/rightswitchpanel/three-ignition-input", 1);
+				setprop("/controls/engines/engine/throttle", 1.0);
+				}, 8.0);
 		}
 	}
 else if (stage == 5)
 	{
+	var periapsis = getprop("/fdm/jsbsim/systems/enginespanel/periapsis-km");
+	var apoapsis = getprop("/fdm/jsbsim/systems/enginespanel/apoapsis-km");
+	var throttle = getprop("/controls/engines/engine/throttle");
+
+	if ((periapsis > 0.0) and (throttle > 0.1))
+		{
+		throttle = throttle * 0.98;
+ 		setprop("/controls/engines/engine/throttle", throttle);
+		}
+
+	if ((apoapsis > 250.0) and (periapsis > 130.0))
+		{
+		stage = 6;
+		setprop("/fdm/jsbsim/systems/rightswitchpanel/three-drop-input", 1);
+		}
+	
+	}
+else if (stage == 6)
+	{
 	print ("Autopilot signing off, have a nice flight!");
 	
 	auto_launch_loop_flag = 0;
-
+	setprop("/fdm/jsbsim/systems/autopilot/autolaunch-active", 0);
 	}
+
+
 
 
 

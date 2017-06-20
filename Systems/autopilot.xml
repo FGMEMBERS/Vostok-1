@@ -31,16 +31,50 @@ Thorsten Renk 2017
 		</function>
 		</fcs_function>
 
+
+
+  		<deadband name="systems/autopilot/pitch-PID-trigger">
+			<input>velocities/v-down-fps</input>
+			<width>30.0</width>
+  		</deadband>
+
+		<pid name="systems/autopilot/pitch-target-mode3">
+			<input>velocities/v-down-fps</input>
+			<kp> 0.6 </kp>
+			<ki> 0.02 </ki>
+			<kd> 0.1</kd>
+			<trigger>systems/autopilot/pitch-PID-trigger</trigger>
+			<clipto>
+				<min>   -5.0 </min>
+        			<max>  40.0 </max>
+			</clipto>
+		</pid>
+
+
+		<fcs_function name="systems/autopilot/pitch-error-mode3">
+		<function>
+			<difference>
+				<property>systems/autopilot/pitch-target-mode3</property>
+				<property>systems/angles/nose-pitch-deg</property>
+			</difference>
+		</function>
+		</fcs_function>
+
+
+
 		<switch name="systems/autopilot/pitch-error">
 			<default value="systems/autopilot/pitch-error-mode1"/>
 			<test value="systems/autopilot/pitch-error-mode2">
 				systems/autopilot/att-mode == 1
 			</test>
+			<test value="systems/autopilot/pitch-error-mode3">
+				systems/autopilot/att-mode == 2
+			</test>
 		</switch>
 
 
 
-		<fcs_function name="systems/autopilot/roll-error">
+		<fcs_function name="systems/autopilot/roll-error-mode1">
 		<function>
 			<difference>
 				<property>systems/autopilot/roll-target</property>
@@ -48,6 +82,22 @@ Thorsten Renk 2017
 			</difference>
 		</function>
 		</fcs_function>
+
+		<fcs_function name="systems/autopilot/roll-error-mode2">
+		<function>
+			<value>0.0</value>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/autopilot/roll-error">
+			<default value="systems/autopilot/roll-error-mode1"/>
+			<test value="systems/autopilot/roll-error-mode2">
+				systems/autopilot/att-mode == 1
+			</test>
+			<test value="systems/autopilot/roll-error-mode2">
+				systems/autopilot/att-mode == 2
+			</test>
+		</switch>
 
 
 		<fcs_function name="systems/autopilot/pitch-cmd">
