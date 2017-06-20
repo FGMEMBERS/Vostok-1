@@ -706,6 +706,18 @@
 					<nose-roll-rad type="double">0.0</nose-roll-rad>
 
 				</angles>
+
+				<autopilot>
+					<pitch-target type="double">0.0</pitch-target>
+					<roll-target type="double">0.0</roll-target>
+					<pitch-cmd type="double">0.0</pitch-cmd>
+					<yaw-cmd type="double">0.0</yaw-cmd>
+					<roll-cmd type="double">0.0</roll-cmd>
+					<autolaunch-selected type="int">0</autolaunch-selected>
+					<autolaunch-active type="int">0</autolaunch-active>
+					<att-mode type="int">0</att-mode>
+				</autopilot>		
+
 				<orientationcomputer>
 					<factor-angle type="double">1.2732</factor-angle>
 
@@ -1933,6 +1945,10 @@
 					<command>nasal</command>
 					<script>setprop("fdm/jsbsim/systems/rightswitchpanel/one-two-ignition-input", 1)</script>
 				</binding>
+				<binding n="1">
+					<command>nasal</command>
+					<script>ap.auto_launch_start()</script>
+				</binding>
 			</key>
 
 			<key n="70">
@@ -2090,6 +2106,9 @@
 			<script>start_stages();</script>
 			<file>Aircraft/Vostok-1/Nasal/Discarded_Stages.nas</file>
 		</stages>
+		<ap>
+			<file>Aircraft/Vostok-1/Nasal/auto_launch.nas</file>
+		</ap>
 		<mainpanel>
 			<file>Aircraft/Vostok-1/Nasal/Main_Panel.nas</file>
 			<script>start_mainpanel();</script>

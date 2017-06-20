@@ -4235,6 +4235,9 @@
 	<system file="Angles">
 	</system>
 
+	<system file="autopilot">
+	</system>
+
 	<!--<system file="Temperature">
 	</system>-->
 

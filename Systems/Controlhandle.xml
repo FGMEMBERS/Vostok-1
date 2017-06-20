@@ -124,11 +124,33 @@
 			<output>systems/controlhandle/button-input</output>
 		</switch>
 
+		<switch name="fcs/aileron-cmd-norm-merged">
+			<default value="fcs/aileron-cmd-norm"/>
+			<test logic="AND" value="systems/autopilot/roll-cmd">
+				systems/autopilot/autolaunch-active == 1
+			</test>
+		</switch>	
+
+		<switch name="fcs/elevator-cmd-norm-merged">
+			<default value="fcs/elevator-cmd-norm"/>
+			<test logic="AND" value="systems/autopilot/pitch-cmd">
+				systems/autopilot/autolaunch-active == 1
+			</test>
+		</switch>	
+
+		<switch name="fcs/rudder-cmd-norm-merged">
+			<default value="fcs/rudder-cmd-norm"/>
+			<test logic="AND" value="systems/autopilot/yaw-cmd">
+				systems/autopilot/autolaunch-active == 1
+			</test>
+		</switch>	
+
+
 		<!-- Output-->
 
 		<switch name="calculations/controlhandle/aileron-pos">
 			<default value="systems/controlhandle/aileron-pos"/>
-			<test logic="AND" value="fcs/aileron-cmd-norm">
+			<test logic="AND" value="fcs/aileron-cmd-norm-merged">
 				one eq 1.0
 			</test>
 			<output>systems/controlhandle/aileron-pos</output>
@@ -136,7 +158,7 @@
 
 		<switch name="calculations/controlhandle/elevator-pos">
 			<default value="systems/controlhandle/elevator-pos"/>
-			<test logic="AND" value="fcs/elevator-cmd-norm">
+			<test logic="AND" value="fcs/elevator-cmd-norm-merged">
 				one eq 1.0
 			</test>
 			<output>systems/controlhandle/elevator-pos</output>
@@ -144,7 +166,7 @@
 
 		<switch name="calculations/controlhandle/rudder-pos">
 			<default value="systems/controlhandle/rudder-pos"/>
-			<test logic="AND" value="fcs/rudder-cmd-norm">
+			<test logic="AND" value="fcs/rudder-cmd-norm-merged">
 				one eq 1.0
 			</test>
 			<output>systems/controlhandle/rudder-pos</output>

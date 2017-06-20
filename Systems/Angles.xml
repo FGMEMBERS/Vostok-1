@@ -509,6 +509,15 @@
 		</function>
 		</fcs_function>
 
+		<fcs_function name="systems/angles/nose-pitch-deg">
+		<function>
+			<product>
+				<property>systems/angles/nose-pitch-rad</property>
+				<value>57.295776</value>
+			</product>
+		</function>
+		</fcs_function>
+
 		<fcs_function name="systems/angles/nose-roll-rad">
 		<function>
 			<atan2>

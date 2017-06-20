@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<!-- 
+
+Launch autopilot for Vostok-1 - the high-level attitude targets are set by a Nasal script 
+
+Thorsten Renk 2017
+
+-->
+
+<system>
+
+	<channel name="Auto launch">
+
+
+		<fcs_function name="systems/autopilot/pitch-error-mode1">
+		<function>
+			<difference>
+				<property>systems/autopilot/pitch-target</property>
+				<property>/orientation/pitch-deg</property>
+			</difference>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/autopilot/pitch-error-mode2">
+		<function>
+			<difference>
+				<property>systems/autopilot/pitch-target</property>
+				<property>/fdm/jsbsim/systems/angles/nose-pitch-deg</property>
+			</difference>
+		</function>
+		</fcs_function>
+
+		<switch name="systems/autopilot/pitch-error">
+			<default value="systems/autopilot/pitch-error-mode1"/>
+			<test value="systems/autopilot/pitch-error-mode2">
+				systems/autopilot/att-mode == 1
+			</test>
+		</switch>
+
+
+
+		<fcs_function name="systems/autopilot/roll-error">
+		<function>
+			<difference>
+				<property>systems/autopilot/roll-target</property>
+				<property>/orientation/heading-deg</property>
+			</difference>
+		</function>
+		</fcs_function>
+
+
+		<fcs_function name="systems/autopilot/pitch-cmd">
+		<function>
+			<min>
+			<max>
+			<product>
+				<property>systems/autopilot/pitch-error</property>
+				<value>-0.05</value>
+			</product>
+			<value>-1.0</value>
+			</max>
+			<value>1.0</value>
+			</min>
+		</function>
+		</fcs_function>
+
+		<fcs_function name="systems/autopilot/roll-cmd">
+		<function>
+			<min>
+			<max>
+			<product>
+				<property>systems/autopilot/roll-error</property>
+				<value>0.1</value>
+			</product>
+			<value>-1.0</value>
+			</max>
+			<value>1.0</value>
+			</min>
+		</function>
+		</fcs_function>
+
+
+	</channel>
+
+</system>

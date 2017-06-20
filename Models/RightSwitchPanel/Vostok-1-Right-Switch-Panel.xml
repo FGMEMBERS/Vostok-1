@@ -357,6 +357,11 @@
 				<property>fdm/jsbsim/systems/rightswitchpanel/one-two-ignition-input</property>
 				<value>1</value>
 			</binding>
+
+			<binding>
+				<command>nasal</command>
+				<script>ap.auto_launch_start()</script>
+			</binding>
 		</action>
 		<action>
 			<button>1</button>
