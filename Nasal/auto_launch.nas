@@ -139,11 +139,11 @@ else if (stage == 4) # fly to second stage separation
 
 	if (apoapsis < 130.0)
 		{
-		setprop("/fdm/jsbsim/systems/autopilot/pitch-target", 5.0);
+		setprop("/fdm/jsbsim/systems/autopilot/pitch-target", 3.0);
 		}
 	else if (apoapsis < 150.0)
 		{
-		setprop("/fdm/jsbsim/systems/autopilot/pitch-target", 2.0);
+		setprop("/fdm/jsbsim/systems/autopilot/pitch-target", 1.5);
 		}
 	else
 		{
