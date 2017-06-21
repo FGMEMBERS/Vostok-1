@@ -715,6 +715,7 @@
 					<roll-cmd type="double">0.0</roll-cmd>
 					<autolaunch-selected type="int">0</autolaunch-selected>
 					<autolaunch-active type="int">0</autolaunch-active>
+					<autolaunch-canceled type="int">0</autolaunch-canceled>
 					<att-mode type="int">0</att-mode>
 				</autopilot>		
 

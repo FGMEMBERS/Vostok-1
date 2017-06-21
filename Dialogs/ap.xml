@@ -192,33 +192,47 @@
       <col>1</col>
        <legend>Manual Control</legend>
        <visible>
+	  <and>
 	  <equals>
 	   <property>/fdm/jsbsim/systems/autopilot/autolaunch-selected</property>	
 	   <value>1</value>
 	  </equals>
+	  <equals>
+	   <property>/fdm/jsbsim/systems/autopilot/autolaunch-canceled</property>	
+	   <value>0</value>
+	  </equals>
+	  </and>
        </visible>
        <default>false</default>
-       <binding>
+       <!--<binding>
 	  <command>property-assign</command>
           <property>/fdm/jsbsim/systems/autopilot/autolaunch-selected</property>
           <value>0</value>
-	</binding>
+	</binding>-->
        <binding>
 	  <command>property-assign</command>
           <property>/fdm/jsbsim/systems/autopilot/autolaunch-active</property>
           <value>0</value>
 	</binding>
+       <binding>
+	  <command>property-assign</command>
+          <property>/fdm/jsbsim/systems/autopilot/autolaunch-canceled</property>
+          <value>1</value>
+	</binding>
+       <binding>
+	  <command>nasal</command>
+	  <script>ap.auto_launch_stop()</script>
+	</binding>
     </button>
 
    <text>
-      <label>active</label>
+      <label>manual control</label>
        <visible>
 	  <equals>
-	   <property>/fdm/jsbsim/systems/ap/launch/autolaunch-master</property>	
+	   <property>/fdm/jsbsim/systems/autopilot/autolaunch-canceled</property>	
 	   <value>1</value>
 	  </equals>
        </visible>
-      <halign>left</halign>
       <row>4</row>
       <col>1</col>
     </text>

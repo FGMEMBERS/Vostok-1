@@ -7,12 +7,16 @@ var stage = 0;
 
 var fairing_flag = 0;
 var pitchdown_flag = 0;
+var apoapsis_tgt = 250.0;
+
 
 
 var auto_launch_prestart = func {
 
 setprop("/fdm/jsbsim/systems/rightswitchpanel/cover-input", 1);
 setprop("/fdm/jsbsim/systems/gascontrol/lock-command", 0);
+
+apoapsis_tgt = getprop("/sim/gui/dialogs/Vostok-1/auto_launch/apoapsis-target-km");
 
 settimer (auto_launch_start, 2.0);
 
@@ -44,7 +48,7 @@ auto_launch_loop();
 
 var auto_launch_stop = func {
 
-
+print("Controls back to manual.");
 auto_launch_loop_flag = 0;
 
 }
@@ -182,7 +186,7 @@ else if (stage == 5)
  		setprop("/controls/engines/engine/throttle", throttle);
 		}
 
-	if ((apoapsis > 250.0) and (periapsis > 130.0))
+	if (apoapsis > apoapsis_tgt)
 		{
 		stage = 6;
 		setprop("/fdm/jsbsim/systems/rightswitchpanel/three-drop-input", 1);
