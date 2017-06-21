@@ -4,6 +4,8 @@
 var ap_dlg = gui.Dialog.new("/sim/gui/dialogs/Vostok-1/ap/dialog","Aircraft/Vostok-1/Dialogs/ap.xml");
 
 
+var config_dlg = gui.Dialog.new("/sim/gui/dialogs/Vostok-1/config/dialog","Aircraft/Vostok-1/Dialogs/config.xml");
+
 
 var update_inclination = func {
 

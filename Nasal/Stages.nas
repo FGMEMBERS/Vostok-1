@@ -17,6 +17,11 @@ var viewHelper = {
 
 };
 
+# Earthview stuff
+
+var earthview_flag = getprop("/sim/config/vostok-1/rendering/use-earthview");
+var earthview_transition_alt = getprop("/sim/config/vostok-1/rendering/earthview-transition-alt-ft");
+
 
 # helper 
 var end_stages = func 
@@ -222,6 +227,34 @@ var stages = func
 			return ( settimer(stages, 0.1) ); 
 		}
 		setprop("fdm/jsbsim/stages/error", 0);
+
+
+		# automatically switch Earthview on or off
+
+		if ((earthview_flag == 1) and (earthview.earthview_running_flag == 0))
+			{
+			var alt = getprop("/position/altitude-ft");
+			if (alt > earthview_transition_alt)
+				{
+				if (getprop("/sim/gui/dialogs/metar/mode/local-weather") == 1)
+					{local_weather.clear_all();}
+				earthview.start();
+				}
+
+			}
+
+		else if ((earthview_flag == 1) and (earthview.earthview_running_flag == 1))
+			{
+			var alt = getprop("/position/altitude-ft");
+			if (alt < earthview_transition_alt)
+				{
+				earthview.stop();
+
+				if (getprop("/sim/gui/dialogs/metar/mode/local-weather") == 1)
+				{local_weather.set_tile();}
+				}
+
+			}
 
 		#Shifts
 

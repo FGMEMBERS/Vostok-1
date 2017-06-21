@@ -1636,6 +1636,10 @@
       			<vostok-1>
 		    		<simulate-booster-drop type="int">0</simulate-booster-drop>
 				<simulate-dropped-stages type="int">1</simulate-dropped-stages>
+				<rendering>
+					<use-earthview type="int">0</use-earthview>
+					<earthview-transition-alt-ft type="double">100000.0</earthview-transition-alt-ft>
+				</rendering>
 	  		</vostok-1>
     		</config>
 
@@ -1864,6 +1868,13 @@
 						<script>Vostok1.ap_dlg.open()</script>
 		       			</binding>
 		      		</item>
+		      		<item>
+		       			<label>Simulation options</label>
+		       			<binding>
+						<command>nasal</command>
+						<script>Vostok1.config_dlg.open()</script>
+		       			</binding>
+		      		</item>
 		    	</menu>
 
 		   	</default>
@@ -1881,6 +1892,14 @@
 		</Vostok-1>
 	    </dialogs>
 	  </gui>
+
+
+	  	<aircraft-data>
+		    	<path>/sim/config/vostok-1/rendering/use-earthview</path>
+		    	<path>/sim/config/vostok-1/rendering/earthview-transition-alt-ft</path>
+		    	<path>/sim/config/vostok-1/simulate-booster-drop</path>
+		    	<path>/sim/config/vostok-1/simulate-dropped-stages</path>
+	  	</aircraft-data>
 
 		<sound>
 			<audible>true</audible>

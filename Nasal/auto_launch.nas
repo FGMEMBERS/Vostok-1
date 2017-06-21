@@ -132,8 +132,23 @@ else if (stage == 3) # fly to booster separation
 		}
 
 	}
-else if (stage == 4)
+else if (stage == 4) # fly to second stage separation
 	{
+
+	var apoapsis = getprop("/fdm/jsbsim/systems/enginespanel/apoapsis-km");
+
+	if (apoapsis < 130.0)
+		{
+		setprop("/fdm/jsbsim/systems/autopilot/pitch-target", 5.0);
+		}
+	else if (apoapsis < 150.0)
+		{
+		setprop("/fdm/jsbsim/systems/autopilot/pitch-target", 2.0);
+		}
+	else
+		{
+		setprop("/fdm/jsbsim/systems/autopilot/pitch-target", 0.0);
+		}
 
 	var g_force = getprop("fdm/jsbsim/accelerations/Nz");
 

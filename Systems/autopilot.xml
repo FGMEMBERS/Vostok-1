@@ -35,14 +35,14 @@ Thorsten Renk 2017
 
   		<deadband name="systems/autopilot/pitch-PID-trigger">
 			<input>velocities/v-down-fps</input>
-			<width>30.0</width>
+			<width>20.0</width>
   		</deadband>
 
 		<pid name="systems/autopilot/pitch-target-mode3">
 			<input>velocities/v-down-fps</input>
-			<kp> 0.6 </kp>
+			<kp> 0.75 </kp>
 			<ki> 0.02 </ki>
-			<kd> 0.1</kd>
+			<kd> 0.15</kd>
 			<trigger>systems/autopilot/pitch-PID-trigger</trigger>
 			<clipto>
 				<min>   -5.0 </min>
