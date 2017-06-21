@@ -9,10 +9,22 @@ var fairing_flag = 0;
 var pitchdown_flag = 0;
 
 
+var auto_launch_prestart = func {
+
+setprop("/fdm/jsbsim/systems/rightswitchpanel/cover-input", 1);
+setprop("/fdm/jsbsim/systems/gascontrol/lock-command", 0);
+
+settimer (auto_launch_start, 2.0);
+
+}
+
 var auto_launch_start = func {
 
-if (getprop("/fdm/jsbsim/systems/autopilot/autolaunch-selected") == 0)
-	{return;}
+#if (getprop("/fdm/jsbsim/systems/autopilot/autolaunch-selected") == 0)
+#	{return;}
+
+
+setprop("/fdm/jsbsim/systems/rightswitchpanel/one-two-ignition-input", 1);
 
 if (auto_launch_loop_flag == 1) {return;}
 
@@ -20,10 +32,10 @@ print("Starting auto-launch guidance");
 
 auto_launch_loop_flag = 1;
 
-setprop("/fdm/jsbsim/systems/autopilot/roll-target", 70.0);
+#setprop("/fdm/jsbsim/systems/autopilot/roll-target", getprop("/);
 setprop("/fdm/jsbsim/systems/autopilot/pitch-target", 0.0);
 
-#setprop("/controls/engines/engine[0]/throttle", 1);
+setprop("/controls/engines/engine[0]/throttle", 1);
 
 auto_launch_loop();
 

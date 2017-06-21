@@ -358,10 +358,10 @@
 				<value>1</value>
 			</binding>
 
-			<binding>
+			<!--<binding>
 				<command>nasal</command>
 				<script>ap.auto_launch_start()</script>
-			</binding>
+			</binding>-->
 		</action>
 		<action>
 			<button>1</button>
