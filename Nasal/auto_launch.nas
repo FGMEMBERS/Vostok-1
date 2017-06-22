@@ -174,7 +174,7 @@ else if (stage == 4) # fly to second stage separation
 				}, 8.0);
 		}
 	}
-else if (stage == 5)
+else if (stage == 5) # hold altitude to target apoapsis
 	{
 	var periapsis = getprop("/fdm/jsbsim/systems/enginespanel/periapsis-km");
 	var apoapsis = getprop("/fdm/jsbsim/systems/enginespanel/apoapsis-km");
