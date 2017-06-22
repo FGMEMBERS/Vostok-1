@@ -2088,6 +2088,11 @@ var init_stages=func
 			third_stage_separate();
 			tdu_stage_separate();
 			spacecraft_separate();
+
+			if (getprop("/sim/config/vostok-1/simulate-booster-drop") == 1)	
+				{
+				settimer(func {setprop("/fdm/jsbsim/stages/unit[0]/attach", 1);}, 0.1);
+				}
 			}
 
 		#first_stage_separate();

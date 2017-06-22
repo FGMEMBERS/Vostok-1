@@ -45,6 +45,15 @@
               <command>dialog-apply</command>
               <object-name>firststage</object-name>
           </binding>
+ 	  <binding>
+              <command>nasal</command>
+              <script>
+			var option = getprop("/sim/config/vostok-1/simulate-booster-drop");
+			if (option == 1)
+				{setprop("/fdm/jsbsim/stages/unit[0]/attach", 1);}
+	      </script>
+          </binding>
+
         </checkbox>
 
     <checkbox>

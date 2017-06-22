@@ -416,6 +416,7 @@
 				<change type="bool">0.0</change>
 				<unit n="0">
 					<active type="bool">1</active>
+					<attach type="int">0</attach>
 					<ignited type="bool">0</ignited>
 					<g-allowed type="double">4</g-allowed>
 					<g-break-psec type="double">0.05</g-break-psec>
@@ -1916,14 +1917,14 @@
 			</Vostok-1>
 		</model>
 
-<!--
+
 
 		<submodels>
 			<serviceable type="bool">1</serviceable>
 			<path>Aircraft/Vostok-1/Models/Vostok-1-Submodels.xml</path>
 		</submodels>
 
--->
+
 
 <!-- Main menu
 
