@@ -1653,7 +1653,7 @@
 
 		<help>
 			<title>Vostok-1</title>
-			<line>Aircraft documentation in /Vostok-1/Documentation directory</line>
+			<line>Detailed spacecraft documentation is in the /Vostok-1/Documentation directory</line>
 			<key>
 				<name>R</name>
 				<desc>Lock/Unlock thRottle handle (Locked at start up)</desc>
@@ -1722,6 +1722,16 @@
 				<name>]</name>
 				<desc>yaw right</desc>
 			</key>
+
+			<text>
+
+The rocket is equipped with a simple launch autopilot. This requires a sane launch setup to work, i.e. an eastward launch and the spacecraft oriented such that the pilot faces the eastern hemisphere so that the rocket does not need to rotate for too long to reach launch azimuth. The launch AP handles all tasks (including throttle, fairings and stage separation) up to 3rd stage separation and restores manual control once the TDU and the capsule are in orbit. 
+
+To use the launch AP, open the menu item, select the targeted inclination, launch direction and apoapsis and press 'Launch' when everything is ready (the correct launch azimuth will be computed automatically). Note that the launch AP (intentionally) is not exact - do not expect to reach the specified orbit precisely.
+
+If you need to take over manually, there is a one-way option provided after the rocket is launched, depress the button again and you are in manual control - note that you can not re-engage the autopilot.
+
+ 			</text>
 		</help>
 
 		<flight-model>jsb</flight-model>
