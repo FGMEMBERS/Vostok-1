@@ -236,7 +236,7 @@ var stages = func
 			var alt = getprop("/position/altitude-ft");
 			if (alt > earthview_transition_alt)
 				{
-				if (getprop("/sim/gui/dialogs/metar/mode/local-weather") == 1)
+				if (getprop("/nasal/local_weather/enabled") == 1)
 					{local_weather.clear_all();}
 				earthview.start();
 				}
@@ -250,7 +250,7 @@ var stages = func
 				{
 				earthview.stop();
 
-				if (getprop("/sim/gui/dialogs/metar/mode/local-weather") == 1)
+				if (getprop("/nasal/local_weather/enabled") == 1)
 				{local_weather.set_tile();}
 				}
 
