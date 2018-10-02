@@ -15,15 +15,15 @@
 
 	<!-- Required input from FlightGear:
 	     /position/sea-level-radius-ft mapped to ic/sea-level-radius-ft
-	     A delay is necessary to give FG time to create the property.
+	     The source property is created from the -set file since FlightGear
+	     creates it after the FDM has started.
 	-->
 	<channel name="input from FG">
-		<switch name="ic/sea-level-radius-ft">
-			<default value="0.0"/>
-			<test logic="AND" value="/position/sea-level-radius-ft">
-				simulation/sim-time-sec GT 0.1
-			</test>
-		</switch>
+		<fcs_function name="ic/sea-level-radius-ft">
+			<function>
+				<property>/position/sea-level-radius-ft</property>
+			</function>
+		</fcs_function>
 	</channel>
 
 <!--	That must be aded to set file

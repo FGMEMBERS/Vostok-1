@@ -2197,4 +2197,8 @@ If you need to take over manually, there is a one-way option provided after the 
 		</Vostok1>
 	</nasal>
 
+	<position n="0">
+		<!-- Make sure this property exists when the FDM starts. -->
+		<sea-level-radius-ft n="0" type="float"/>
+	</position>
 </PropertyList>
