@@ -10,6 +10,26 @@
 
 	<path>Vostok-1-Stage-1.ac</path>
 
+	<animation>
+		<type>select</type>
+		<condition>
+			<and>
+			<equals>
+				<property>/fdm/jsbsim/stages/unit[0]/drop</property>
+				<value>0</value>
+			</equals>
+			<equals>
+				<property>/sim/config/vostok-1/simulate-booster-drop</property>
+				<value>0</value>
+			</equals>
+			<equals>
+				<property>fdm/jsbsim/stages/unit[0]/active</property>
+				<value>true</value>
+			</equals>
+			</and>
+		</condition>
+	</animation>
+
 	<offsets>
 		<x-m>0.0</x-m>
 		<y-m>0.0</y-m>
@@ -19,85 +39,22 @@
 
 	<enable-hot type="bool">false</enable-hot>
 
-<model>
-<path>Aircraft/Vostok-1/Models/Effects/main-exhaust.xml</path>
-     <offsets>
-       <x-m> 0.196 </x-m>
-       <y-m> 0.0</y-m>
-       <z-m> -19.553 </z-m>
-       <pitch-deg>87.8</pitch-deg>
-     </offsets>
-   <condition>
- 	<greater-than>
-	<property>/fdm/jsbsim/propulsion/engine[2]/thrust-lbs</property>
- 	<value>0</value>
- 	</greater-than>
-     </condition>
-</model>
-
-	<!-- Add exhaust models
-
 	<model>
-		<path>Aircraft/Vostok-1/Models/Exhausts/Stage1/Vostok-1-Stage-1-Block-C-Main-Exhaust.xml</path>
-		<name>EXT_Main</name>
-		<offsets>
-			<x-m>0.196</x-m>
-			<y-m>0.0</y-m>
-			<z-m>-19.553</z-m>
-			<pitch-deg>87.8</pitch-deg>
-			<heading-deg>0</heading-deg>
-		</offsets>
+	<path>Aircraft/Vostok-1/Models/Effects/main-exhaust.xml</path>
+	     <offsets>
+	       <x-m> 0.196 </x-m>
+	       <y-m> 0.0</y-m>
+	       <z-m> -19.553 </z-m>
+	       <pitch-deg>87.8</pitch-deg>
+	     </offsets>
+	   <condition>
+	 	<greater-than>
+		<property>/fdm/jsbsim/propulsion/engine[2]/thrust-lbs</property>
+	 	<value>0</value>
+	 	</greater-than>
+	     </condition>
 	</model>
 
-	<model>
-		<path>Aircraft/Vostok-1/Models/Exhausts/Stage1/Vostok-1-Stage-1-Block-C-Maneur-One-Exhaust.xml</path>
-		<name>EXT_One</name>
-		<offsets>
-			<x-m>-1.034</x-m>
-			<y-m>0.497</y-m>
-			<z-m>-19.843</z-m>
-			<pitch-deg>90.0</pitch-deg>
-			<heading-deg>0</heading-deg>
-		</offsets>
-	</model>
-
-	<model>
-		<path>Aircraft/Vostok-1/Models/Exhausts/Stage1/Vostok-1-Stage-1-Block-C-Maneur-One-Exhaust.xml</path>
-		<name>EXT_Two</name>
-		<offsets>
-			<x-m>-1.034</x-m>
-			<y-m>-0.510</y-m>
-			<z-m>-19.843</z-m>
-			<pitch-deg>90.0</pitch-deg>
-			<heading-deg>0</heading-deg>
-		</offsets>
-	</model>
-
--->
-
-	<animation>
-		<type>select</type>
-		<condition>
-			<equals>
-				<property>fdm/jsbsim/stages/unit[0]/active</property>
-				<value>true</value>
-			</equals>
-		</condition>
-	</animation>
-
-	<!--Main engine
-
-	<animation>
-		<type>material</type>
-		<object-name>FS_RD108MainI</object-name>
-		<emission>
-			<red-prop>fdm/jsbsim/propulsion/engine[2]/red</red-prop>
-			<green-prop>fdm/jsbsim/propulsion/engine[2]/green</green-prop>
-			<blue-prop>fdm/jsbsim/propulsion/engine[2]/blue</blue-prop>
-		</emission>
-	</animation>
-
--->
 
 	<!--First engine-->
 
@@ -120,19 +77,7 @@
 		</axis>
 	</animation>
 
-<!--
 
-	<animation>
-		<type>material</type>
-		<object-name>FS_RD107MOneI</object-name>
-		<emission>
-			<red-prop>fdm/jsbsim/propulsion/engine[3]/red</red-prop>
-			<green-prop>fdm/jsbsim/propulsion/engine[3]/green</green-prop>
-			<blue-prop>fdm/jsbsim/propulsion/engine[3]/blue</blue-prop>
-		</emission>
-	</animation>
-
--->
 
 	<!--Second engine-->
 
@@ -155,19 +100,7 @@
 		</axis>
 	</animation>
 
-<!--
 
-	<animation>
-		<type>material</type>
-		<object-name>FS_RD107MTwoI</object-name>
-		<emission>
-			<red-prop>fdm/jsbsim/propulsion/engine[3]/red</red-prop>
-			<green-prop>fdm/jsbsim/propulsion/engine[3]/green</green-prop>
-			<blue-prop>fdm/jsbsim/propulsion/engine[3]/blue</blue-prop>
-		</emission>
-	</animation>
-
--->
 
 	<!--Stabilisator-->
 

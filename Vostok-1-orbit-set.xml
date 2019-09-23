@@ -1,31 +1,33 @@
 <?xml version="1.0"?>
 
-<!-- this puts Vostok onto the launch pad -->
+<!-- this puts Vostok into orbit -->
 
 <PropertyList include="Vostok-1-common.xml">
 <sim>
-  <presets>
-	<stage type="int">0</stage>
-  </presets>
-  <description>Vostok-1</description>
+  <variant-of>Vostok-1</variant-of>
+  <description>Vostok-1 in orbit</description>
   <long-description>
-   The Vostok spacecraft carried the first human into Earth orbit. In this mission phase, the spacecraft is attached to the carrier rocket and ready to launch into space.
+   The Vostok spacecraft carried the first human into Earth orbit. In this mission phase, the capsule is in low Earth orbit and the TDU provides very limited maneuvering capability.
   </long-description>
+  <presets>
+	<stage type="int">1</stage>
+	<altitude-ft>500000.0</altitude-ft>
+  </presets>
   <previews>
       <preview>
         <type>exterior</type>
         <splash type="bool">true</splash>
-        <path>Pics/vostok_exterior01.jpg</path>
+        <path>Pics/vostok_tdu_exterior01.jpg</path>
       </preview>
       <preview>
         <type>exterior</type>
         <splash type="bool">true</splash>
-        <path>Pics/vostok_exterior02.jpg</path>
+        <path>Pics/vostok_tdu_exterior02.jpg</path>
       </preview>
       <preview>
         <type>exterior</type>
         <splash type="bool">true</splash>
-        <path>Pics/vostok_exterior03.jpg</path>
+        <path>Pics/vostok_tdu_exterior03.jpg</path>
       </preview>
 	  <preview>
         <type>panel</type>

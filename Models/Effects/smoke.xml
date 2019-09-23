@@ -7,8 +7,8 @@
 	 <name>vostok_smoke</name>
 	 <texture>smoke.png</texture>
 	 <emissive>false</emissive>
-	 <lighting>true</lighting>
-	                <x-m>0.0</x-m>
+	 <lighting>false</lighting>
+	        <x-m>0.0</x-m>
 			<y-m>0.0</y-m>
 			<z-m>0.0</z-m>
 			<roll-deg>0.0</roll-deg>
@@ -66,7 +66,7 @@
 	 
 	 <counter>
 		 <particles-per-sec>
-			 <value>50</value>
+			 <value>250</value>
 			 <spread>0</spread>
 		 </particles-per-sec>
 	 </counter>
@@ -77,32 +77,32 @@
 		 <start>
 			 <color>
 				<red>
-						<value>0.9</value>
+						<property>/lighting/effects/color-7</property>
 					</red>
 					<green>
-						<value>0.9</value>
+						<property>/lighting/effects/color-7</property>
 					</green>
 					<blue>
-						<value>0.9</value>
+						<property>/lighting/effects/color-7</property>
 					</blue>
 					<alpha>
 						<value>0.4</value>
 					</alpha>
 			 </color>
 			 <size>
-				 <value>5.2</value>
+				 <value>7.5</value>
 			 </size>
 		 </start>
 		 <end>
 			 <color>
 				 <red>
-					 <value>0.6</value>
+						<property>/lighting/effects/color-4</property>
 				 </red>
 				 <green>
-					 <value>0.6</value>
+						<property>/lighting/effects/color-4</property>
 				 </green>
 				 <blue>
-					 <value>0.6</value>
+						<property>/lighting/effects/color-4</property>
 				 </blue>
 				 <alpha>
 					 <value>0.2</value>

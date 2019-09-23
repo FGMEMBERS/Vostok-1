@@ -1,11 +1,27 @@
 #
-# Author: Slavutinsky Victor
+# Author: Slavutinsky Victor, changes and additions Thorsten Renk 2017
 #
 
 # Stages stages. Change weights, points of view, inital fuel tanks contents due to stages change.
 # Currently active stages is setted as 1.
 
 #stages.init_stages(); gotta be called on manual aircraft restart
+
+# use a view manager to force view resets only when views are changed to 
+# allow user to change views
+
+var viewHelper = {
+
+	lastView: -1,
+	currentView: 0,
+
+};
+
+# Earthview stuff
+
+var earthview_flag = getprop("/sim/config/vostok-1/rendering/use-earthview");
+var earthview_transition_alt = getprop("/sim/config/vostok-1/rendering/earthview-transition-alt-ft");
+
 
 # helper 
 var end_stages = func 
@@ -69,6 +85,7 @@ var stages = func
 		view_heading_offset_deg[6]=getprop("sim/view[104]/config/heading-offset-deg");
 
 		var current_view_name=getprop("sim/current-view/name");
+		viewHelper.currentView = getprop("/sim/current-view/view-number");
 
 		var one_two_ignition_switch=getprop("fdm/jsbsim/systems/rightswitchpanel/one-two-ignition-switch");
 		var one_drop_switch=getprop("fdm/jsbsim/systems/rightswitchpanel/one-drop-switch");
@@ -211,6 +228,34 @@ var stages = func
 		}
 		setprop("fdm/jsbsim/stages/error", 0);
 
+
+		# automatically switch Earthview on or off
+
+		if ((earthview_flag == 1) and (earthview.earthview_running_flag == 0))
+			{
+			var alt = getprop("/position/altitude-ft");
+			if (alt > earthview_transition_alt)
+				{
+				if (getprop("/nasal/local_weather/enabled") == 1)
+					{local_weather.clear_all();}
+				earthview.start();
+				}
+
+			}
+
+		else if ((earthview_flag == 1) and (earthview.earthview_running_flag == 1))
+			{
+			var alt = getprop("/position/altitude-ft");
+			if (alt < earthview_transition_alt)
+				{
+				earthview.stop();
+
+				if (getprop("/nasal/local_weather/enabled") == 1)
+				{local_weather.set_tile();}
+				}
+
+			}
+
 		#Shifts
 
 		fairings_shift();
@@ -218,7 +263,7 @@ var stages = func
 		third_stage_shift();
 		tdu_stage_shift();
 		spacecraft_shift();
-		view_shift();
+		#view_shift();
 
 		#Effect colors
 
@@ -576,25 +621,35 @@ var stages = func
 
 		#Views
 
+
 		if (current_view_name=="Cosmonaut View")
 		{
-			setprop("sim/current-view/x-offset-m", view_offset_x[0]);
-			setprop("sim/current-view/y-offset-m", view_offset_y[0]);
-			setprop("sim/current-view/z-offset-m", view_offset_z[0]);
+			if (viewHelper.currentView != viewHelper.lastView)
+				{
+				setprop("sim/current-view/x-offset-m", view_offset_x[0]);
+				setprop("sim/current-view/y-offset-m", view_offset_y[0]);
+				setprop("sim/current-view/z-offset-m", view_offset_z[0]);
+				}
 		}
 
 		if (current_view_name=="Tail View")
 		{
-			setprop("sim/current-view/x-offset-m", view_offset_x[1]);
-			setprop("sim/current-view/y-offset-m", view_offset_y[1]);
-			setprop("sim/current-view/z-offset-m", view_offset_z[1]);
+			if (viewHelper.currentView != viewHelper.lastView)
+				{
+				setprop("sim/current-view/x-offset-m", view_offset_x[1]);
+				setprop("sim/current-view/y-offset-m", view_offset_y[1]);
+				setprop("sim/current-view/z-offset-m", view_offset_z[1]);
+				}
 		}
 
 		if (current_view_name=="Side View")
 		{
-			setprop("sim/current-view/x-offset-m", view_offset_x[2]);
-			setprop("sim/current-view/y-offset-m", view_offset_y[2]);
-			setprop("sim/current-view/z-offset-m", view_offset_z[2]);
+			if (viewHelper.currentView != viewHelper.lastView)
+				{
+				setprop("sim/current-view/x-offset-m", view_offset_x[2]);
+				setprop("sim/current-view/y-offset-m", view_offset_y[2]);
+				setprop("sim/current-view/z-offset-m", view_offset_z[2]);
+				}
 		}
 
 		if (current_view_name=="Left Panel View")
@@ -632,6 +687,8 @@ var stages = func
 			setprop("sim/current-view/pitch-offset-deg", view_pitch_offset_deg[6]);
 			setprop("sim/current-view/heading-offset-deg", view_heading_offset_deg[6]);
 		}
+
+		viewHelper.lastView = viewHelper.currentView;
 
 		setprop("fdm/jsbsim/stages/command", 0);
 
@@ -734,6 +791,7 @@ var first_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[0]/active", 1);
+		view_shift();
 	}
 
 var first_stage_drop_fuel=func
@@ -800,6 +858,8 @@ var first_stage_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[0]/active", 0);
+		viewHelper.lastView = -1;
+		view_shift();
 	}
 
 var first_stage_init=func
@@ -839,6 +899,7 @@ var fairings_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[1]/active", 1);
+		view_shift();
 	}
 
 var fairings_drop_weights=func
@@ -922,6 +983,7 @@ var second_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[2]/active", 1);
+		view_shift();
 	}
 
 var second_stage_drop_fuel=func
@@ -959,6 +1021,8 @@ var second_stage_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[2]/active", 0);
+		viewHelper.lastView = -1;
+		view_shift();
 	}
 
 var second_stage_init=func
@@ -1037,6 +1101,7 @@ var third_stage_activate=func
 	{
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[3]/active", 1);
+		settimer(view_shift, 0.3);
 	}
 
 var third_stage_drop_fuel=func
@@ -1076,6 +1141,8 @@ var third_stage_deactivate=func
 	{
 		#Deactivate
 		setprop("fdm/jsbsim/stages/unit[3]/active", 0);
+		viewHelper.lastView = -1;
+		view_shift();
 	}
 
 var third_stage_init=func
@@ -1205,6 +1272,7 @@ var tdu_stage_activate=func
 		setprop("fdm/jsbsim/systems/tdu/whip-antennas-pos-norm", 0);
 		setprop("fdm/jsbsim/systems/tdu/whip-antennas-extracted", 0);
 		setprop("fdm/jsbsim/stages/unit[4]/active", 1);
+		view_shift();
 	}
 
 var tdu_stage_drop_fuel=func
@@ -1275,6 +1343,8 @@ var tdu_stage_deactivate=func
 		setprop("fdm/jsbsim/systems/tdu/whip-antennas-pos-norm", 0);
 		setprop("fdm/jsbsim/systems/tdu/whip-antennas-extracted", 0);
 		setprop("fdm/jsbsim/stages/unit[4]/active", 0);
+		viewHelper.lastView = -1;
+		view_shift();
 	}
 
 var tdu_stage_init=func
@@ -1353,6 +1423,7 @@ var spacecraft_activate=func
 		#Activate
 		setprop("fdm/jsbsim/stages/unit[5]/activated", 0);
 		setprop("fdm/jsbsim/stages/unit[5]/active", 1);
+		view_shift();
 }
 
 var spacecraft_drop_fuel=func
@@ -1538,6 +1609,10 @@ var start_second_stage_drop=func
 		start_change();
 		second_stage_stop_engine();
 		third_stage_stop_engine();
+
+		if (getprop("/sim/config/vostok-1/simulate-dropped-stages") == 1)
+			{init_ss_ballistic();}  # this calls the Nasal simulation of co-orbiting objects
+
 		settimer(second_stage_drop_phase_one, 0.3);
 	}
 
@@ -1569,24 +1644,8 @@ var second_stage_drop_phase_two=func
 var second_stage_drop_phase_three=func
 	{
 
-		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
-		var heading=props.globals.getNode("orientation/heading-deg", 1).getValue(0);
-
-		var ballistics=props.globals.getNode("ai/models").getChildren("ballistic");
-		foreach(var ballistic; ballistics)
-		{
-			var name=ballistic.getName();
-			if (
-				(name="Second Stage")
-			)
-			{
-				ballistic.getChild("controls", 0, 1).getChild("slave-to-ac", 0, 1).setValue(0);
-			}
-		}
-
-		setprop("ai/ballistic-forces/force[6]/force-lb", 16312*2);
-		setprop("ai/ballistic-forces/force[6]/force-azimuth-deg", heading);
-		setprop("ai/ballistic-forces/force[6]/force-elevation-deg", pitch-90);
+		var wBody = getprop("/velocities/wBody-fps");
+		setprop("/velocities/wBody-fps", wBody - 3.0);
 
 		setprop("fdm/jsbsim/stages/unit[2]/drop", 0);
 
@@ -1596,7 +1655,6 @@ var second_stage_drop_phase_three=func
 
 var end_second_stage_drop=func
 	{
-		setprop("ai/ballistic-forces/force[6]/force-lb", 0);
 		setprop("fdm/jsbsim/stages/unit[2]/dropped", 1);
 		third_stage_allow_engines();
 		end_change();
@@ -1609,6 +1667,8 @@ var start_third_stage_drop=func
 		start_change();
 		third_stage_stop_engine();
 		tdu_stage_stop_engine();
+		if (getprop("/sim/config/vostok-1/simulate-dropped-stages") == 1)
+			{init_ts_ballistic();}  # this calls the Nasal simulation of co-orbiting objects
 		settimer(third_stage_drop_phase_one, 0.3);
 	}
 
@@ -1639,24 +1699,9 @@ var third_stage_drop_phase_three=func
 	{
 		tdu_stage_allow_engines();
 
-		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
-		var heading=props.globals.getNode("orientation/heading-deg", 1).getValue(0);
+		var wBody = getprop("/velocities/wBody-fps");
+		setprop("/velocities/wBody-fps", wBody - 1.0);
 
-		var ballistics=props.globals.getNode("ai/models").getChildren("ballistic");
-		foreach(var ballistic; ballistics)
-		{
-			var name=ballistic.getName();
-			if (
-				(name="Third Stage")
-			)
-			{
-				ballistic.getChild("controls", 0, 1).getChild("slave-to-ac", 0, 1).setValue(0);
-			}
-		}
-
-		setprop("ai/ballistic-forces/force[7]/force-lb", 3420*2);
-		setprop("ai/ballistic-forces/force[7]/force-azimuth-deg", heading);
-		setprop("ai/ballistic-forces/force[7]/force-elevation-deg", pitch-90);
 
 		setprop("fdm/jsbsim/stages/unit[3]/drop", 0);
 
@@ -1667,7 +1712,6 @@ var end_third_stage_drop=func
 	{
 		tdu_stage_start_maneur_engines();
 
-		setprop("ai/ballistic-forces/force[7]/force-lb", 0);
 		setprop("fdm/jsbsim/stages/unit[3]/dropped", 1);
 
 		end_change();
@@ -1680,6 +1724,10 @@ var start_tdu_stage_drop=func
 		start_change();
 		tdu_stage_stop_engine();
 		spacecraft_stop_engine();
+
+		if (getprop("/sim/config/vostok-1/simulate-dropped-stages") == 1)
+			{init_tdu_ballistic();}  # this calls the Nasal simulation of co-orbiting objects
+
 		settimer(tdu_stage_drop_phase_one, 0.3);
 	}
 
@@ -1705,24 +1753,9 @@ var tdu_stage_drop_phase_three=func
 	{
 		spacecraft_allow_engines();
 
-		var pitch=props.globals.getNode("orientation/pitch-deg", 1).getValue(0);
-		var heading=props.globals.getNode("orientation/heading-deg", 1).getValue(0);
-
-		var ballistics=props.globals.getNode("ai/models").getChildren("ballistic");
-		foreach(var ballistic; ballistics)
-		{
-			var name=ballistic.getName();
-			if (
-				(name="TDU")
-			)
-			{
-				ballistic.getChild("controls", 0, 1).getChild("slave-to-ac", 0, 1).setValue(0);
-			}
-		}
-
-		setprop("ai/ballistic-forces/force[8]/force-lb", 3368*2.0);
-		setprop("ai/ballistic-forces/force[8]/force-azimuth-deg", heading);
-		setprop("ai/ballistic-forces/force[8]/force-elevation-deg", pitch-90);
+		# add a little separation velocity
+		var wBody = getprop("/velocities/wBody-fps");
+		setprop("/velocities/wBody-fps", wBody - 1.0);
 
 		setprop("fdm/jsbsim/stages/unit[4]/drop", 0);
 
@@ -1731,7 +1764,6 @@ var tdu_stage_drop_phase_three=func
 
 var end_tdu_stage_drop=func
 	{
-		setprop("ai/ballistic-forces/force[8]/force-lb", 0);
 		setprop("fdm/jsbsim/stages/unit[4]/dropped", 1);
 		spacecraft_additional_activation();
 		end_change();
@@ -1949,10 +1981,14 @@ var spacecraft_shift=func
 
 var view_shift=func
 	{
+
 		var first_on=getprop("fdm/jsbsim/stages/unit[0]/active");
 		var second_on=getprop("fdm/jsbsim/stages/unit[2]/active");
 		var third_on=getprop("fdm/jsbsim/stages/unit[3]/active");
 		var tdu_on=getprop("fdm/jsbsim/stages/unit[4]/active");
+
+		#print("Fist: ", first_on, " Second: ", second_on, " Third: ", third_on, " TDU: ", tdu_on);
+
 		if (!((first_on==nil)
 			or (second_on==nil)
 			or (third_on==nil)
@@ -1961,7 +1997,7 @@ var view_shift=func
 		{
 			if (
 				(first_on==1)
-				or (second_on==1)
+				or (second_on==1) 
 			)
 			{
 				setprop("sim/view[0]/config/y-offset-m", 19.74);
@@ -1974,7 +2010,7 @@ var view_shift=func
 			}
 			else
 			{
-				if (third_on==1)
+				if (third_on==1) 				
 				{
 					setprop("sim/view[0]/config/y-offset-m", 2.238);
 					setprop("sim/view[1]/config/y-offset-m", -10.0);
@@ -2011,6 +2047,22 @@ var view_shift=func
 		}
 	}
 
+
+# set startup in orbit
+
+var set_speed = func {
+
+	var latitude = getprop("/position/latitude-deg") * 3.1415/180.0;
+	var heading = getprop("/orientation/heading-deg") * 3.1415/180.0;
+
+	var rotation_boost = 1579.0 * math.cos(latitude) * math.sin(heading);
+	setprop("/velocities/uBody-fps", 25650.0 - rotation_boost);
+	setprop("/velocities/wBody-fps", 150.0);
+	setprop("/orientation/pitch-deg", -88.0);
+
+}
+
+
 # set startup configuration
 var init_stages=func
 	{
@@ -2018,12 +2070,30 @@ var init_stages=func
 		setprop("fdm/jsbsim/stages/command", 0);
 		setprop("fdm/jsbsim/stages/repeat-time", 0);
 
-		first_stage_init();
-		second_stage_init();
-		fairings_init();
-		third_stage_separate();
-		tdu_stage_separate();
-		spacecraft_separate();
+		if (getprop("/sim/presets/stage") == 1)
+			{
+			set_speed();
+			first_stage_separate();
+			second_stage_separate();
+			fairings_separate();
+			third_stage_separate();
+			tdu_stage_init();
+			spacecraft_separate();
+			}
+		else	
+			{
+			first_stage_init();
+			second_stage_init();
+			fairings_init();
+			third_stage_separate();
+			tdu_stage_separate();
+			spacecraft_separate();
+
+			if (getprop("/sim/config/vostok-1/simulate-booster-drop") == 1)	
+				{
+				settimer(func {setprop("/fdm/jsbsim/stages/unit[0]/attach", 1);}, 0.1);
+				}
+			}
 
 		#first_stage_separate();
 		#second_stage_separate();
@@ -2060,6 +2130,9 @@ var extra_activation=func
 		setprop("fdm/jsbsim/systems/spacecraft/engine-sensor-teared", 0);
 		setprop("fdm/jsbsim/systems/spacecraft/ground-contact", 0);
 	}
+
+
+
 
 # set startup configuration
 var start_stages=func

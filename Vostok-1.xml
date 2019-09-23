@@ -21,6 +21,11 @@
 <!-- 
 	There is no possibility to put craft on tail in FG currently,
 		so coordinate system in aerodynamics section turned on 90deg.
+
+	(Note added by Thorsten Renk: The above statement isn't true and hasn't been true (as the Space Shuttle proves)
+	- the weird shifted coordinate system is an unfortunate design choice that should not be repeated).
+
+
 	Every phase of flight have it's own flight scheme,
 		including fuel tanks, engines, masses of next stages filled and payload,
 		areas, arms, moments and forces.
@@ -4230,7 +4235,13 @@
 	<system file="Angles">
 	</system>
 
-	<system file="Temperature">
+	<system file="autopilot">
+	</system>
+
+	<!--<system file="Temperature">
+	</system>-->
+
+	<system file="entry_temperature">
 	</system>
 
 	<system file="Calculations">

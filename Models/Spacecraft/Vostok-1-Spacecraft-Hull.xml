@@ -47,6 +47,18 @@
 	<!-- Add exhaust models-->
 
 	<model>
+		<path>Aircraft/Vostok-1/Models/Exhausts/Spacecraft/Vostok-1-Plasma-Trail.xml</path>
+		<name>SC_PlasmaTrail</name>
+		<offsets>
+			<x-m>0.0</x-m>
+			<y-m>0.0</y-m>
+			<z-m>0.0</z-m>
+			<pitch-deg>0.0</pitch-deg>
+			<heading-deg>0</heading-deg>
+		</offsets>
+	</model>
+
+	<!--<model>
 		<path>Aircraft/Vostok-1/Models/Exhausts/Spacecraft/Vostok-1-Flow-Cone.xml</path>
 		<name>SC_FlowCone</name>
 		<offsets>
@@ -109,11 +121,11 @@
 				<value>true</value>
 			</equals>
 		</condition>
-	</animation>
+	</animation>-->
 
 	<!-- Make surface glow on reentry-->
 
-	<animation>
+	<!--<animation>
 		<type>material</type>
 		<object-name>SC_Out</object-name>
 		<object-name>SC_HFOut</object-name>
@@ -145,7 +157,50 @@
 			<green-prop>fdm/jsbsim/aero/temperature/surface-mach-green</green-prop>
 			<blue-prop>fdm/jsbsim/aero/temperature/surface-mach-blue</blue-prop>
 		</emission>
+	</animation>-->
+
+	<effect>
+	<inherits-from>Aircraft/Vostok-1/Models/Effects/vostok-heat</inherits-from>
+		<object-name>SC_Out</object-name>
+		<object-name>SC_HFOut</object-name>
+		<object-name>SC_HLOut</object-name>
+		<object-name>SC_HBOut</object-name>
+	</effect>
+	
+	<animation>
+		<type>material</type>
+		<object-name>SC_Out</object-name>
+		<object-name>SC_HFOut</object-name>
+		<object-name>SC_HLOut</object-name>
+		<object-name>SC_HBOut</object-name>
+		<shininess-prop>/fdm/jsbsim/systems/temperature/char-shininess</shininess-prop>
 	</animation>
+	
+	<effect>
+	<inherits-from>Aircraft/Vostok-1/Models/Effects/vostok-low</inherits-from>
+
+		<object-name>SC_UUEAntenna1</object-name>
+		<object-name>SC_UUEAntenna2</object-name>
+		<object-name>SC_MCPBases</object-name>
+		<object-name>SC_CPanel</object-name>
+		<object-name>SC_UUASafer1</object-name>
+		<object-name>SC_UUAAxle1</object-name>
+		<object-name>SC_UUAHolder1</object-name>
+		<object-name>SC_UURAntenna1</object-name>
+		<object-name>SC_UUABHolder1</object-name>
+		<object-name>SC_UUABoxe1</object-name>
+		<object-name>SC_UUACables1</object-name>
+		<object-name>SC_UUAConnector1</object-name>
+		<object-name>SC_UUASafer2</object-name>
+		<object-name>SC_UUAAxle2</object-name>
+		<object-name>SC_UUAHolder2</object-name>
+		<object-name>SC_UURAntenna2</object-name>
+		<object-name>SC_UUABHolder2</object-name>
+		<object-name>SC_UUABoxe2</object-name>
+		<object-name>SC_UUACables2</object-name>
+		<object-name>SC_UUAConnector2</object-name>
+		<object-name>SC_UUACBases</object-name>
+	</effect>
 
 	<!--Up whip antennas-->
 

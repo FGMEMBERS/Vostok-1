@@ -13,6 +13,8 @@ var end_crashes = func
 
 var crashes = func 
 	{
+		var flag = 0;
+
 		var in_service = getprop("fdm/jsbsim/systems/crashes/serviceable" );
 		if (in_service == nil)
 		{
@@ -401,6 +403,7 @@ var crashes = func
 			setprop("fdm/jsbsim/systems/crashes/crashed", 1);
 			setprop("fdm/jsbsim/systems/crashes/crash-type", "G force exceeds 15");
 			crash("G force exceeds 15", "Uskorenie prevysilo 15");
+			flag = 1;
 		}
 
 		if (g_force<-5)
@@ -408,6 +411,7 @@ var crashes = func
 			setprop("fdm/jsbsim/systems/crashes/crashed", 1);
 			setprop("fdm/jsbsim/systems/crashes/crash-type", "G force exceeds -5");
 			crash("G force exceeds -5", "Uskorenie prevysilo -5");
+			flag = 1;
 		}
 
 
@@ -421,6 +425,7 @@ var crashes = func
 			setprop("fdm/jsbsim/systems/crashes/crashed", 1);
 			setprop("fdm/jsbsim/systems/crashes/crash-type", "Craft hits the ground");
 			crash("Craft hits the ground", "Korabl' udarilsya o Zemlu");
+			flag = 1;
 		}
 
 		if (
@@ -431,11 +436,13 @@ var crashes = func
 			setprop("fdm/jsbsim/systems/crashes/crashed", 1);
 			setprop("fdm/jsbsim/systems/crashes/crash-type", "TDU exploded");
 			crash("TDU exploded", "TDU vzorvalsya");
+			flag = 1;
 		}
 
 		setprop("fdm/jsbsim/systems/crashes/prev-time", simulation_time);
 
-		settimer(crashes, repeat_time);
+		if (flag == 0)
+			{settimer(crashes, repeat_time);}
 	}
 
 var crash=func(crash_message, crash_russian_message)
@@ -454,7 +461,8 @@ var crash=func(crash_message, crash_russian_message)
 				window.write("Please restart simulator by Reset menu");
 				window.write("Pojaluista peresapustite simulator cheres punkt menu Reset");
 			}
-			settimer(simulation_pause, 0.1);
+			setprop("/fdm/jsbsim/simulation/terminate", 1);
+			#settimer(simulation_pause, 0.1);
 		}
 	}
 
